@@ -16,6 +16,7 @@
   public static void main (String[] args) {
     System.out.println("------------");
     System.out.println("!!! program start !!!");
+    System.out.println();
     System.out.println("hello");
     System.out.println("!!! program end !!!");
     System.out.println("------------");
