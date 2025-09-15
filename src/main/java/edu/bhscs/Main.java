@@ -10,16 +10,19 @@
  * EDGE CASE: They are all edge cases at the moment
  */
 
- package edu.bhscs;
+package edu.bhscs;
 
- class Main {
-  public static void main (String[] args) {
-    System.out.println("------------");
-    System.out.println("!!! program start !!!");
+class Main {
+
+  public static final char A = 'a';
+  public static void main(String[] args) {
+    int na = 67;
+    System.out.println("67!" + A + na);
+    System.out.println(A + "?" + A + na);
+    System.out.println(A + A + na);
     System.out.println();
-    System.out.println("hello");
+    System.out.println("This is neet");
     System.out.println();
-    System.out.println("!!! program end !!!");
-    System.out.println("------------");
+    System.out.println("OK I am done");
   }
- }
+}
