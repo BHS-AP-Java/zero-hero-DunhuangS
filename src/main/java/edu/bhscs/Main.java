@@ -15,6 +15,7 @@ package edu.bhscs;
 class Main {
 
   public static final char A = 'a';
+
   public static void main(String[] args) {
     int na = 67;
     System.out.println("67!" + A + na);
