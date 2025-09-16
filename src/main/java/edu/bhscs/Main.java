@@ -16,20 +16,23 @@ class Main {
 
   public static float A = 69.42f;
   public static int B = 67;
+
   public static String pushup(int numb) {
     if (numb > 1) {
       return pushup(numb - 1) + " sweat";
     }
     return "sweaty";
   }
+
   public static void main(String[] args) {
     System.out.println(A);
-    System.out.println(pushup(3));
-    //System.out.println(A + "?" + A + na);
-    //System.out.println(A + A + na);
-    //System.out.println();
-    //System.out.println("This is neet");
-    //System.out.println();
-    //System.out.println("OK I am done");
+    Integer f = Integer.parseInt(System.console().readLine("Pushups: "));
+    System.out.println(pushup(f));
+    // System.out.println(A + "?" + A + na);
+    // System.out.println(A + A + na);
+    // System.out.println();
+    // System.out.println("This is neet");
+    // System.out.println();
+    // System.out.println("OK I am done"); 
   }
 }
