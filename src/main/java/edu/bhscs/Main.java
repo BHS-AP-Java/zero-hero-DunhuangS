@@ -14,16 +14,22 @@ package edu.bhscs;
 
 class Main {
 
-  public static final char A = 'a';
-
+  public static float A = 69.42f;
+  public static int B = 67;
+  public static String pushup(int numb) {
+    if (numb > 1) {
+      return pushup(numb - 1) + " sweat";
+    }
+    return "sweaty";
+  }
   public static void main(String[] args) {
-    int na = 67;
-    System.out.println("67!" + A + na);
-    System.out.println(A + "?" + A + na);
-    System.out.println(A + A + na);
-    System.out.println();
-    System.out.println("This is neet");
-    System.out.println();
-    System.out.println("OK I am done");
+    System.out.println(A);
+    System.out.println(pushup(3));
+    //System.out.println(A + "?" + A + na);
+    //System.out.println(A + A + na);
+    //System.out.println();
+    //System.out.println("This is neet");
+    //System.out.println();
+    //System.out.println("OK I am done");
   }
 }
