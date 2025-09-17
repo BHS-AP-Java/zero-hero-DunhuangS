@@ -54,6 +54,8 @@ class Main {
     System.out.println(dorothy.getName());
     anna.learnSomething(x);
     System.out.println(anna.getKnowledge());
+
+    new funType();
     // System.out.println(A + "?" + A + na);
     // System.out.println(A + A + na);
     // System.out.println();
