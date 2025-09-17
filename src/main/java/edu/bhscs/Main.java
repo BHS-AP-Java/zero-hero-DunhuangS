@@ -30,7 +30,7 @@ class Main {
 
    public static void printrepeat(int repetitions, String giventxt) {
      for (int i = 0; i < repetitions; i++) {
-
+        System.out.println(giventxt);
      }
   }
   public static void main(String[] args) {
@@ -39,12 +39,13 @@ class Main {
     // System.out.println(pushu(f));
     String x = pushup("Garlic");
     System.out.println(x);
-    //String[] names = {"Anna","Belle","Cadey","Dorothy"};
+    printrepeat( 10, x);
     Awesome anna = new Awesome("Anna");
     Awesome belle = new Awesome("Belle");
     Awesome cadey = new Awesome("Cadey");
     Awesome dorothy = new Awesome("Dorothy");
-
+    
+    Awesome.testin();
 
     System.out.println(anna.getName());
     System.out.println(belle.getName());

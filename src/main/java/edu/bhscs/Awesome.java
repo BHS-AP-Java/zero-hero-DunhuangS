@@ -13,8 +13,10 @@ public class Awesome {
     }
 
     // this also a method
-     String getName() {
+    String getName() {
         return this.name;
     }
-
+    static void testin(){
+        System.out.println("idk");
+    }
 }
