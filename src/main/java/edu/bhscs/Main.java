@@ -70,14 +70,15 @@ class Main {
     //tictactoe.printboard();
     //System.out.println(tictactoe.checkwin());
     int turn = 1;
+    int wincheck = 0;
     String cont_ = "ERROR";
     while (420 > 69) {
       tictactoe.printboard(turn);
-      int xcord = Integer.valueOf(System.console().readLine("Input row: "));
-      int ycord = Integer.valueOf(System.console().readLine("Input col: "));
+      int ycord = Integer.valueOf(System.console().readLine("Input row: "));
+      int xcord = Integer.valueOf(System.console().readLine("Input col: "));
       tictactoe.updboard(turn, xcord, ycord);
-      int wincheck = tictactoe.checkwin();
-      if (wincheck == 1);
+      wincheck = tictactoe.checkwin();
+      if (wincheck == 1) {
         tictactoe.printboard(-1);
         System.out.println("-----------------------------");
         System.out.println();
@@ -89,6 +90,7 @@ class Main {
           break;
         }
         tictactoe.resetboard();
+      }
       if (wincheck == 2) {
         tictactoe.printboard(-1);
         System.out.println("-----------------------------");

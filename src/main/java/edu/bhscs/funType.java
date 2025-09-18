@@ -61,7 +61,7 @@ public class funType {
                 }
             if (winner != 0) { // returns the winner if one has been identified
             return winner;
-                }
+            }
         }
         if (boardfilled) { // returns the ultimate code screen of death if board is filled
             return -1;
