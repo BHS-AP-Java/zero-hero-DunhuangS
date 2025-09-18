@@ -80,9 +80,11 @@ class Main {
         tictactoe.printboard(turn);
       }
       try {
-      ycord = Integer.valueOf(System.console().readLine("Input row: "));
-      xcord = Integer.valueOf(System.console().readLine("Input col: "));
-      valid = tictactoe.validate_pos(xcord, ycord);
+        ycord = Integer.valueOf(System.console().readLine("Input row: "));
+        if (0 < ycord && ycord < 4) {
+          xcord = Integer.valueOf(System.console().readLine("Input col: "));
+        }
+        valid = tictactoe.validate_pos(xcord, ycord);
       }
       catch(Exception e) {
         valid = false;
