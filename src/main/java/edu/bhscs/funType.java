@@ -21,6 +21,10 @@ public class funType {
             System.out.println("PLAYER " + turn + " TURN");
         }
     }
+    boolean validate_pos(int coordx, int coordy) {
+        if ((coordx > 3) || (coordy > 3)) {return false;}
+        if (board[coordy - 1][coordx - 1] != 0) {return false;} else {return true;}
+    }
     void updboard(int player, int coord_x, int coord_y) {
         board[coord_y - 1][coord_x - 1] = player;
     }

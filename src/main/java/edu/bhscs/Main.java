@@ -72,52 +72,67 @@ class Main {
     int turn = 1;
     int wincheck = 0;
     String cont_ = "ERROR";
+    boolean valid = true;
+    int ycord = 0;
+    int xcord = 0;
     while (420 > 69) {
-      tictactoe.printboard(turn);
-      int ycord = Integer.valueOf(System.console().readLine("Input row: "));
-      int xcord = Integer.valueOf(System.console().readLine("Input col: "));
-      tictactoe.updboard(turn, xcord, ycord);
-      wincheck = tictactoe.checkwin();
-      if (wincheck == 1) {
-        tictactoe.printboard(-1);
-        System.out.println("-----------------------------");
-        System.out.println();
-        System.out.println("Player 1 has WON!");
-        System.out.println();
-        System.out.println("-----------------------------");
-        cont_ = System.console().readLine("Continue? (type yes or no): ");
-        if (cont_ != "yes") {
-          break;
-        }
-        tictactoe.resetboard();
+      if (valid) {
+        tictactoe.printboard(turn);
       }
-      if (wincheck == 2) {
-        tictactoe.printboard(-1);
-        System.out.println("-----------------------------");
-        System.out.println();
-        System.out.println("Player 2 has WON!");
-        System.out.println();
-        System.out.println("-----------------------------");
-        cont_ = System.console().readLine("Continue? (type yes or no): ");
-        if (cont_ != "yes") {
-          break;
-        }
-        tictactoe.resetboard();
+      try {
+      ycord = Integer.valueOf(System.console().readLine("Input row: "));
+      xcord = Integer.valueOf(System.console().readLine("Input col: "));
+      valid = tictactoe.validate_pos(xcord, ycord);
       }
-      if (wincheck == -1) {
-        tictactoe.printboard(-1);
-        System.out.println("-----------------------------");
-        System.out.println();
-        System.out.println("It is a draw like predicted");
-        System.out.println();
-        System.out.println("-----------------------------");
-        cont_ = System.console().readLine("Continue? (type yes or no): ");
-        if (cont_ != "yes") {
-          break;
-        }
-        tictactoe.resetboard();
+      catch(Exception e) {
+        valid = false;
       }
-      if (turn == 1) {turn = 2;} else {turn = 1;}
+      if (valid) {
+        tictactoe.updboard(turn, xcord, ycord);
+        wincheck = tictactoe.checkwin();
+        if (wincheck == 1) {
+          tictactoe.printboard(-1);
+          System.out.println("-----------------------------");
+          System.out.println();
+          System.out.println("Player 1 has WON!");
+          System.out.println();
+          System.out.println("-----------------------------");
+          cont_ = System.console().readLine("Continue? (type yes or no): ");
+          if (cont_ != "yes") {
+            break;
+          }
+          tictactoe.resetboard();
+        }
+        if (wincheck == 2) {
+          tictactoe.printboard(-1);
+          System.out.println("-----------------------------");
+          System.out.println();
+          System.out.println("Player 2 has WON!");
+          System.out.println();
+          System.out.println("-----------------------------");
+          cont_ = System.console().readLine("Continue? (type yes or no): ");
+          if (cont_ != "yes") {
+            break;
+          }
+          tictactoe.resetboard();
+        }
+        if (wincheck == -1) {
+          tictactoe.printboard(-1);
+          System.out.println("-----------------------------");
+          System.out.println();
+          System.out.println("It is a draw like predicted");
+          System.out.println();
+          System.out.println("-----------------------------");
+          cont_ = System.console().readLine("Continue? (type yes or no): ");
+          if (cont_ != "yes") {
+            break;
+          }
+          tictactoe.resetboard();
+        }
+        if (turn == 1) {turn = 2;} else {turn = 1;}
+      } else {
+        System.out.println("This location is invalid! Please pick another: ");
+      }
     }
   }
 }
