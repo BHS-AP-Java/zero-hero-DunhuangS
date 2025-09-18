@@ -35,32 +35,39 @@ class Main {
   }
 
   public static void main(String[] args) {
-    // System.out.println(A);
-    // Integer f = Integer.valueOf(System.console().readLine("Pushups: "));
-    // System.out.println(pushu(f));
-    String x = pushup("Garlic");
-    System.out.println(x);
-    printrepeat(10, x);
-    Awesome anna = new Awesome("Anna");
-    Awesome belle = new Awesome("Belle");
-    Awesome cadey = new Awesome("Cadey");
-    Awesome dorothy = new Awesome("Dorothy");
+    boolean old = false;
+    //currently not running the old program
+    if (old) {
+      // System.out.println(A);
+      // Integer f = Integer.valueOf(System.console().readLine("Pushups: "));
+      // System.out.println(pushu(f));
+      String x = pushup("Garlic");
+      System.out.println(x);
+      printrepeat(10, x);
+      Awesome anna = new Awesome("Anna");
+      Awesome belle = new Awesome("Belle");
+      Awesome cadey = new Awesome("Cadey");
+      Awesome dorothy = new Awesome("Dorothy");
 
-    Awesome.testin();
+      Awesome.testin();
 
-    System.out.println(anna.getName());
-    System.out.println(belle.getName());
-    System.out.println(cadey.getName());
-    System.out.println(dorothy.getName());
-    anna.learnSomething(x);
-    System.out.println(anna.getKnowledge());
+      System.out.println(anna.getName());
+      System.out.println(belle.getName());
+      System.out.println(cadey.getName());
+      System.out.println(dorothy.getName());
+      anna.learnSomething(x);
+      System.out.println(anna.getKnowledge());
 
-    new funType();
-    // System.out.println(A + "?" + A + na);
-    // System.out.println(A + A + na);
-    // System.out.println();
-    // System.out.println("This is neet");
-    // System.out.println();
-    // System.out.println("OK I am done");
+      new funType();
+      // System.out.println(A + "?" + A + na);
+      // System.out.println(A + A + na);
+      // System.out.println();
+      // System.out.println("This is neet");
+      // System.out.println();
+      // System.out.println("OK I am done");
+    }
+    funType tictactoe = new funType();
+    tictactoe.printboard();
+    System.out.println(tictactoe.checkwin());
   }
 }
