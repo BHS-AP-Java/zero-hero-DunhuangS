@@ -67,7 +67,55 @@ class Main {
       // System.out.println("OK I am done");
     }
     funType tictactoe = new funType();
-    tictactoe.printboard();
-    System.out.println(tictactoe.checkwin());
+    //tictactoe.printboard();
+    //System.out.println(tictactoe.checkwin());
+    int turn = 1;
+    String cont_ = "ERROR";
+    while (420 > 69) {
+      tictactoe.printboard(turn);
+      int xcord = Integer.valueOf(System.console().readLine("Input row: "));
+      int ycord = Integer.valueOf(System.console().readLine("Input col: "));
+      tictactoe.updboard(turn, xcord, ycord);
+      int wincheck = tictactoe.checkwin();
+      if (wincheck == 1);
+        tictactoe.printboard(-1);
+        System.out.println("-----------------------------");
+        System.out.println();
+        System.out.println("Player 1 has WON!");
+        System.out.println();
+        System.out.println("-----------------------------");
+        cont_ = System.console().readLine("Continue? (type yes or no): ");
+        if (cont_ != "yes") {
+          break;
+        }
+        tictactoe.resetboard();
+      if (wincheck == 2) {
+        tictactoe.printboard(-1);
+        System.out.println("-----------------------------");
+        System.out.println();
+        System.out.println("Player 2 has WON!");
+        System.out.println();
+        System.out.println("-----------------------------");
+        cont_ = System.console().readLine("Continue? (type yes or no): ");
+        if (cont_ != "yes") {
+          break;
+        }
+        tictactoe.resetboard();
+      }
+      if (wincheck == -1) {
+        tictactoe.printboard(-1);
+        System.out.println("-----------------------------");
+        System.out.println();
+        System.out.println("It is a draw like predicted");
+        System.out.println();
+        System.out.println("-----------------------------");
+        cont_ = System.console().readLine("Continue? (type yes or no): ");
+        if (cont_ != "yes") {
+          break;
+        }
+        tictactoe.resetboard();
+      }
+      if (turn == 1) {turn = 2;} else {turn = 1;}
+    }
   }
 }
