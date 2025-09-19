@@ -36,7 +36,7 @@ class Main {
 
   public static void main(String[] args) {
     boolean old = false;
-    //currently not running the old program
+    // currently not running the old program
     if (old) {
       // System.out.println(A);
       // Integer f = Integer.valueOf(System.console().readLine("Pushups: "));
@@ -67,8 +67,8 @@ class Main {
       // System.out.println("OK I am done");
     }
     funType tictactoe = new funType();
-    //tictactoe.printboard();
-    //System.out.println(tictactoe.checkwin());
+    // tictactoe.printboard();
+    // System.out.println(tictactoe.checkwin());
     int turn = 1;
     int wincheck = 0;
     String cont_ = "ERROR";
@@ -80,13 +80,12 @@ class Main {
         tictactoe.printboard(turn);
       }
       try {
-        ycord = Integer.valueOf(System.console().readLine("Input row: "));
+        ycord = Integer.parseInt(System.console().readLine("Input row: "));
         if (0 < ycord && ycord < 4) {
-          xcord = Integer.valueOf(System.console().readLine("Input col: "));
+          xcord = Integer.parseInt(System.console().readLine("Input col: "));
         }
         valid = tictactoe.validate_pos(xcord, ycord);
-      }
-      catch(Exception e) {
+      } catch (Exception e) {
         valid = false;
       }
       if (valid) {
@@ -100,7 +99,7 @@ class Main {
           System.out.println();
           System.out.println("-----------------------------");
           cont_ = System.console().readLine("Continue? (type yes or no): ");
-          if (cont_ != "yes") {
+          if (!"yes".equals(cont_)) {
             break;
           }
           tictactoe.resetboard();
@@ -113,7 +112,7 @@ class Main {
           System.out.println();
           System.out.println("-----------------------------");
           cont_ = System.console().readLine("Continue? (type yes or no): ");
-          if (cont_ != "yes") {
+          if (!"yes".equals(cont_)) {
             break;
           }
           tictactoe.resetboard();
@@ -126,12 +125,16 @@ class Main {
           System.out.println();
           System.out.println("-----------------------------");
           cont_ = System.console().readLine("Continue? (type yes or no): ");
-          if (cont_ != "yes") {
+          if (!"yes".equals(cont_)) {
             break;
           }
           tictactoe.resetboard();
         }
-        if (turn == 1) {turn = 2;} else {turn = 1;}
+        if (turn == 1) {
+          turn = 2;
+        } else {
+          turn = 1;
+        }
       } else {
         System.out.println("This location is invalid! Please pick another: ");
       }

@@ -37,5 +37,4 @@ public class Awesome {
   String getKnowledge() {
     return knowledge;
   }
-
 }
