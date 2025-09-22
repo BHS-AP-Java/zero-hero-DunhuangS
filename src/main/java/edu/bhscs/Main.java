@@ -61,7 +61,7 @@ class Main {
       anna.learnSomething(x);
       System.out.println(anna.getKnowledge());
 
-      //new funType();
+      // new funType();
       // System.out.println(A + "?" + A + na);
       // System.out.println(A + A + na);
       // System.out.println();
@@ -145,7 +145,6 @@ class Main {
       }
     }
     if (cake) {
-      makecake MyCake = new makecake();
       String MyFlavor = "chocolate";
       String MySweetness = "moderately";
       String MyToppings = "cherry";
@@ -153,11 +152,10 @@ class Main {
       int MyDiameter = 8;
       int MyHeight = 6;
       int MyWeight = 617;
-      MyCake.batchsetting(MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight);
-      MyCake.viewcake();
-      MyCake.setowner("Bob");
-      MyCake.eatcake(31);
-      MyCake.viewcake();
+      Baker bob = new Baker();
+      bob.giveinstructions(MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight);
+      bob.Bakeacake();
+      //MadeCake.viewcake();
     }
   }
 }
