@@ -152,10 +152,14 @@ class Main {
       int MyDiameter = 8;
       int MyHeight = 6;
       int MyWeight = 617;
+      String MyName = "chocolate blast";
       Baker bob = new Baker();
-      bob.giveinstructions(MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight);
+      bob.giveinstructions(
+          MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, MyName);
       bob.Bakeacake();
-      //MadeCake.viewcake();
+      // MadeCake.viewcake();
+      cake shelf_1 = bob.addtostore();
+      shelf_1.viewcake();
     }
   }
 }
