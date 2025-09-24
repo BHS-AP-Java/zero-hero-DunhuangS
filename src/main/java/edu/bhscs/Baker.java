@@ -52,6 +52,7 @@ public class Baker {
   void setweight(int given) {
     this.weight = given;
   }
+
   void setname(String given) {
     this.name = given;
   }

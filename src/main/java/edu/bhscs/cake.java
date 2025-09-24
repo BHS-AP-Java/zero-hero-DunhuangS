@@ -48,9 +48,11 @@ class cake {
       System.out.println("There is no cake!");
     }
   }
+
   boolean cakeexist() {
     return this.existent;
   }
+
   String cakename() {
     return this.name;
   }
@@ -73,9 +75,9 @@ class cake {
     this.weight = givenweight;
     this.name = givenname;
     this.existent = true;
-
   }
-  /* 
+
+  /*
   void eatcake(int eatpercent) {
     this.eatingprogress += eatpercent;
     if (eatingprogress > 100) {
