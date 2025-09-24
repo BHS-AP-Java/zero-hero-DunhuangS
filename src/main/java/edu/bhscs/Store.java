@@ -56,7 +56,7 @@ class Store {
 
   void buyCake (int y, int x) {
     if (shelf[y-1][x-1].cakeexist()) {
-      if (selCake != a) {
+      if (selCake.cakeexist()) {
         addcakes(selCakey, selCakex, selCake, cashier);
         System.out.println("The previous cake has been returned to the shelf!");
       }
@@ -73,7 +73,7 @@ class Store {
 
   double PayForCake (double payment) {
     double refund = payment - cashier;
-    if (selCake != a) {
+    if (selCake.cakeexist()) {
       if (refund == 0) {
         System.out.println("Paid exactly! Have a great day!");
         System.out.println("don't forget to pick up your cake!");
