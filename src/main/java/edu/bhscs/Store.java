@@ -4,22 +4,108 @@ class Store {
   cake a = new cake(false);
   // cake b = new cake(false);
   cake[][] shelf = {{a, a, a, a, a}, {a, a, a, a, a}, {a, a, a, a, a}};
+  double[][] prices = {{0.00, 0.00, 0.00, 0.00, 0.00},{0.00, 0.00, 0.00, 0.00, 0.00},{0.00, 0.00, 0.00, 0.00, 0.00}};
+  cake selCake = a;
+  double cashier = 0.00;
+  boolean paid = false;
+  int selCakex = 0;
+  int selCakey = 0;
 
-  public Store(String[] args) {
+  public Store() {
     System.out.println("A store has opened!");
   }
 
-  void showcakes() {
+  void showcakes() { //shows all cakes on sale
     boolean therearecakes = false;
     int height = 1;
-    int dist = 1;
     for (cake[] row : shelf) {
+      int dist = 1;
       for (cake item : row) {
         if (item.cakeexist()) {
-          therearecakes = true;
-          System.out.println(item.cakename());
+          if (!therearecakes) {
+            therearecakes = true;
+            System.out.println("THE FOLLOWING CAKES ARE AVAILABLE:");
+            System.out.println("-------------------------------------");
+          } else {
+            System.out.println();
+          }
+          System.out.println("'" + item.cakename() + "'");
+          System.out.println("At shelf position | row: " + height + " column: " + dist + " |");
+          System.out.println("This cake costs $" + prices[height - 1][dist - 1]);
         }
+        dist += 1;
       }
+      height += 1;
+    }
+    if (!therearecakes) {
+      System.out.println("There are no cakes on the shelf right now!");
+    } else {
+      System.out.println("-------------------------------------");
+      System.out.println();
+    }
+  }
+
+  void addcakes(int y, int x, cake thingie, double price) {//adds a cake to the shelves
+    this.shelf[y - 1][x - 1] = thingie;
+    this.prices[y - 1][x - 1] = price;
+  }
+
+  void ExamineCake(int y, int x) {
+    this.shelf[y - 1][x - 1].viewcake();
+  }
+
+  void buyCake (int y, int x) {
+    if (shelf[y-1][x-1].cakeexist()) {
+      if (selCake != a) {
+        addcakes(selCakey, selCakex, selCake, cashier);
+        System.out.println("The previous cake has been returned to the shelf!");
+      }
+      this.cashier = prices[y - 1][x - 1];
+      selCake = this.shelf[y - 1][x - 1];
+      this.shelf[y - 1][x - 1] = a;
+      selCakex = x;
+      selCakey = y;
+      System.out.println("Cake has been selected! Please pay at the cashier!");
+    } else {
+      System.out.println("There is no cake here!");
+    }
+  }
+
+  double PayForCake (double payment) {
+    double refund = payment - cashier;
+    if (selCake != a) {
+      if (refund == 0) {
+        System.out.println("Paid exactly! Have a great day!");
+        System.out.println("don't forget to pick up your cake!");
+        paid = true;
+        return refund;
+      } else if (refund < 0) {
+        System.out.println("Oof. Not enough money, no cake for you! Cake returned to shelf.");
+        addcakes(selCakey, selCakex, selCake, cashier);
+        selCake = a;
+        return payment;
+      } else {
+        System.out.println("Your change is $" + refund + ". Have a great day!");
+        System.out.println("don't forget to pick up your cake!");
+        paid = true;
+        return refund;
+      }
+    } else {
+      System.out.println("No selected cake to pay for!");
+      return payment;
+    }
+  }
+
+  cake PickupCake () {
+    if (paid) {
+      cake outcake = selCake;
+      selCake = a;
+      paid = false;
+      System.out.println("You have picked up the cake '" + outcake.cakename() +"' !");
+      return outcake;
+    } else {
+      System.out.println("There isn't a cake to pick up!");
+      return a;
     }
   }
 }

@@ -158,8 +158,19 @@ class Main {
           MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, MyName);
       bob.Bakeacake();
       // MadeCake.viewcake();
-      cake shelf_1 = bob.addtostore();
-      shelf_1.viewcake();
+      Store overpricery = new Store();
+      overpricery.addcakes(2, 1, bob.Givemethecake(),22.99);
+      bob.giveinstructions(MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight,
+          MyWeight, "scamblast");
+      bob.Bakeacake();
+      overpricery.addcakes(1, 1, bob.Givemethecake(), 229.90);
+      overpricery.showcakes();
+      overpricery.ExamineCake(2, 1);
+      overpricery.buyCake(2, 1);
+      overpricery.buyCake(1, 1);
+      overpricery.PayForCake(1009.10);
+      overpricery.PickupCake();
+      overpricery.showcakes();
     }
   }
 }
