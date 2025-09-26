@@ -171,6 +171,10 @@ class Main {
       overpricery.PayForCake(1009.10);
       overpricery.PickupCake();
       overpricery.showcakes();
+      Customer Janet = new Customer("Janet", true, overpricery, 99.99);
+      Janet.BuyAndPayForCake(2,1);
+      Janet.PickupCake();
+      Janet.CakeInfo();
     }
   }
 }

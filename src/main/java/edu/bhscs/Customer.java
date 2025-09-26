@@ -7,12 +7,13 @@ class Customer {
   double MyMoney = 0.00;
   String MyName;
 
-  public Customer(String name, boolean a, Store store) {
+  public Customer(String name, boolean a, Store store, double money) {
     if (a) {
       System.out.println("Hello! I am " + name + ", and I am a customer.");
       System.out.println("I purchase cakes at the store " + store.StoreName());
       PreferredStore = store;
       MyName = name;
+      MyMoney = money;
     }
   }
 
@@ -23,10 +24,11 @@ class Customer {
   void PickupCake() {
     this.OwnedCake = PreferredStore.PickupCake();
     if (OwnedCake.cakeexist()) {
-      
+      OwnedCake.SetCakeOwner(MyName);
     }
   }
-  void EatCake(int eatpercent) {
-
+  void CakeInfo() {
+    OwnedCake.viewcake();
   }
+
 }

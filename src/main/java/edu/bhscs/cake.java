@@ -84,7 +84,8 @@ class Cake {
     }
   }
 
-  public void SetCakeOwner(String given) {
-    this.owner = given;
+  public void SetCakeOwner(String name) {
+    this.owner = name;
   }
+
 }
