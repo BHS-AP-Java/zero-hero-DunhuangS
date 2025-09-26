@@ -104,12 +104,12 @@ class Store {
     }
   }
 
-  Cake PickupCake() {
+  Cake PickupCake(String name) {
     if (paid) {
       Cake outcake = selCake;
       selCake = a;
       paid = false;
-      System.out.println("You have picked up the cake '" + outcake.cakename() + "' !");
+      System.out.println(name + " has picked up the cake '" + outcake.cakename() + "' !");
       return outcake;
     } else {
       System.out.println("There isn't a cake to pick up!");

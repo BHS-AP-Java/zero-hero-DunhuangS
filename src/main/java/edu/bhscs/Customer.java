@@ -24,9 +24,13 @@ class Customer {
   }
 
   void PickupCake() {
-    this.OwnedCake = PreferredStore.PickupCake();
     if (OwnedCake.cakeexist()) {
-      OwnedCake.SetCakeOwner(MyName);
+      System.out.println("I already have a cake!");
+    } else {
+      this.OwnedCake = PreferredStore.PickupCake(MyName);
+      if (OwnedCake.cakeexist()) {
+        OwnedCake.SetCakeOwner(MyName);
+      }
     }
   }
 
@@ -35,7 +39,11 @@ class Customer {
   }
 
   void EatMyCake(int eatinginpercent) {
-    OwnedCake.eatcake(eatinginpercent);
+    if (OwnedCake.cakeexist()) {
+      OwnedCake.eatcake(eatinginpercent);
+    } else {
+      System.out.println("I don't have a cake to eat, silly!");
+    }
   }
 
   void DiscardMyCake() {

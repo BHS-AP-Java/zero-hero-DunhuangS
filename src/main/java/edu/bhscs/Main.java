@@ -168,7 +168,7 @@ class Main {
       // overpricery.buyCake(2, 1);
       // overpricery.buyCake(1, 1);
       // overpricery.PayForCake(1009.10);
-      // overpricery.PickupCake();
+      // overpricery.PickupCake("burhuhfuh");
       // overpricery.showcakes();
       bob.Bakeacake();
       overpricery.addcakes(1, 3, bob.Givemethecake(), 129.99);
@@ -181,6 +181,7 @@ class Main {
       Janet.EatMyCake(100);
       Janet.CakeInfo();
       Janet.DiscardMyCake();
+      Janet.CakeInfo();
     }
   }
 }
