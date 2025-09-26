@@ -15,7 +15,7 @@ class Store {
   String StoreName;
 
   public Store(String name) {
-    System.out.println("A new store that sells cakes, " + name + " has opened!");
+    System.out.println("A new store that sells cakes, " + name + ", has opened!");
     StoreName = name;
   }
 
@@ -73,7 +73,7 @@ class Store {
       this.shelf[y - 1][x - 1] = a;
       selCakex = x;
       selCakey = y;
-      System.out.println("Cake has been selected! Please pay at the cashier!");
+      System.out.println("Cake '" + selCake.cakename() + "' has been selected! Please pay at the cashier!");
     } else {
       System.out.println("There is no cake here!");
     }

@@ -164,12 +164,12 @@ class Main {
           MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, "scamblast");
       bob.Bakeacake();
       overpricery.addcakes(1, 1, bob.Givemethecake(), 229.90);
-      //overpricery.ExamineCake(2, 1);
-      //overpricery.buyCake(2, 1);
-      //overpricery.buyCake(1, 1);
-      //overpricery.PayForCake(1009.10);
-      //overpricery.PickupCake();
-      //overpricery.showcakes();
+      // overpricery.ExamineCake(2, 1);
+      // overpricery.buyCake(2, 1);
+      // overpricery.buyCake(1, 1);
+      // overpricery.PayForCake(1009.10);
+      // overpricery.PickupCake();
+      // overpricery.showcakes();
       bob.Bakeacake();
       overpricery.addcakes(1, 3, bob.Givemethecake(), 129.99);
       bob.Bakeacake();

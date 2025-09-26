@@ -49,9 +49,10 @@ class Cake {
     }
   }
 
-  public int ReturnAmountEaten () {
+  public int ReturnAmountEaten() {
     return eatingprogress;
   }
+
   public int ReturnWeight() {
     return weight;
   }
