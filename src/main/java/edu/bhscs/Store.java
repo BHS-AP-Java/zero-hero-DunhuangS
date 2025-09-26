@@ -1,26 +1,34 @@
 package edu.bhscs;
 
 class Store {
-  cake a = new cake(false);
+  Cake a = new Cake(false);
   // cake b = new cake(false);
-  cake[][] shelf = {{a, a, a, a, a}, {a, a, a, a, a}, {a, a, a, a, a}};
-  double[][] prices = {{0.00, 0.00, 0.00, 0.00, 0.00},{0.00, 0.00, 0.00, 0.00, 0.00},{0.00, 0.00, 0.00, 0.00, 0.00}};
-  cake selCake = a;
+  Cake[][] shelf = {{a, a, a, a, a}, {a, a, a, a, a}, {a, a, a, a, a}};
+  double[][] prices = {
+    {0.00, 0.00, 0.00, 0.00, 0.00}, {0.00, 0.00, 0.00, 0.00, 0.00}, {0.00, 0.00, 0.00, 0.00, 0.00}
+  };
+  Cake selCake = a;
   double cashier = 0.00;
   boolean paid = false;
   int selCakex = 0;
   int selCakey = 0;
+  String StoreName;
 
-  public Store() {
-    System.out.println("A store has opened!");
+  public Store(String name) {
+    System.out.println("A new store that sells cakes, " + name + " has opened!");
+    StoreName = name;
   }
 
-  void showcakes() { //shows all cakes on sale
+  String StoreName() {
+    return StoreName;
+  }
+
+  void showcakes() { // shows all cakes on sale
     boolean therearecakes = false;
     int height = 1;
-    for (cake[] row : shelf) {
+    for (Cake[] row : shelf) {
       int dist = 1;
-      for (cake item : row) {
+      for (Cake item : row) {
         if (item.cakeexist()) {
           if (!therearecakes) {
             therearecakes = true;
@@ -45,7 +53,7 @@ class Store {
     }
   }
 
-  void addcakes(int y, int x, cake thingie, double price) {//adds a cake to the shelves
+  void addcakes(int y, int x, Cake thingie, double price) { // adds a cake to the shelves
     this.shelf[y - 1][x - 1] = thingie;
     this.prices[y - 1][x - 1] = price;
   }
@@ -54,8 +62,8 @@ class Store {
     this.shelf[y - 1][x - 1].viewcake();
   }
 
-  void buyCake (int y, int x) {
-    if (shelf[y-1][x-1].cakeexist()) {
+  void buyCake(int y, int x) {
+    if (shelf[y - 1][x - 1].cakeexist()) {
       if (selCake.cakeexist()) {
         addcakes(selCakey, selCakex, selCake, cashier);
         System.out.println("The previous cake has been returned to the shelf!");
@@ -71,7 +79,7 @@ class Store {
     }
   }
 
-  double PayForCake (double payment) {
+  double PayForCake(double payment) {
     double refund = payment - cashier;
     if (selCake.cakeexist()) {
       if (refund == 0) {
@@ -96,12 +104,12 @@ class Store {
     }
   }
 
-  cake PickupCake () {
+  Cake PickupCake() {
     if (paid) {
-      cake outcake = selCake;
+      Cake outcake = selCake;
       selCake = a;
       paid = false;
-      System.out.println("You have picked up the cake '" + outcake.cakename() +"' !");
+      System.out.println("You have picked up the cake '" + outcake.cakename() + "' !");
       return outcake;
     } else {
       System.out.println("There isn't a cake to pick up!");

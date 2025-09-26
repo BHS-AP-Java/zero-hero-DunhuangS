@@ -1,6 +1,6 @@
 package edu.bhscs;
 
-class cake {
+class Cake {
   String flavor = "unknown";
   String sweetness = "unknown";
   String toppings = "unknown";
@@ -13,13 +13,13 @@ class cake {
   boolean existent = false;
   String name = "unknown";
 
-  public cake(boolean a) {
+  public Cake(boolean a) {
     if (a) {
       System.out.println("A new cake has been ordered! Please add information:");
     }
   }
 
-  void viewcake() {
+  public void viewcake() {
     if (existent) {
       System.out.println("Currently viewing the cake " + name + ":");
       System.out.println("This cake has a " + shape + " shape.");
@@ -49,11 +49,11 @@ class cake {
     }
   }
 
-  boolean cakeexist() {
+  public boolean cakeexist() {
     return this.existent;
   }
 
-  String cakename() {
+  public String cakename() {
     return this.name;
   }
 
@@ -77,16 +77,14 @@ class cake {
     this.existent = true;
   }
 
-  /*
-  void eatcake(int eatpercent) {
+  public void eatcake(int eatpercent) {
     this.eatingprogress += eatpercent;
     if (eatingprogress > 100) {
       this.eatingprogress = 100;
     }
   }
 
-  void setowner(String given) {
+  public void SetCakeOwner(String given) {
     this.owner = given;
   }
-  */
 }

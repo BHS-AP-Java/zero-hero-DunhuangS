@@ -158,10 +158,10 @@ class Main {
           MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, MyName);
       bob.Bakeacake();
       // MadeCake.viewcake();
-      Store overpricery = new Store();
-      overpricery.addcakes(2, 1, bob.Givemethecake(),22.99);
-      bob.giveinstructions(MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight,
-          MyWeight, "scamblast");
+      Store overpricery = new Store("overpricery");
+      overpricery.addcakes(2, 1, bob.Givemethecake(), 22.99);
+      bob.giveinstructions(
+          MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, "scamblast");
       bob.Bakeacake();
       overpricery.addcakes(1, 1, bob.Givemethecake(), 229.90);
       overpricery.showcakes();

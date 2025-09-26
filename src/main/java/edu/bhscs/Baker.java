@@ -9,7 +9,7 @@ public class Baker {
   String shape = "unknown";
   int height = 3;
   int weight = 350;
-  cake MadeCake = new cake(false);
+  Cake MadeCake = new Cake(false);
   String name = "unknown";
   boolean existent = false;
 
@@ -18,18 +18,18 @@ public class Baker {
   }
 
   public void Bakeacake() {
-    this.MadeCake = new cake(false);
+    this.MadeCake = new Cake(false);
     MadeCake.batchsetting(flavor, sweetness, toppings, shape, diameter, height, weight, name);
   }
 
-  cake Givemethecake() {
-    if (existent){
+  Cake Givemethecake() {
+    if (existent) {
       existent = false;
-      cake intermediate = MadeCake;
-      MadeCake = new cake(false);
+      Cake intermediate = MadeCake;
+      MadeCake = new Cake(false);
       return intermediate;
     } else {
-      cake empty = new cake(false);
+      Cake empty = new Cake(false);
       System.out.println("I currently do not have a cake!");
       return empty;
     }
