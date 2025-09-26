@@ -164,17 +164,23 @@ class Main {
           MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, "scamblast");
       bob.Bakeacake();
       overpricery.addcakes(1, 1, bob.Givemethecake(), 229.90);
-      overpricery.showcakes();
-      overpricery.ExamineCake(2, 1);
-      overpricery.buyCake(2, 1);
-      overpricery.buyCake(1, 1);
-      overpricery.PayForCake(1009.10);
-      overpricery.PickupCake();
+      //overpricery.ExamineCake(2, 1);
+      //overpricery.buyCake(2, 1);
+      //overpricery.buyCake(1, 1);
+      //overpricery.PayForCake(1009.10);
+      //overpricery.PickupCake();
+      //overpricery.showcakes();
+      bob.Bakeacake();
+      overpricery.addcakes(1, 3, bob.Givemethecake(), 129.99);
+      bob.Bakeacake();
+      overpricery.addcakes(3, 5, bob.Givemethecake(), 129.99);
       overpricery.showcakes();
       Customer Janet = new Customer("Janet", true, overpricery, 99.99);
-      Janet.BuyAndPayForCake(2,1);
+      Janet.BuyAndPayForCake(2, 1);
       Janet.PickupCake();
+      Janet.EatMyCake(100);
       Janet.CakeInfo();
+      Janet.DiscardMyCake();
     }
   }
 }

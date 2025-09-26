@@ -20,6 +20,7 @@ public class Baker {
   public void Bakeacake() {
     this.MadeCake = new Cake(false);
     MadeCake.batchsetting(flavor, sweetness, toppings, shape, diameter, height, weight, name);
+    this.existent = true;
   }
 
   Cake Givemethecake() {
@@ -37,42 +38,34 @@ public class Baker {
 
   void setflavor(String given) {
     this.flavor = given;
-    this.existent = true;
   }
 
   void setsweetness(String given) {
     this.sweetness = given;
-    this.existent = true;
   }
 
   void settoppings(String given) {
     this.toppings = given;
-    this.existent = true;
   }
 
   void setshape(String given) {
     this.shape = given;
-    this.existent = true;
   }
 
   void setdiameter(int given) {
     this.diameter = given;
-    this.existent = true;
   }
 
   void setheight(int given) {
     this.height = given;
-    this.existent = true;
   }
 
   void setweight(int given) {
     this.weight = given;
-    this.existent = true;
   }
 
   void setname(String given) {
     this.name = given;
-    this.existent = true;
   }
 
   public void giveinstructions(
@@ -92,6 +85,5 @@ public class Baker {
     this.height = givenheight;
     this.weight = givenweight;
     this.name = givenname;
-    this.existent = true;
   }
 }

@@ -49,6 +49,13 @@ class Cake {
     }
   }
 
+  public int ReturnAmountEaten () {
+    return eatingprogress;
+  }
+  public int ReturnWeight() {
+    return weight;
+  }
+
   public boolean cakeexist() {
     return this.existent;
   }
@@ -87,5 +94,4 @@ class Cake {
   public void SetCakeOwner(String name) {
     this.owner = name;
   }
-
 }
