@@ -18,7 +18,8 @@ class Customer {
   }
 
   void BuyAndPayForCake(int y, int x) {
-    System.out.println("I, " + MyName + ", will attempt to buy the cake at row " + y + " column " + x);
+    System.out.println(
+        "I, " + MyName + ", will attempt to buy the cake at row " + y + " column " + x);
     PreferredStore.buyCake(y, x);
     MyMoney = PreferredStore.PayForCake(MyMoney);
   }

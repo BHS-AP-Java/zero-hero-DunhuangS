@@ -182,6 +182,7 @@ class Main {
       Janet.CakeInfo();
       Janet.DiscardMyCake();
       Janet.CakeInfo();
+      overpricery.ShowProfits();
     }
   }
 }

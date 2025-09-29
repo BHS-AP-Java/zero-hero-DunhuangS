@@ -13,6 +13,7 @@ class Store {
   int selCakex = 0;
   int selCakey = 0;
   String StoreName;
+  double moneyinstore = 0.00;
 
   public Store(String name) {
     System.out.println("A new store that sells cakes, " + name + ", has opened!");
@@ -86,6 +87,7 @@ class Store {
         System.out.println("Paid exactly! Have a great day!");
         System.out.println("don't forget to pick up your cake!");
         paid = true;
+        moneyinstore += cashier;
         return refund;
       } else if (refund < 0) {
         System.out.println("Oof. Not enough money, no cake for you! Cake returned to shelf.");
@@ -96,6 +98,7 @@ class Store {
         System.out.println("Your change is $" + refund + ". Have a great day!");
         System.out.println("don't forget to pick up your cake!");
         paid = true;
+        moneyinstore += cashier;
         return refund;
       }
     } else {
@@ -115,5 +118,9 @@ class Store {
       System.out.println("There isn't a cake to pick up!");
       return a;
     }
+  }
+
+  void ShowProfits() {
+    System.out.println("The store " + StoreName + " has earned a total of $" + moneyinstore);
   }
 }
