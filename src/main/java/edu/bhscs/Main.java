@@ -1,12 +1,11 @@
-// Dunhuang Su
-// P2
-// Zero Hero
-// 9/19/2025
+/* Dunhuang Su
+ * P2
+ * Bake Sale
+ * 9/29/2025
 
-/*
- * DESCRIPTION: Whatever Mr. Reiber says
+ * DESCRIPTION: A Cake, a Baker, a Store, and a Customer exist in a bake sale. Earned money is given to PTSA.
  * INPUT: we don't know about input yet
- * OUTPUT: Some cool words in the command line terminal thing
+ * OUTPUT: The standard operation of the bake sale
  * EDGE CASE: They are all edge cases at the moment
  */
 
@@ -33,7 +32,7 @@ class Main {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) { //this is a constructor
     boolean old = false;
     // currently not running the old program
     boolean ttt = false;
@@ -145,6 +144,7 @@ class Main {
       }
     }
     if (cake) {
+      // default cake settings
       String MyFlavor = "chocolate";
       String MySweetness = "moderately";
       String MyToppings = "cherry";
@@ -153,35 +153,50 @@ class Main {
       int MyHeight = 6;
       int MyWeight = 617;
       String MyName = "chocolate blast";
+      //new baker Bob, given instructions and baked a cake
       Baker bob = new Baker();
       bob.giveinstructions(
           MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, MyName);
       bob.Bakeacake();
       // MadeCake.viewcake();
+      //new store Overpricery opens
       Store overpricery = new Store("overpricery");
+      //adds bob's cake to the store
       overpricery.addcakes(2, 1, bob.Givemethecake(), 22.99);
       bob.giveinstructions(
           MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, "scamblast");
+      //adds a few more cakes
       bob.Bakeacake();
-      overpricery.addcakes(1, 1, bob.Givemethecake(), 229.90);
-      // overpricery.ExamineCake(2, 1);
-      // overpricery.buyCake(2, 1);
-      // overpricery.buyCake(1, 1);
-      // overpricery.PayForCake(1009.10);
-      // overpricery.PickupCake("burhuhfuh");
-      // overpricery.showcakes();
+      overpricery.addcakes(1, 1, bob.Givemethecake(), 229.99);
+      bob.giveinstructions(
+          MyFlavor, MySweetness, MyToppings, MyShape, MyDiameter, MyHeight, MyWeight, "miniscamblast");
       bob.Bakeacake();
       overpricery.addcakes(1, 3, bob.Givemethecake(), 129.99);
+      bob.giveinstructions(
+          "Dog", "more savory than", "dog ear", "dog", 90, 24, 16500, "DogCake");
       bob.Bakeacake();
-      overpricery.addcakes(3, 5, bob.Givemethecake(), 129.99);
+      overpricery.addcakes(3, 5, bob.Givemethecake(), 69.99);
+      //this shows all the cakes
       overpricery.showcakes();
-      Customer Janet = new Customer("Janet", true, overpricery, 99.99);
+      //Janet, a new customer, buys from specifically overpricery
+      Customer Janet = new Customer("Janet", true, overpricery, 100);
+      //Janet buys a cake
       Janet.BuyAndPayForCake(2, 1);
       Janet.PickupCake();
+      //Janet eats the cake
       Janet.EatMyCake(100);
       Janet.CakeInfo();
+      //Cake discarded
       Janet.DiscardMyCake();
+      //Since cake is discarded, no cake is present when info is taken
       Janet.CakeInfo();
+      //Profits of the store
+      overpricery.ShowProfits();
+      Janet.BuyAndPayForCake(3, 5);
+      Janet.PickupCake();
+      Janet.EatMyCake(65);
+      Janet.CakeInfo();
+      Janet.DiscardMyCake();
       overpricery.ShowProfits();
     }
   }
