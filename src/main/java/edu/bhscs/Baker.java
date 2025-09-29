@@ -1,7 +1,9 @@
 package edu.bhscs;
 
 public class Baker {
-
+  //fields and properties
+  //constructors
+  //methods
   String flavor = "unknown";
   String sweetness = "unknown";
   String toppings = "unknown";
