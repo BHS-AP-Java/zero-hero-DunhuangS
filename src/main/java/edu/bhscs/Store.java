@@ -74,7 +74,8 @@ class Store {
       this.shelf[y - 1][x - 1] = a;
       selCakex = x;
       selCakey = y;
-      System.out.println("Cake '" + selCake.cakename() + "' has been selected! Please pay at the cashier!");
+      System.out.println(
+          "Cake '" + selCake.cakename() + "' has been selected! Please pay at the cashier!");
     } else {
       System.out.println("There is no cake here!");
     }
