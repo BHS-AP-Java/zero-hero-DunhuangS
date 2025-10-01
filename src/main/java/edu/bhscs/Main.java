@@ -24,7 +24,7 @@ class Main {
     boolean bakesale = true;
     // doing cake stuff (acts like a master switch)
     if (bakesale) {
-      //Section 1: Defining variables
+      //Prelude: Defining variables
       Pantry overstorery = new Pantry();
       overstorery.putbutter(new Butter(1000, 10.00, 9));
       overstorery.puteggs(new Eggs(120, 85.00, 3));
