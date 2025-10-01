@@ -32,4 +32,3 @@ class Eggs {
     return Count;
   }
 }
-

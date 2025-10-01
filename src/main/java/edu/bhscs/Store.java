@@ -40,7 +40,6 @@ class Store {
   void firebaker(int position) {
     employees[position - 1].gotfired();
     employees[position - 1] = null;
-
   }
 
   String StoreName() {
@@ -64,10 +63,9 @@ class Store {
   }
 
   void getCakefrombaker(int y, int x, int bakerindex) {
-    shelf[y-1][x-1] = employees[bakerindex - 1].Givemethecake();
-    prices[y-1][x-1] = employees[bakerindex - 1].getprice();
+    shelf[y - 1][x - 1] = employees[bakerindex - 1].Givemethecake();
+    prices[y - 1][x - 1] = employees[bakerindex - 1].getprice();
   }
-
 
   void showcakes() { // shows all cakes on sale
     boolean therearecakes = false;
@@ -85,7 +83,8 @@ class Store {
           }
           System.out.println("'" + item.cakename() + "'");
           System.out.println("At shelf position | row: " + height + " column: " + dist + " |");
-          System.out.println("This cake costs $" + String.format("%.2f",prices[height - 1][dist - 1]));
+          System.out.println(
+              "This cake costs $" + String.format("%.2f", prices[height - 1][dist - 1]));
         }
         dist += 1;
       }
@@ -141,7 +140,8 @@ class Store {
         selCake = a;
         return payment;
       } else {
-        System.out.println("Your change is $" + String.format("%.2f", refund) + ". Have a great day!");
+        System.out.println(
+            "Your change is $" + String.format("%.2f", refund) + ". Have a great day!");
         System.out.println("don't forget to pick up your cake!");
         paid = true;
         moneyinstore += (cashier - selCake.getoprice());
@@ -167,7 +167,11 @@ class Store {
   }
 
   void ShowProfits() {
-    System.out.println("The store " + StoreName + " is currently holding a profit of $" + String.format("%.2f",moneyinstore));
+    System.out.println(
+        "The store "
+            + StoreName
+            + " is currently holding a profit of $"
+            + String.format("%.2f", moneyinstore));
   }
 
   void DonateAllMoneyToPTSA(PTSA ptsa) {

@@ -32,4 +32,3 @@ class Sugar {
     return grams;
   }
 }
-

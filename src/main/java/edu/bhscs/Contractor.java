@@ -11,6 +11,5 @@ class Contractor {
     } else {
       return false;
     }
-
   }
 }

@@ -10,21 +10,33 @@ public class Baker {
   Store workplace;
   int exp = 0;
   int level = 1;
-  int[] levelupchart = {20,30,50,50,75,125,150,200,300,1000,3000,5000,15000,Integer.MAX_VALUE};
-   //there are 14 levels, so 13 level up sequences
-  String[] levelnames = {"Newbie",
-  "Novice I","Novice II", "Novice III",
-  "Intermediate I", "Intermediate II", "Intermediate III",
-  "Expert I", "Expert II", "Expert III",
-  "Virtuoso confectioner", "Master confectioner",
-  "Grandmaster confectioner", "World class confectioner"};
+  int[] levelupchart = {
+    20, 30, 50, 50, 75, 125, 150, 200, 300, 1000, 3000, 5000, 15000, Integer.MAX_VALUE
+  };
+  // there are 14 levels, so 13 level up sequences
+  String[] levelnames = {
+    "Newbie",
+    "Novice I",
+    "Novice II",
+    "Novice III",
+    "Intermediate I",
+    "Intermediate II",
+    "Intermediate III",
+    "Expert I",
+    "Expert II",
+    "Expert III",
+    "Virtuoso confectioner",
+    "Master confectioner",
+    "Grandmaster confectioner",
+    "World class confectioner"
+  };
   String name;
   double price = 0.;
   double sellprice;
 
   public Baker(String name) {
     this.name = name;
-    //System.out.println("A new baker has been hired to make cakes!");
+    // System.out.println("A new baker has been hired to make cakes!");
   }
 
   String getname() {
@@ -38,9 +50,18 @@ public class Baker {
     } else {
       levelcomptxt = String.valueOf(levelupchart[level - 1]);
     }
-    System.out.println(name + " is level " + level + " (" + levelnames[level - 1] + ") with " + exp + "/" + levelcomptxt + " experience points");
+    System.out.println(
+        name
+            + " is level "
+            + level
+            + " ("
+            + levelnames[level - 1]
+            + ") with "
+            + exp
+            + "/"
+            + levelcomptxt
+            + " experience points");
   }
-
 
   void acceptjob(Store bakery) {
     workplace = bakery;
@@ -51,8 +72,14 @@ public class Baker {
   }
 
   public void Bakeacake() {
-    if (workplace.accessPantry().checkresources(MyRecipe.flour(), MyRecipe.eggs(),
-      MyRecipe.butter(), MyRecipe.milk(), MyRecipe.sugar())) {
+    if (workplace
+        .accessPantry()
+        .checkresources(
+            MyRecipe.flour(),
+            MyRecipe.eggs(),
+            MyRecipe.butter(),
+            MyRecipe.milk(),
+            MyRecipe.sugar())) {
       price = 0.;
       double cakequality = 0.;
       Pantry Ravage = workplace.accessPantry();
@@ -70,24 +97,30 @@ public class Baker {
       cakequality -= 1;
       cakequality += (level / 4);
       sellprice = price * ((double) 1 + (0.1 * level) + (cakequality / 10));
-      //Ravage.putflour(Ravage.getFlour().use(MyRecipe.flour()));
+      // Ravage.putflour(Ravage.getFlour().use(MyRecipe.flour()));
       MadeCake = new Cake(false);
-      int weight = (50 * MyRecipe.eggs()) + MyRecipe.butter() + MyRecipe.milk() + MyRecipe.sugar() + MyRecipe.flour();
+      int weight =
+          (50 * MyRecipe.eggs())
+              + MyRecipe.butter()
+              + MyRecipe.milk()
+              + MyRecipe.sugar()
+              + MyRecipe.flour();
       MadeCake.batchsetting(
-      MyRecipe.flavor(),
-      MyRecipe.sweetness(),
-      MyRecipe.toppings(),
-      MyRecipe.shape(),
-      MyRecipe.diameter(),
-      MyRecipe.height(),
-      MyRecipe.name(),
-      MyRecipe.flour(),
-      MyRecipe.eggs(),
-      MyRecipe.butter(),
-      MyRecipe.milk(),
-      MyRecipe.sugar(),
-      cakequality,
-      price, level);
+          MyRecipe.flavor(),
+          MyRecipe.sweetness(),
+          MyRecipe.toppings(),
+          MyRecipe.shape(),
+          MyRecipe.diameter(),
+          MyRecipe.height(),
+          MyRecipe.name(),
+          MyRecipe.flour(),
+          MyRecipe.eggs(),
+          MyRecipe.butter(),
+          MyRecipe.milk(),
+          MyRecipe.sugar(),
+          cakequality,
+          price,
+          level);
       this.existent = true;
       exp += weight / 50;
       checklevelup();
@@ -98,7 +131,7 @@ public class Baker {
 
   private void checklevelup() {
     while (exp >= levelupchart[level - 1]) {
-      exp -= levelupchart[level-1];
+      exp -= levelupchart[level - 1];
       level += 1;
     }
   }
@@ -122,7 +155,6 @@ public class Baker {
     price = 0.;
     return intermediate;
   }
-
 
   public void getinstructions(Recipe therecipe) {
     MyRecipe = therecipe;

@@ -32,4 +32,3 @@ class Butter {
     return grams;
   }
 }
-

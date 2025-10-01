@@ -3,6 +3,7 @@ package edu.bhscs;
 class PTSA {
   String name;
   double money;
+
   PTSA(String name) {
     this.name = name;
   }
@@ -14,5 +15,4 @@ class PTSA {
   void sumofdonation() {
     System.out.println(money);
   }
-
 }

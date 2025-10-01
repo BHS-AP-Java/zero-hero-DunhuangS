@@ -12,14 +12,12 @@ class Cake {
   String owner;
   boolean existent;
   String name;
-  int[] ingredients = {0,0,0,0,0};
-  //I have no clue how to make a dictionary in Java,
-  //so I will just use array instead :/
+  int[] ingredients = {0, 0, 0, 0, 0};
+  // I have no clue how to make a dictionary in Java,
+  // so I will just use array instead :/
   double quality;
   double oprice;
   int craftquality;
-
-
 
   public Cake(boolean a) {
     if (a) {
@@ -35,10 +33,15 @@ class Cake {
       System.out.print("The longest part of the cake is " + diameter + " inches wide,");
       System.out.println(" and it is " + height + " inches tall.");
       System.out.println("The cake has a " + flavor + " flavor.");
-      System.out.println("It has a sweetness rating of " + String.format("%.2f",sweetness) + ".");
+      System.out.println("It has a sweetness rating of " + String.format("%.2f", sweetness) + ".");
       System.out.println("Finally, it is topped off with " + toppings + " toppings.");
       System.out.println("It weighs " + weight + " grams coming out of the store.");
-      System.out.println("It has a quality rating of " + String.format("%.1f",quality) + ", made by a baker with experience level " + craftquality + ".");
+      System.out.println(
+          "It has a quality rating of "
+              + String.format("%.1f", quality)
+              + ", made by a baker with experience level "
+              + craftquality
+              + ".");
       System.out.println("------------------------------------------------------");
       if (owner == null) {
         System.out.println("This cake has not been purchased yet.");
@@ -59,7 +62,7 @@ class Cake {
       System.out.println("Butter: " + ingredients[2] + "g");
       System.out.println("Milk: " + ingredients[3] + "mL");
       System.out.println("Sugar: " + ingredients[4] + "g");
-      System.out.println("May include a negligable amount of toppings and flavoring.");
+      System.out.println("May include: toppings, flavoring, preservatives.");
       System.out.println("------------------------------------------------------");
       System.out.println();
     } else {
@@ -101,7 +104,8 @@ class Cake {
       int milkamount,
       int sugaramount,
       double predictedquality,
-      double makeprice, int craftsmanship) {
+      double makeprice,
+      int craftsmanship) {
     this.flavor = givenflavor;
     this.sweetness = givensweetness;
     this.toppings = giventoppings;

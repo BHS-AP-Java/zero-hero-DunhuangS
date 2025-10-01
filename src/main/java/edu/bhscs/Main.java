@@ -95,18 +95,28 @@ class Main {
     if (bakesale) {
 
       Pantry overstorery = new Pantry();
-      overstorery.putbutter(new Butter(1000,10.00,9));
-      overstorery.puteggs(new Eggs(120,85.00,3));
+      overstorery.putbutter(new Butter(1000, 10.00, 9));
+      overstorery.puteggs(new Eggs(120, 85.00, 3));
       overstorery.putflour(new Flour(16000, 30.15, 10));
       overstorery.putmilk(new Milk(4000, 12.15, 4));
-      overstorery.putsugar(new Sugar(8000,40.00,5));
+      overstorery.putsugar(new Sugar(8000, 40.00, 5));
 
       Store overpricery = new Store("Overpricery");
       overpricery.updatePantry(overstorery);
       Contractor hirer = new Contractor();
       Baker bob = new Baker("bob");
       hirer.performjobinterview(bob, overpricery);
-      Recipe chocoblast = new Recipe("Chocolate", "Cherry", "Circle", "Chocolate Blast", 6, 3, 600, 5, 70, 120, 560);
+      Recipe chocoblast =
+          new Recipe(
+              "Chocolate", "Cherry", 
+              "Circle", "Chocolate Blast", 
+              6, 3, 
+              600, 5, 70, 120, 560);
+          new Recipe(
+              "Chocolate", "Cherry", 
+              "Circle", "Chocolate Blast", 
+              6, 3, 
+              600, 5, 70, 120, 560);
       bob.getinstructions(chocoblast);
       bob.Bakeacake();
       overpricery.getCakefrombaker(1, 1, 1);
@@ -125,10 +135,6 @@ class Main {
       Janet.PickupCake();
       overpricery.ShowProfits();
       bob.printlevel();
-
-
-
-
 
       /*
       // default cake settings

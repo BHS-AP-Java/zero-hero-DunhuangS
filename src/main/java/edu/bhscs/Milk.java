@@ -32,4 +32,3 @@ class Milk {
     return mililiters;
   }
 }
-

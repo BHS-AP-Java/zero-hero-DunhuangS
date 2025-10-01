@@ -49,15 +49,16 @@ class Pantry {
     return butterstore;
   }
 
-  boolean checkresources(int neededFlour, int neededEggs, int neededButter, int neededMilk, int neededSugar) {
-    if (
-    neededSugar <= sugarstore.returnquantity() &&
-    neededEggs <= eggstore.returnquantity() &&
-    neededMilk <= milkstore.returnquantity() &&
-    neededFlour <= flourstore.returnquantity() &&
-    neededButter <= butterstore.returnquantity()
-    ) {return true;} else {return false;}
+  boolean checkresources(
+      int neededFlour, int neededEggs, int neededButter, int neededMilk, int neededSugar) {
+    if (neededSugar <= sugarstore.returnquantity()
+        && neededEggs <= eggstore.returnquantity()
+        && neededMilk <= milkstore.returnquantity()
+        && neededFlour <= flourstore.returnquantity()
+        && neededButter <= butterstore.returnquantity()) {
+      return true;
+    } else {
+      return false;
+    }
   }
-
-
 }

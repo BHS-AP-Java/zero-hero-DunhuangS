@@ -14,34 +14,43 @@ class Recipe {
   int milk;
   int sugar;
 
-  Recipe(String givenflavor,
-        String giventoppings,
-        String givenshape,
-        String givenname,
-        int givendiameter,
-        int givenheight,
-        int flouramount,
-        int eggamount,
-        int butteramount,
-        int milkamount,
-        int sugaramount) {
-      flavor = givenflavor;
-      toppings = giventoppings;
-      shape = givenshape;
-      name = givenname;
-      diameter = givendiameter;
-      height = givenheight;
-      flour = flouramount;
-      egg = eggamount;
-      butter = butteramount;
-      milk = milkamount;
-      sugar = sugaramount;
-      sweetness = (double) (500./35.) * ((double) sugar / ((double) ((50 * egg) + butter + milk + sugar + flour))); //an egg weighs approximately 50 grams
-      /*
-       * The average cake is about 30-40% sugar by weight, I will assume 35%
-       * Which is assigned a 5 on the sweetness scale
-       * Therefore multiply percent of sugar in cake by 100/35 * 5 = 500/35
-       */
+  Recipe(
+      String givenflavor,
+      String giventoppings,
+      String givenshape,
+      String givenname,
+      int givendiameter,
+      int givenheight,
+      int flouramount,
+      int eggamount,
+      int butteramount,
+      int milkamount,
+      int sugaramount) {
+    flavor = givenflavor;
+    toppings = giventoppings;
+    shape = givenshape;
+    name = givenname;
+    diameter = givendiameter;
+    height = givenheight;
+    flour = flouramount;
+    egg = eggamount;
+    butter = butteramount;
+    milk = milkamount;
+    sugar = sugaramount;
+    sweetness =
+        (double) (500. / 35.)
+            * ((double) sugar
+                / ((double)
+                    ((50 * egg)
+                        + butter
+                        + milk
+                        + sugar
+                        + flour))); // an egg weighs approximately 50 grams
+    /*
+     * The average cake is about 30-40% sugar by weight, I will assume 35%
+     * Which is assigned a 5 on the sweetness scale
+     * Therefore multiply percent of sugar in cake by 100/35 * 5 = 500/35
+     */
   }
 
   String flavor() {
@@ -91,7 +100,4 @@ class Recipe {
   double sweetness() {
     return sweetness;
   }
-
-
-
 }
