@@ -71,6 +71,21 @@ public class Baker {
     workplace = null;
   }
 
+  void gotobakingclass() {
+    if (level < 14) {
+      level += 1;
+    }
+  }
+
+  void examinepantry() {
+    System.out.println("RESULTS OF PANTRY EXAMINATION");
+    System.out.println("Flour: " + workplace.accessPantry().getFlour().returnquantity() + "g");
+    System.out.println("Eggs: " + workplace.accessPantry().getEggs().returnquantity() + " units");
+    System.out.println("Butter: " + workplace.accessPantry().getButter().returnquantity() + "g");
+    System.out.println("Milk: " + workplace.accessPantry().getMilk().returnquantity() + "mL");
+    System.out.println("Sugar: " + workplace.accessPantry().getButter().returnquantity() + "g");
+  }
+
   public void Bakeacake() {
     if (workplace
         .accessPantry()
@@ -93,10 +108,10 @@ public class Baker {
       cakequality += Ravage.getMilk().returnquality();
       price += Ravage.getSugar().use(MyRecipe.sugar());
       cakequality += Ravage.getSugar().returnquality();
-      cakequality /= 5;
-      cakequality -= 1;
-      cakequality += (level / 4);
-      sellprice = price * ((double) 1 + (0.1 * level) + (cakequality / 10));
+      cakequality /= 5.;
+      cakequality -= 1.;
+      cakequality += ((double) level / 4);
+      sellprice = price * ((double) 1. + (0.1 * level) + ((double) cakequality / (double) 10.));
       // Ravage.putflour(Ravage.getFlour().use(MyRecipe.flour()));
       MadeCake = new Cake(false);
       int weight =

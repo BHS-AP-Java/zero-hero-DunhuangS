@@ -13,6 +13,6 @@ class PTSA {
   }
 
   void sumofdonation() {
-    System.out.println(money);
+    System.out.println("The PTSA " + name + " has gathered $" + String.format("%.2f", money));
   }
 }

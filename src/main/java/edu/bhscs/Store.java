@@ -47,11 +47,21 @@ class Store {
   }
 
   void delivergoods(Flour flour, Eggs eggs, Butter butter, Milk milk, Sugar sugar) {
-    BackPantry.putflour(flour);
-    BackPantry.puteggs(eggs);
-    BackPantry.putbutter(butter);
-    BackPantry.putmilk(milk);
-    BackPantry.putsugar(sugar);
+    if (flour != null) {
+      BackPantry.putflour(flour);
+    }
+    if (eggs != null) {
+      BackPantry.puteggs(eggs);
+    }
+    if (butter != null) {
+      BackPantry.putbutter(butter);
+    }
+    if (milk != null) {
+      BackPantry.putmilk(milk);
+    }
+    if (sugar != null) {
+      BackPantry.putsugar(sugar);
+    }
   }
 
   Pantry accessPantry() {
@@ -63,8 +73,11 @@ class Store {
   }
 
   void getCakefrombaker(int y, int x, int bakerindex) {
-    shelf[y - 1][x - 1] = employees[bakerindex - 1].Givemethecake();
-    prices[y - 1][x - 1] = employees[bakerindex - 1].getprice();
+    Cake gotcake = employees[bakerindex - 1].Givemethecake();
+    if (gotcake.cakeexist()) {
+      shelf[y - 1][x - 1] = gotcake;
+      prices[y - 1][x - 1] = employees[bakerindex - 1].getprice();
+    }
   }
 
   void showcakes() { // shows all cakes on sale
