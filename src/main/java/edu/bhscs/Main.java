@@ -93,6 +93,18 @@ class Main {
       }
     }
     if (bakesale) {
+
+      Pantry overstorery = new Pantry();
+      overstorery.putbutter(new Butter(1000,10.00,9));
+      overstorery.puteggs(new Eggs(120,85.00,3));
+      overstorery.putflour(new Flour(16000, 30.15, 10));
+      overstorery.putmilk(new Milk(4000, 12.15, 4));
+      overstorery.putsugar(new Sugar(8000,40.00,5));
+
+
+
+
+      /*
       // default cake settings
       String MyFlavor = "chocolate";
       String MySweetness = "moderately";
@@ -153,6 +165,7 @@ class Main {
       Janet.CakeInfo();
       Janet.DiscardMyCake();
       overpricery.ShowProfits();
+      */
     }
   }
 }

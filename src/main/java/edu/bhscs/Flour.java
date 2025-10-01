@@ -1,4 +1,4 @@
-package edu.bhscs.Ingredients;
+package edu.bhscs;
 
 class Flour {
   int grams;
@@ -11,7 +11,7 @@ class Flour {
     this.costpergram = cost / quantity;
   }
 
-  double useflour(int amount) {
+  double use(int amount) {
     if (grams - amount < 0) {
       return -1;
     } else {
@@ -26,5 +26,9 @@ class Flour {
 
   void goesbad() {
     quality = 0;
+  }
+
+  int returnquantity() {
+    return grams;
   }
 }

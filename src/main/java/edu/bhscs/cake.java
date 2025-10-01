@@ -13,6 +13,8 @@ class Cake {
   boolean existent = false;
   String name = "unknown";
 
+  
+
   public Cake(boolean a) {
     if (a) {
       System.out.println("A new cake has been ordered! Please add information:");

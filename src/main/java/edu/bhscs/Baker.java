@@ -4,19 +4,15 @@ public class Baker {
   // fields and properties
   // constructors
   // methods
-  String flavor = "unknown";
-  String sweetness = "unknown";
-  String toppings = "unknown";
-  int diameter = 6;
-  String shape = "unknown";
-  int height = 3;
-  int weight = 350;
+  Recipe MyRecipe;
   Cake MadeCake = new Cake(false);
-  String name = "unknown";
   boolean existent = false;
+  Store workplace;
+  int exp = 0;
 
-  public Baker() {
+  public Baker(Store work) {
     System.out.println("A new baker has been hired to make cakes!");
+    workplace = work;
   }
 
   public void Bakeacake() {
@@ -38,54 +34,14 @@ public class Baker {
     }
   }
 
-  void setflavor(String given) {
-    this.flavor = given;
-  }
+  public void getinstructions(Recipe therecipe) {
+    MyRecipe = therecipe;
+    this.flavor = therecipe.flavor();
+    this.toppings = therecipe.toppings();
+    this.shape = therecipe.shape();
+    this.diameter = therecipe.diameter();
+    this.height = therecipe.height();
+    this.name = therecipe.name();
 
-  void setsweetness(String given) {
-    this.sweetness = given;
-  }
-
-  void settoppings(String given) {
-    this.toppings = given;
-  }
-
-  void setshape(String given) {
-    this.shape = given;
-  }
-
-  void setdiameter(int given) {
-    this.diameter = given;
-  }
-
-  void setheight(int given) {
-    this.height = given;
-  }
-
-  void setweight(int given) {
-    this.weight = given;
-  }
-
-  void setname(String given) {
-    this.name = given;
-  }
-
-  public void giveinstructions(
-      String givenflavor,
-      String givensweetness,
-      String giventoppings,
-      String givenshape,
-      int givendiameter,
-      int givenheight,
-      int givenweight,
-      String givenname) {
-    this.flavor = givenflavor;
-    this.sweetness = givensweetness;
-    this.toppings = giventoppings;
-    this.shape = givenshape;
-    this.diameter = givendiameter;
-    this.height = givenheight;
-    this.weight = givenweight;
-    this.name = givenname;
   }
 }
