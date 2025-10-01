@@ -36,7 +36,7 @@ class Recipe {
       butter = butteramount;
       milk = milkamount;
       sugar = sugaramount;
-      sweetness = (500/35) * (sugar / ((50 * egg) + butter + milk + sugar + flour)); //an egg weighs approximately 50 grams
+      sweetness = (double) (500./35.) * ((double) sugar / ((double) ((50 * egg) + butter + milk + sugar + flour))); //an egg weighs approximately 50 grams
       /*
        * The average cake is about 30-40% sugar by weight, I will assume 35%
        * Which is assigned a 5 on the sweetness scale
@@ -69,23 +69,23 @@ class Recipe {
   }
 
   int flour() {
-    return height;
+    return flour;
   }
 
   int eggs() {
-    return height;
+    return egg;
   }
 
   int butter() {
-    return height;
+    return butter;
   }
 
   int milk() {
-    return height;
+    return milk;
   }
 
   int sugar() {
-    return height;
+    return sugar;
   }
 
   double sweetness() {

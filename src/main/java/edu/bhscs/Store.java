@@ -14,15 +14,60 @@ class Store {
   int selCakey = 0;
   String StoreName;
   double moneyinstore = 0.00;
+  Pantry BackPantry;
+  Baker[] employees = new Baker[3];
 
   public Store(String name) {
     System.out.println("A new store that sells cakes, " + name + ", has opened!");
     StoreName = name;
+    BackPantry = new Pantry();
+  }
+
+  boolean bakerapplication(Baker baker) {
+    if (employees[0] == null) {
+      employees[0] = baker;
+    } else if (employees[1] == null) {
+      employees[1] = baker;
+    } else if (employees[2] == null) {
+      employees[2] = baker;
+    } else {
+      System.out.println("There is no more room for another baker!");
+      return false;
+    }
+    return true;
+  }
+
+  void firebaker(int position) {
+    employees[position - 1].gotfired();
+    employees[position - 1] = null;
+
   }
 
   String StoreName() {
     return StoreName;
   }
+
+  void delivergoods(Flour flour, Eggs eggs, Butter butter, Milk milk, Sugar sugar) {
+    BackPantry.putflour(flour);
+    BackPantry.puteggs(eggs);
+    BackPantry.putbutter(butter);
+    BackPantry.putmilk(milk);
+    BackPantry.putsugar(sugar);
+  }
+
+  Pantry accessPantry() {
+    return BackPantry;
+  }
+
+  void updatePantry(Pantry pantry) {
+    BackPantry = pantry;
+  }
+
+  void getCakefrombaker(int y, int x, int bakerindex) {
+    shelf[y-1][x-1] = employees[bakerindex - 1].Givemethecake();
+    prices[y-1][x-1] = employees[bakerindex - 1].getprice();
+  }
+
 
   void showcakes() { // shows all cakes on sale
     boolean therearecakes = false;
@@ -40,7 +85,7 @@ class Store {
           }
           System.out.println("'" + item.cakename() + "'");
           System.out.println("At shelf position | row: " + height + " column: " + dist + " |");
-          System.out.println("This cake costs $" + prices[height - 1][dist - 1]);
+          System.out.println("This cake costs $" + String.format("%.2f",prices[height - 1][dist - 1]));
         }
         dist += 1;
       }
@@ -88,7 +133,7 @@ class Store {
         System.out.println("Paid exactly! Have a great day!");
         System.out.println("don't forget to pick up your cake!");
         paid = true;
-        moneyinstore += cashier;
+        moneyinstore += (cashier - selCake.getoprice());
         return refund;
       } else if (refund < 0) {
         System.out.println("Oof. Not enough money, no cake for you! Cake returned to shelf.");
@@ -96,10 +141,10 @@ class Store {
         selCake = a;
         return payment;
       } else {
-        System.out.println("Your change is $" + refund + ". Have a great day!");
+        System.out.println("Your change is $" + String.format("%.2f", refund) + ". Have a great day!");
         System.out.println("don't forget to pick up your cake!");
         paid = true;
-        moneyinstore += cashier;
+        moneyinstore += (cashier - selCake.getoprice());
         return refund;
       }
     } else {
@@ -122,6 +167,11 @@ class Store {
   }
 
   void ShowProfits() {
-    System.out.println("The store " + StoreName + " has earned a total of $" + moneyinstore);
+    System.out.println("The store " + StoreName + " is currently holding a profit of $" + String.format("%.2f",moneyinstore));
+  }
+
+  void DonateAllMoneyToPTSA(PTSA ptsa) {
+    ptsa.donation(moneyinstore);
+    moneyinstore = 0;
   }
 }

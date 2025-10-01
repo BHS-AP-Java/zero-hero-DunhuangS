@@ -101,6 +101,32 @@ class Main {
       overstorery.putmilk(new Milk(4000, 12.15, 4));
       overstorery.putsugar(new Sugar(8000,40.00,5));
 
+      Store overpricery = new Store("Overpricery");
+      overpricery.updatePantry(overstorery);
+      Contractor hirer = new Contractor();
+      Baker bob = new Baker("bob");
+      hirer.performjobinterview(bob, overpricery);
+      Recipe chocoblast = new Recipe("Chocolate", "Cherry", "Circle", "Chocolate Blast", 6, 3, 600, 5, 70, 120, 560);
+      bob.getinstructions(chocoblast);
+      bob.Bakeacake();
+      overpricery.getCakefrombaker(1, 1, 1);
+      bob.Bakeacake();
+      overpricery.getCakefrombaker(1, 2, 1);
+      bob.Bakeacake();
+      overpricery.getCakefrombaker(1, 3, 1);
+      bob.Bakeacake();
+      overpricery.getCakefrombaker(1, 4, 1);
+      bob.Bakeacake();
+      overpricery.getCakefrombaker(1, 5, 1);
+      overpricery.showcakes();
+      overpricery.ExamineCake(1, 1);
+      Customer Janet = new Customer("janet", true, overpricery, 999.99);
+      Janet.BuyAndPayForCake(1, 1);
+      Janet.PickupCake();
+      overpricery.ShowProfits();
+      bob.printlevel();
+
+
 
 
 

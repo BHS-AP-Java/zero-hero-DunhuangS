@@ -49,7 +49,7 @@ class Pantry {
     return butterstore;
   }
 
-  boolean checkresources(int neededSugar, int neededEggs, int neededMilk, int neededFlour, int neededButter) {
+  boolean checkresources(int neededFlour, int neededEggs, int neededButter, int neededMilk, int neededSugar) {
     if (
     neededSugar <= sugarstore.returnquantity() &&
     neededEggs <= eggstore.returnquantity() &&

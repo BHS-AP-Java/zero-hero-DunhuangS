@@ -11,8 +11,8 @@ class PTSA {
     money += donation;
   }
 
-  double returnprofits() {
-    return money;
+  void sumofdonation() {
+    System.out.println(money);
   }
 
 }
