@@ -1,3 +1,15 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A cake with various assigned properties
+ * INPUT: The wanted properties of a given cake
+ * OUTPUT: Various information about the cake
+ * EDGE CASES: Often the string-based properties will have gramatically incorrect phrases in viewcake
+ */
+
 package edu.bhscs;
 
 class Cake {
@@ -88,6 +100,10 @@ class Cake {
 
   public String cakename() {
     return this.name;
+  }
+
+  public double returnquality() {
+    return quality;
   }
 
   public void batchsetting(

@@ -1,3 +1,14 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A PTSA collects money from store.
+ * INPUT: Money
+ * OUTPUT: Sum of collected money
+ * EDGE CASES: negative numbers put the organization in debt. 
+ */
 package edu.bhscs;
 
 class PTSA {

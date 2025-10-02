@@ -1,3 +1,13 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A customer that purchases cake from stores and consumes them. INPUT: Preferred
+ * store, money, name, consumption of cake OUTPUT: Properties of the customer and the cake EDGE
+ * CASES: The customer can eat negative cake.
+ */
 package edu.bhscs;
 
 class Pantry {

@@ -1,3 +1,14 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A recipe that is used by a baker to make a specific cake
+ * INPUT: Various details of a cake
+ * OUTPUT: The provided details
+ * EDGE CASES: negative numbers yield negative ingredients.
+ */
 package edu.bhscs;
 
 class Recipe {

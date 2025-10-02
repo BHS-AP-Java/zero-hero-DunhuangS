@@ -1,3 +1,18 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: This is a baker that makes cakes from instructions
+ * INPUT: Baker's name, Recipe to bake, Store to work for
+ * OUTPUT: A made cake with the given properties
+ * EDGE CASES:
+ * An incomplete recipe (null info) will break the comparison
+ * A negative ingredient requirement will add ingredients to the source (undesirable)
+ * Much negative ingredients will result in a negative pricetag. This sometimes breaks formatting.
+ * Negative ingredients also give negative exp to the baker
+ */
 package edu.bhscs;
 
 public class Baker {

@@ -1,3 +1,14 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A person that links bakers and stores
+ * INPUT: Baker, Store
+ * OUTPUT: Status if the assignment
+ * EDGE CASES: None at the moment
+ */
 package edu.bhscs;
 
 class Contractor {

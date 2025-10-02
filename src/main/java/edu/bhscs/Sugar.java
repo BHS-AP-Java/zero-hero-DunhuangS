@@ -1,3 +1,14 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: Base ingredient #5 (Sugar)
+ * INPUT: Sugar quantity, cost, and quality
+ * OUTPUT: boolean if the materials exist or not
+ * EDGE CASES: negative numbers again. Same issue as flour.
+ */
 package edu.bhscs;
 
 class Sugar {

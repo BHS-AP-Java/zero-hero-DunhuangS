@@ -1,3 +1,15 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: Base ingredient #4 (Milk)
+ * INPUT: Milk quantity, cost, and quality
+ * OUTPUT: boolean if the materials exist or not
+ * EDGE CASES: negative numbers again. Same issue as flour.
+ */
+
 package edu.bhscs;
 
 class Milk {

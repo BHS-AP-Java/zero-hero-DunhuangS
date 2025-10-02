@@ -1,3 +1,17 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: Base ingredient #1 (flour)
+ * INPUT: Flour quantity, cost, and quality
+ * OUTPUT: boolean if the materials exist or not
+ * EDGE CASES: negative numbers break things once again.
+ * Especially if the quantity is also negative,
+ * which practically disables all input other than more negatives
+ */
+
 package edu.bhscs;
 
 class Flour {

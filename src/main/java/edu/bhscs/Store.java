@@ -1,3 +1,14 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A store that holds up to 15 cakes
+ * INPUT: Store name, Cakes, workers (bakers), selected cake, and payment
+ * OUTPUT: Sold cakes, money, info about the store
+ * EDGE CASES: if a type Null is added as a cake, it breaks things due to checks not being able to be run.
+ */
 package edu.bhscs;
 
 class Store {

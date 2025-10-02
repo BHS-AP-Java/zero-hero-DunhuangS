@@ -1,3 +1,5 @@
+//This is NOT in bakesale. This is a mini Tic Tac Toe code I created
+
 package edu.bhscs;
 
 public class funType {
