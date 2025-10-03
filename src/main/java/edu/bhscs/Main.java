@@ -1,21 +1,20 @@
 /* Dunhuang Su
-* P2
-* Bake Sale
-* 9/29/2025
-*
-* DESCRIPTION: A Cake, a Baker, a Store, and a Customer exist in a bake sale. Earned money is given to PTSA.
-* INPUT: None
-* OUTPUT: The standard operation of the bake sale
-* EDGE CASES: None in Main
-*/
+ * P2
+ * Bake Sale
+ * 9/29/2025
+ *
+ * DESCRIPTION: A Cake, a Baker, a Store, and a Customer exist in a bake sale. Earned money is given to PTSA.
+ * INPUT: None
+ * OUTPUT: The standard operation of the bake sale
+ * EDGE CASES: None in Main
+ */
 
 package edu.bhscs;
 
 class Main {
   public static void main(String[] args) { // this is a constructor
-    boolean bakesale = true;
-    // doing cake stuff (acts like a master switch)
-    if (bakesale) {
+    boolean storybakesale = false;
+    if (storybakesale) {
       // Prelude: Defining variables
       Pantry overstorery = new Pantry();
       overstorery.putbutter(new Butter(1000, 10.00, 9));
@@ -183,20 +182,21 @@ class Main {
       goodpricery.ShowProfits(); // profits are gone because...
       GalliumOrganization.sumofdonation(); // ...they are all in the PTSA!
 
-      // Act 8: Janet goes to work to earn money. She gets tired after a while, and buying a cake heeps her satisfication up.
+      // Act 8: Janet goes to work to earn money. She gets tired after a while, and buying a cake
+      // heeps her satisfication up.
       System.out.println("================ ACT 8 ================");
       Janet.getmysatisfication();
       Janet.MakeYTVideos(600);
       Janet.printmoney();
-      Janet.MakeYTVideos(20); //she isn't motivated enough to do this
+      Janet.MakeYTVideos(20); // she isn't motivated enough to do this
       Janet.BuyAndPayForCake(2, 1);
       Janet.PickupCake();
-      Janet.EatMyCake(50); //she is more motivated after eating cake
+      Janet.EatMyCake(50); // she is more motivated after eating cake
       Janet.getmysatisfication();
       Janet.MakeYTVideos(20);
 
-
-
+    } else {
+      
     }
   }
 }

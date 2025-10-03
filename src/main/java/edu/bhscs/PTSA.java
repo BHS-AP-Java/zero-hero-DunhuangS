@@ -7,7 +7,7 @@
  * DESCRIPTION: A PTSA collects money from store.
  * INPUT: Money
  * OUTPUT: Sum of collected money
- * EDGE CASES: negative numbers put the organization in debt. 
+ * EDGE CASES: negative numbers put the organization in debt.
  */
 package edu.bhscs;
 

@@ -1,4 +1,4 @@
-//This is NOT in bakesale. This is a mini Tic Tac Toe code I created
+// This is NOT in bakesale. This is a mini Tic Tac Toe code I created
 
 package edu.bhscs;
 

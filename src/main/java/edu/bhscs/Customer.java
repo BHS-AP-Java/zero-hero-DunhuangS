@@ -35,7 +35,8 @@ class Customer {
 
   void MakeYTVideos(int hours) {
     if (satisfication < (hours * 25)) {
-      System.out.println("I don't feel motivated to go to record for that long, Perhaps some cake will motivate me?");
+      System.out.println(
+          "I don't feel motivated to go to record for that long, Perhaps some cake will motivate me?");
     } else {
       satisfication -= (hours * 25);
       MyMoney += (hours * 20);
@@ -43,7 +44,12 @@ class Customer {
   }
 
   void getmysatisfication() {
-    System.out.println("I, " + MyName + ", have " + String.format("%.2f",satisfication) + " points of satisfaction");
+    System.out.println(
+        "I, "
+            + MyName
+            + ", have "
+            + String.format("%.2f", satisfication)
+            + " points of satisfaction");
   }
 
   void printmoney() {
@@ -73,7 +79,9 @@ class Customer {
   }
 
   void EatMyCake(int eatinginpercent) {
-    satisfication += ((double) OwnedCake.ReturnWeight() * (double) eatinginpercent / (double) 100) * (OwnedCake.returnquality() / 10);
+    satisfication +=
+        ((double) OwnedCake.ReturnWeight() * (double) eatinginpercent / (double) 100)
+            * (OwnedCake.returnquality() / 10);
     if (OwnedCake.cakeexist()) {
       OwnedCake.eatcake(eatinginpercent);
     } else {

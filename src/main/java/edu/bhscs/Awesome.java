@@ -1,4 +1,4 @@
-//This is NOT used in bakesale, and is here from a class lecture and purely for reference
+// This is NOT used in bakesale, and is here from a class lecture and purely for reference
 
 package edu.bhscs;
 
