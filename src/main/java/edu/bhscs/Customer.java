@@ -29,6 +29,10 @@ class Customer {
     }
   }
 
+  String name() {
+    return MyName;
+  }
+
   void ChangePreferredStore(Store store) {
     PreferredStore = store;
   }

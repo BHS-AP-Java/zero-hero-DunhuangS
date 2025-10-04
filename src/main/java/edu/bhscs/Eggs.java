@@ -23,6 +23,8 @@ class Eggs {
     this.costpergram = cost / quantity;
   }
 
+  Eggs() {}
+
   double use(int amount) {
     if (this.Count - amount < 0) {
       return -1;

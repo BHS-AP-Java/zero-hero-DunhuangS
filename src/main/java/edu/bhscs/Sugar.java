@@ -22,6 +22,8 @@ class Sugar {
     this.costpergram = cost / quantity;
   }
 
+  Sugar() {}
+
   double use(int amount) {
     if (grams - amount < 0) {
       return -1;

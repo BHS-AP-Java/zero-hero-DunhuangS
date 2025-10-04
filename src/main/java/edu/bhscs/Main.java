@@ -4,16 +4,17 @@
  * 9/29/2025
  *
  * DESCRIPTION: A Cake, a Baker, a Store, and a Customer exist in a bake sale. Earned money is given to PTSA.
- * INPUT: None
+ * INPUT: Anything the user wishes, up to the program's limits
  * OUTPUT: The standard operation of the bake sale
- * EDGE CASES: None in Main
+ * EDGE CASES: None (in class Main)
  */
 
 package edu.bhscs;
 
 class Main {
-  public static void main(String[] args) { // this is a constructor
+  public static void main(String[] args) { // this is a constructor. It is not a method because it has the same name as the file name.
     boolean storybakesale = false;
+      // Change this to true to get a default story. This is otherwise user-interactive!
     if (storybakesale) {
       // Prelude: Defining variables
       Pantry overstorery = new Pantry();
@@ -196,7 +197,7 @@ class Main {
       Janet.MakeYTVideos(20);
 
     } else {
-      
+      new Player("testing");
     }
   }
 }

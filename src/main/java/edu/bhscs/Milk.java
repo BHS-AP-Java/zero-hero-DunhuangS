@@ -23,6 +23,8 @@ class Milk {
     this.costpergram = cost / quantity;
   }
 
+  Milk() {}
+
   double use(int amount) {
     if (mililiters - amount < 0) {
       return -1;
