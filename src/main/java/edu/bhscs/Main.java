@@ -205,6 +205,7 @@ class Main {
 
     } else {
       new Player("testing");
+      sc.close();
     }
   }
 }
