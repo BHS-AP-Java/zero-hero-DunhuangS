@@ -46,6 +46,7 @@ public class Player {
       } else if (selection.equals("Contractor")) {
         Contractor();
       } else if (selection.equals("end")) {
+        userinput.close();
         playing = false;
       } else {
         System.out.println("Command not recognized! please use 'Help' for help");
