@@ -92,7 +92,11 @@ public class Player {
 
         System.out.println("Which slot to view? (1 - 5)");
         int storeindex = Integer.parseInt(userinput.next()) - 1;
-        viewstore(stores[storeindex]);
+        if (stores[storeindex] != null) {
+          viewstore(stores[storeindex]);
+        } else {
+          System.out.println("That does not exist!");
+        }
 
       } else {
         System.out.println("Not valid!");
@@ -208,7 +212,11 @@ private void viewstore (Store store) {
 
       System.out.println("Which slot to view? (1 - 5)");
       int theindex = Integer.parseInt(userinput.next()) - 1;
-      ViewCustomer(customers[theindex]);
+      if (customers[theindex] != null) {
+        ViewCustomer(customers[theindex]);
+      } else {
+        System.out.println("That does not exist!");
+      }
 
     } else {
       System.out.println("Not valid!");
@@ -278,7 +286,11 @@ private void viewstore (Store store) {
 
       System.out.println("Which slot to view? (1 - 5)");
       int theindex = Integer.parseInt(userinput.next()) - 1;
-      ViewBaker(bakers[theindex]);
+      if (bakers[theindex] != null) {
+        ViewBaker(bakers[theindex]);
+      } else {
+        System.out.println("That does not exist!");
+      }
 
     } else {
       System.out.println("Not valid!");
@@ -356,7 +368,11 @@ private void viewstore (Store store) {
     int theindex = Integer.parseInt(userinput.next()) - 1;
     System.out.println("At which store? (1 - 5)");
     int theotherindex = Integer.parseInt(userinput.next()) - 1;
-    Contractor a = new Contractor();
-    a.performjobinterview(bakers[theindex], stores[theotherindex]);
+    if (bakers[theindex] != null && stores[theotherindex] != null) {
+      Contractor a = new Contractor();
+      a.performjobinterview(bakers[theindex], stores[theotherindex]);
+    } else {
+      System.out.println("One or more of the two are invalid!");
+    }
   }
 }
