@@ -6,6 +6,12 @@
  * OUTPUT: The standard operation of the bake sale
  * EDGE CASES: Typing something that cannot be converted to int or double when appropriate will break the code.
  * When another class is being asked for as input, choosing a slot that does not exist (type null) will also.
+ * the requirements are VERY SPECIFIC. Please refer to as follows:
+ * 1) A store must get a goods shipment before any baking or examinations can be done.
+ * 2) A baker must be hired and given a recipe before making a cake.
+ * 3) A customer must be given a preferred store before attempting to buy a cake.
+ * 4) A store must be made before making a customer, or the process is impossible to complete without an error.
+ * there are many more, however they should be basic knowledge.
  */
 package edu.bhscs;
 
@@ -182,7 +188,7 @@ private void viewstore (Store store) {
       String thename = userinput.next();
       System.out.println("How much money should they have?");
       Double money = Double.parseDouble(userinput.next());
-      System.out.println("Which store should they buy from? (index 1 - 5). Type '0' for none.");
+      System.out.println("Which store should they buy from? (index 1 - 5)");
       String intermdin = userinput.next();
       Store buyfrom = null;
       if (!intermdin.equals("0")) {
@@ -225,9 +231,9 @@ private void viewstore (Store store) {
       customer.MakeYTVideos(intermdin);
     } else if (selection.equals("4")) {
       System.out.println("Which shelf row should I buy from? (1 - 3)");
-      int intermdin = Integer.parseInt(userinput.next()) - 1;
+      int intermdin = Integer.parseInt(userinput.next());
       System.out.println("Which shelf column should I buy from? (1 - 5)");
-      int secei = Integer.parseInt(userinput.next()) - 1;
+      int secei = Integer.parseInt(userinput.next());
       customer.BuyAndPayForCake(intermdin, secei);
       customer.PickupCake();
     } else if (selection.equals("5")) {
