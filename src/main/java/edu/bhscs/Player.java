@@ -28,8 +28,11 @@ public class Player {
   String selection;
   PTSA fraudulentServices = new PTSA("scammseo");
 
-  public Player(String name) {
-    this.name = name;
+  public Player() {
+
+  }
+
+  public void runSimulation() {
     while (playing) {
       System.out.println("What would you like to do? Type 'help' for help");
       selection = userinput.next();
@@ -54,6 +57,19 @@ public class Player {
     }
   }
 
+  public Player(String name) {
+    this.name = name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String GetInput(String prompt) {
+    System.out.println(prompt);
+    return userinput.next();
+  }
+
   private void help() {
     System.out.println("Type 'Store' to edit stores");
     System.out.println("Type 'Baker' to edit bakers");
@@ -63,92 +79,94 @@ public class Player {
     System.out.println("Type 'end' to stop program");
   }
 
-
   private void Store() {
     System.out.println("STORE: Type 1 to view stores. Type 2 to add a store.");
     System.out.println("Type 3 to delete a store. Type 4 to view a specific store.");
     selection = userinput.next();
     if (selection.equals("1")) {
-        int a = 0;
-        for (Store j : stores) {
-          a += 1;
-          if (j != null) {
-            System.out.println(j.StoreName() + " in slot " + a);
-          }
+      int a = 0;
+      for (Store j : stores) {
+        a += 1;
+        if (j != null) {
+          System.out.println(j.StoreName() + " in slot " + a);
         }
-      } else if (selection.equals("2")) {
-        System.out.println("What shall this store be called?");
-        String storename = userinput.next();
-        System.out.println("Which slot to put data for this store into? (1 - 5)");
-        int storeindex = Integer.parseInt(userinput.next()) - 1;
-        stores[storeindex] = new Store(storename);
-
-      } else if (selection.equals("3")) {
-        System.out.println("Which slot to remove? (1 - 5)");
-        int storeindex = Integer.parseInt(userinput.next()) - 1;
-        stores[storeindex] = null;
-
-
-      } else if (selection.equals("4")) {
-
-        System.out.println("Which slot to view? (1 - 5)");
-        int storeindex = Integer.parseInt(userinput.next()) - 1;
-        if (stores[storeindex] != null) {
-          viewstore(stores[storeindex]);
-        } else {
-          System.out.println("That does not exist!");
-        }
-
-      } else {
-        System.out.println("Not valid!");
       }
-   }
+    } else if (selection.equals("2")) {
+      System.out.println("What shall this store be called?");
+      String storename = userinput.next();
+      System.out.println("Which slot to put data for this store into? (1 - 5)");
+      int storeindex = Integer.parseInt(userinput.next()) - 1;
+      stores[storeindex] = new Store(storename);
 
-private void viewstore (Store store) {
-  System.out.println("STORE " + store.StoreName() + ": Type 1 to show cakes. Type 2 to check pantry.");
-  System.out.println("Type 3 to import a goods shipment. Type 4 to show profits. Type 5 to donate it to the PTSA.");
-  System.out.println("Type 6 to fire a baker. Type 7 to get a cake from a baker. Type 8 to examine a specific cake.");
-  selection = userinput.next();
-  if (selection.equals("1")) {
-    store.showcakes();
-  } else if (selection.equals("2")) {
-    System.out.println("RESULTS OF PANTRY EXAMINATION");
-    System.out.println("Flour: " + store.accessPantry().getFlour().returnquantity() + "g");
-    System.out.println("Eggs: " + store.accessPantry().getEggs().returnquantity() + " units");
-    System.out.println("Butter: " + store.accessPantry().getButter().returnquantity() + "g");
-    System.out.println("Milk: " + store.accessPantry().getMilk().returnquantity() + "mL");
-    System.out.println("Sugar: " + store.accessPantry().getButter().returnquantity() + "g");
-  } else if (selection.equals("3")) {
-    String[] items = {"Flour", "Eggs", "Butter", "Milk", "Sugar"};
-    Flour d = null;
-    Eggs e = null;
-    Butter f = null;
-    Milk g = null;
-    Sugar h = null;
-    for (int i = 1; i <= 5; i++) {
-      System.out.println("Currently importing: " + items[i-1]);
-      System.out.println("What is the quantity?");
-      selection = userinput.next();
-      int a = Integer.parseInt(selection);
-      System.out.println("What is the cost?");
-      selection = userinput.next();
-      double b = Double.parseDouble(selection);
-      System.out.println("What is the quality?");
-      selection = userinput.next();
-      int c = Integer.parseInt(selection);;
-      if (i == 1) {
-        d = new Flour(a, b, c);
-      } else if (i == 2) {
-        e = new Eggs(a, b, c);
-      } else if (i == 3) {
-        f = new Butter(a, b, c);
-      } else if (i == 4) {
-        g = new Milk(a, b, c);
+    } else if (selection.equals("3")) {
+      System.out.println("Which slot to remove? (1 - 5)");
+      int storeindex = Integer.parseInt(userinput.next()) - 1;
+      stores[storeindex] = null;
+
+    } else if (selection.equals("4")) {
+
+      System.out.println("Which slot to view? (1 - 5)");
+      int storeindex = Integer.parseInt(userinput.next()) - 1;
+      if (stores[storeindex] != null) {
+        viewstore(stores[storeindex]);
       } else {
-        h = new Sugar(a, b, c);
-        store.delivergoods(d, e, f, g, h);
+        System.out.println("That does not exist!");
       }
+
+    } else {
+      System.out.println("Not valid!");
     }
+  }
+
+  private void viewstore(Store store) {
+    System.out.println(
+        "STORE " + store.StoreName() + ": Type 1 to show cakes. Type 2 to check pantry.");
+    System.out.println(
+        "Type 3 to import a goods shipment. Type 4 to show profits. Type 5 to donate it to the PTSA.");
+    System.out.println(
+        "Type 6 to fire a baker. Type 7 to get a cake from a baker. Type 8 to examine a specific cake.");
+    selection = userinput.next();
+    if (selection.equals("1")) {
+      store.showcakes();
+    } else if (selection.equals("2")) {
+      System.out.println("RESULTS OF PANTRY EXAMINATION");
+      System.out.println("Flour: " + store.accessPantry().getFlour().returnquantity() + "g");
+      System.out.println("Eggs: " + store.accessPantry().getEggs().returnquantity() + " units");
+      System.out.println("Butter: " + store.accessPantry().getButter().returnquantity() + "g");
+      System.out.println("Milk: " + store.accessPantry().getMilk().returnquantity() + "mL");
+      System.out.println("Sugar: " + store.accessPantry().getButter().returnquantity() + "g");
+    } else if (selection.equals("3")) {
+      String[] items = {"Flour", "Eggs", "Butter", "Milk", "Sugar"};
+      Flour d = null;
+      Eggs e = null;
+      Butter f = null;
+      Milk g = null;
+      Sugar h = null;
+      for (int i = 1; i <= 5; i++) {
+        System.out.println("Currently importing: " + items[i - 1]);
+        System.out.println("What is the quantity?");
+        selection = userinput.next();
+        int a = Integer.parseInt(selection);
+        System.out.println("What is the cost?");
+        selection = userinput.next();
+        double b = Double.parseDouble(selection);
+        System.out.println("What is the quality?");
+        selection = userinput.next();
+        int c = Integer.parseInt(selection);
+        ;
+        if (i == 1) {
+          d = new Flour(a, b, c);
+        } else if (i == 2) {
+          e = new Eggs(a, b, c);
+        } else if (i == 3) {
+          f = new Butter(a, b, c);
+        } else if (i == 4) {
+          g = new Milk(a, b, c);
+        } else {
+          h = new Sugar(a, b, c);
+          store.delivergoods(d, e, f, g, h);
+        }
+      }
     } else if (selection.equals("4")) {
       store.ShowProfits();
     } else if (selection.equals("5")) {
@@ -208,7 +226,6 @@ private void viewstore (Store store) {
       int theindex = Integer.parseInt(userinput.next()) - 1;
       customers[theindex] = null;
 
-
     } else if (selection.equals("4")) {
 
       System.out.println("Which slot to view? (1 - 5)");
@@ -225,8 +242,10 @@ private void viewstore (Store store) {
   }
 
   private void ViewCustomer(Customer customer) {
-    System.out.println("CUSTOMER " + customer.name() + ": Type 1 to set store to go to. Type 2 to see money.");
-    System.out.println("Type 3 to go to work. Type 4 to buy a cake. Type 5 to eat cake. Type 6 to discard cake. Type 7 to examine the cake.");
+    System.out.println(
+        "CUSTOMER " + customer.name() + ": Type 1 to set store to go to. Type 2 to see money.");
+    System.out.println(
+        "Type 3 to go to work. Type 4 to buy a cake. Type 5 to eat cake. Type 6 to discard cake. Type 7 to examine the cake.");
     selection = userinput.next();
     if (selection.equals("1")) {
       System.out.println("Which store should they buy from? (index 1 - 5). Type '0' for none.");
@@ -282,7 +301,6 @@ private void viewstore (Store store) {
       int theindex = Integer.parseInt(userinput.next()) - 1;
       bakers[theindex] = null;
 
-
     } else if (selection.equals("4")) {
 
       System.out.println("Which slot to view? (1 - 5)");
@@ -297,8 +315,10 @@ private void viewstore (Store store) {
       System.out.println("Not valid!");
     }
   }
-  private void ViewBaker (Baker baker) {
-    System.out.println("BAKER " + baker.getname() + ": Type 1 to set the recipe. Type 2 to see level.");
+
+  private void ViewBaker(Baker baker) {
+    System.out.println(
+        "BAKER " + baker.getname() + ": Type 1 to set the recipe. Type 2 to see level.");
     System.out.println("Type 3 to bake a cake. Type 4 to go to clases.");
     selection = userinput.next();
     if (selection.equals("1")) {
@@ -353,7 +373,9 @@ private void viewstore (Store store) {
       int sugar = Integer.parseInt(userinput.next());
       System.out.println("Which slot to save the recipe to? (1 - 5)");
       int theindex = Integer.parseInt(userinput.next()) - 1;
-      recipes[theindex] = new Recipe(flavor, toppings, shape, names, diameter, height, flour, eggs, butter, milk, sugar);
+      recipes[theindex] =
+          new Recipe(
+              flavor, toppings, shape, names, diameter, height, flour, eggs, butter, milk, sugar);
 
     } else if (selection.equals("3")) {
       System.out.println("Which slot to remove? (1 - 5)");
@@ -364,6 +386,7 @@ private void viewstore (Store store) {
       System.out.println("Not valid!");
     }
   }
+
   private void Contractor() {
     System.out.println("Which baker should be hired? (1 - 5)");
     int theindex = Integer.parseInt(userinput.next()) - 1;

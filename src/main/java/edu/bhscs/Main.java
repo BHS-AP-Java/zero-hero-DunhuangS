@@ -10,18 +10,17 @@
  */
 
 package edu.bhscs;
-import java.util.Scanner;
 
 class Main {
-  public static void main(String[] args) { // this is a constructor. It is not a method because it has the same name as the file name.
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Type 0 for default story, or type 1 for interactive mode.");
-    String option = sc.next();
+  public static void main(String[] args) { // this is a constructor. It is not a method because it has the same name as the
+    // file name.
+    Player ply = new Player("testing");
+    String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
     boolean storybakesale = false;
     if (option.equals("0")) {
       storybakesale = true;
     }
-      // Change this to true to get a default story. This is otherwise user-interactive!
+    // Change this to true to get a default story. This is otherwise user-interactive!
     if (storybakesale) {
       // Prelude: Defining variables
       Pantry overstorery = new Pantry();
@@ -204,8 +203,7 @@ class Main {
       Janet.MakeYTVideos(20);
 
     } else {
-      new Player("testing");
-      sc.close();
+      ply.runSimulation();
     }
   }
 }
