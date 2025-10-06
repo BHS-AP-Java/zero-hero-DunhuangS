@@ -26,7 +26,7 @@ public class Player {
   Customer[] customers = new Customer[5];
   Recipe[] recipes = new Recipe[5];
   String selection;
-  PTSA fraudulentServices = new PTSA("scammseo");
+  PTSA fraudulentServices = new PTSA("unknown");
 
   public Player() {
 
@@ -34,8 +34,7 @@ public class Player {
 
   public void runSimulation() {
     while (playing) {
-      System.out.println("What would you like to do? Type 'help' for help");
-      selection = userinput.next();
+      selection = GetInput("What would you like to do? Type 'help' for help");
       if (selection.equals("help")) {
         help();
       } else if (selection.equals("Store")) {
@@ -48,6 +47,8 @@ public class Player {
         Recipe();
       } else if (selection.equals("Contractor")) {
         Contractor();
+      } else if (selection.equals("PTSA")) {
+        PTSA();
       } else if (selection.equals("end")) {
         userinput.close();
         playing = false;
@@ -70,12 +71,28 @@ public class Player {
     return userinput.next();
   }
 
+  //private methods below, cannot be accessed outside of Player
+
+  private void PTSA() {
+    System.out.println("PTSA " + fraudulentServices.returnname() + ": Type 1 to view profits. Type 2 to rename PTSA.");
+    selection = userinput.next();
+    if (selection.equals("1")) {
+      fraudulentServices.sumofdonation();
+    } else if (selection.equals("2")) {
+      System.out.println("What should the PTSA be called?");
+      fraudulentServices.updatename(userinput.next());
+    } else {
+      System.out.println("Not valid!");
+    }
+  }
+
   private void help() {
     System.out.println("Type 'Store' to edit stores");
     System.out.println("Type 'Baker' to edit bakers");
     System.out.println("Type 'Customer' to edit customers");
     System.out.println("Type 'Recipe' to edit recipes");
     System.out.println("Type 'Contractor' to assign work to a Baker");
+    System.out.println("Type 'PTSA' to view PTSA");
     System.out.println("Type 'end' to stop program");
   }
 

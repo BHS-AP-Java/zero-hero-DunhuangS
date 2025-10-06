@@ -19,6 +19,14 @@ class PTSA {
     this.name = name;
   }
 
+  void updatename(String name) {
+    this.name = name;
+  }
+
+  String returnname() {
+    return name;
+  }
+
   void donation(double donation) {
     money += donation;
   }
