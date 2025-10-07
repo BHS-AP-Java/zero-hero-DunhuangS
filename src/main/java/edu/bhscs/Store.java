@@ -34,18 +34,24 @@ class Store {
     BackPantry = new Pantry();
   }
 
-  boolean bakerapplication(Baker baker) {
+  int bakerapplication(Baker baker) {
     if (employees[0] == null) {
       employees[0] = baker;
+      return 1;
     } else if (employees[1] == null) {
       employees[1] = baker;
+      return 2;
     } else if (employees[2] == null) {
       employees[2] = baker;
+      return 3;
     } else {
       System.out.println("There is no more room for another baker!");
-      return false;
+      return -1;
     }
-    return true;
+  }
+
+  String getName() {
+    return StoreName;
   }
 
   void firebaker(int position) {

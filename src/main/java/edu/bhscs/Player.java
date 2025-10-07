@@ -18,6 +18,7 @@ package edu.bhscs;
 import java.util.Scanner;
 
 public class Player {
+  //FIELDS AND PROPERTIES
   Scanner userinput = new Scanner(System.in);
   String name;
   boolean playing = true;
@@ -28,10 +29,16 @@ public class Player {
   String selection;
   PTSA fraudulentServices = new PTSA("unknown");
 
+  //CONSTRUCTORS
   public Player() {
 
   }
 
+  public Player(String name) {
+    this.name = name;
+  }
+
+  //METHODS
   public void runSimulation() {
     while (playing) {
       selection = GetInput("What would you like to do? Type 'help' for help");
@@ -58,12 +65,13 @@ public class Player {
     }
   }
 
-  public Player(String name) {
+  public void setName(String name) {
     this.name = name;
   }
 
-  public void setName(String name) {
-    this.name = name;
+
+  public String giveAnswer(String prompt) {
+    return GetInput(prompt);
   }
 
   public String GetInput(String prompt) {
@@ -74,13 +82,11 @@ public class Player {
   //private methods below, cannot be accessed outside of Player
 
   private void PTSA() {
-    System.out.println("PTSA " + fraudulentServices.returnname() + ": Type 1 to view profits. Type 2 to rename PTSA.");
-    selection = userinput.next();
+    selection = GetInput("PTSA " + fraudulentServices.returnname() + ": Type 1 to view profits. Type 2 to rename PTSA.");
     if (selection.equals("1")) {
       fraudulentServices.sumofdonation();
     } else if (selection.equals("2")) {
-      System.out.println("What should the PTSA be called?");
-      fraudulentServices.updatename(userinput.next());
+      fraudulentServices.updatename(GetInput("What should the PTSA be called?"));
     } else {
       System.out.println("Not valid!");
     }
@@ -109,8 +115,7 @@ public class Player {
         }
       }
     } else if (selection.equals("2")) {
-      System.out.println("What shall this store be called?");
-      String storename = userinput.next();
+      String storename = GetInput("What shall this store be called?");
       System.out.println("Which slot to put data for this store into? (1 - 5)");
       int storeindex = Integer.parseInt(userinput.next()) - 1;
       stores[storeindex] = new Store(storename);
@@ -170,7 +175,6 @@ public class Player {
         System.out.println("What is the quality?");
         selection = userinput.next();
         int c = Integer.parseInt(selection);
-        ;
         if (i == 1) {
           d = new Flour(a, b, c);
         } else if (i == 2) {

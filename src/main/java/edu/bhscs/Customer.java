@@ -78,6 +78,28 @@ class Customer {
     }
   }
 
+  int pay (int price) {
+    if (MyMoney >= price) {
+      MyMoney -= price;
+      return price;
+    } else {
+      int interninsd = (int) MyMoney;
+      MyMoney = 0.;
+      return interninsd;
+    }
+  }
+
+  void takeCake(Cake cake) {
+    if (OwnedCake.cakeexist()) {
+      System.out.println("I already have a cake!");
+    } else {
+      this.OwnedCake = cake;
+      if (OwnedCake.cakeexist()) {
+        OwnedCake.SetCakeOwner(MyName);
+      }
+    }
+  }
+
   void CakeInfo() {
     OwnedCake.viewcake();
   }

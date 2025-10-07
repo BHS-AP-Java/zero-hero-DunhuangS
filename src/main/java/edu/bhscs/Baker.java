@@ -16,13 +16,10 @@
 package edu.bhscs;
 
 public class Baker {
-  // fields and properties
-  // constructors
-  // methods
+  //FIELDS AND PROPERTIES
   Recipe MyRecipe;
   Cake MadeCake = new Cake(false);
   boolean existent = false;
-  Store workplace;
   int exp = 0;
   int level = 1;
   int[] levelupchart = {
@@ -45,17 +42,57 @@ public class Baker {
     "Grandmaster confectioner",
     "World class confectioner"
   };
-  String name;
+  String name = "";
   double price = 0.;
   double sellprice;
 
+  Player p;
+  Flour f;
+  Store placeOfWork;
+  int cash;
+  //
+
+  // CONSTRUCTORS
   public Baker(String name) {
     this.name = name;
     // System.out.println("A new baker has been hired to make cakes!");
   }
 
+  Baker(Player p) {
+    this.p = p;
+  }
+
+  // METHODS
+  void takeOrder(int price, Customer c) {
+    cash += c.pay(price);
+    c.takeCake(bakeCake());
+  }
+
+  Cake bakeCake() {
+    String answer = this.p.giveAnswer("what cake do you you want?");
+    return new Cake(answer, this.f);
+  }
+
+  void takeJob(Store bakery) {
+    String doYouWantToWorkHere = this.p.giveAnswer("Do you want to work at " + bakery.getName());
+    if(doYouWantToWorkHere.equals("y")){
+      this.placeOfWork = bakery;
+      System.out.println(this.name + " now works at " + bakery.getName());
+    }
+  }
+  //
+
+  Store showworkplace() {
+    return placeOfWork;
+  }
+
+
   String getname() {
     return name;
+  }
+
+  void setname(String name) {
+    this.name = name;
   }
 
   void printlevel() {
@@ -79,11 +116,11 @@ public class Baker {
   }
 
   void acceptjob(Store bakery) {
-    workplace = bakery;
+    this.placeOfWork = bakery;
   }
 
   void gotfired() {
-    workplace = null;
+    this.placeOfWork = null;
   }
 
   void gotobakingclass() {
@@ -94,15 +131,15 @@ public class Baker {
 
   void examinepantry() {
     System.out.println("RESULTS OF PANTRY EXAMINATION");
-    System.out.println("Flour: " + workplace.accessPantry().getFlour().returnquantity() + "g");
-    System.out.println("Eggs: " + workplace.accessPantry().getEggs().returnquantity() + " units");
-    System.out.println("Butter: " + workplace.accessPantry().getButter().returnquantity() + "g");
-    System.out.println("Milk: " + workplace.accessPantry().getMilk().returnquantity() + "mL");
-    System.out.println("Sugar: " + workplace.accessPantry().getButter().returnquantity() + "g");
+    System.out.println("Flour: " + this.placeOfWork.accessPantry().getFlour().returnquantity() + "g");
+    System.out.println("Eggs: " + this.placeOfWork.accessPantry().getEggs().returnquantity() + " units");
+    System.out.println("Butter: " + this.placeOfWork.accessPantry().getButter().returnquantity() + "g");
+    System.out.println("Milk: " + this.placeOfWork.accessPantry().getMilk().returnquantity() + "mL");
+    System.out.println("Sugar: " + this.placeOfWork.accessPantry().getButter().returnquantity() + "g");
   }
 
   public void Bakeacake() {
-    if (workplace
+    if (this.placeOfWork
         .accessPantry()
         .checkresources(
             MyRecipe.flour(),
@@ -112,7 +149,7 @@ public class Baker {
             MyRecipe.sugar())) {
       price = 0.;
       double cakequality = 0.;
-      Pantry Ravage = workplace.accessPantry();
+      Pantry Ravage = this.placeOfWork.accessPantry();
       price += Ravage.getFlour().use(MyRecipe.flour());
       cakequality += Ravage.getFlour().returnquality();
       price += Ravage.getEggs().use(MyRecipe.eggs());
@@ -166,6 +203,11 @@ public class Baker {
     }
   }
 
+  void increaselevel() {
+    exp += f.returnquantity() / 50;
+    checklevelup();
+  }
+
   Cake Givemethecake() {
     if (existent) {
       existent = false;
@@ -184,6 +226,10 @@ public class Baker {
     sellprice = 0.;
     price = 0.;
     return intermediate;
+  }
+
+  void printpersonalcash() {
+    System.out.println("I have $" + cash);
   }
 
   public void getinstructions(Recipe therecipe) {

@@ -30,6 +30,7 @@ class Cake {
   double quality;
   double oprice;
   int craftquality;
+  boolean alternatedef = false;
 
   public Cake(boolean a) {
     if (a) {
@@ -37,7 +38,23 @@ class Cake {
     }
   }
 
+  public Cake(String kindofcake, Flour flour) {
+    existent = true;
+    alternatedef = true;
+    name = kindofcake;
+    ingredients[0] = flour.returnquantity();
+  }
+
   public void viewcake() {
+    if (alternatedef) {
+      System.out.println("------------------------------------------------------");
+      System.out.println("Currently viewing the low definition cake '" + name + "':");
+      System.out.println("INGREDIENTS:");
+      System.out.println("Flour: " + ingredients[0] + "g");
+      System.out.println("May include: toppings, flavoring, preservatives.");
+      System.out.println("------------------------------------------------------");
+
+    }
     if (existent) {
       System.out.println("------------------------------------------------------");
       System.out.println("Currently viewing the cake " + name + ":");

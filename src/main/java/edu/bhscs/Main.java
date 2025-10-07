@@ -12,7 +12,9 @@
 package edu.bhscs;
 
 class Main {
-  public static void main(String[] args) { // this is a constructor. It is not a method because it has the same name as the
+  public static void main(
+      String[]
+          args) { // this is a constructor. It is not a method because it has the same name as the
     // file name.
     Player ply = new Player("testing");
     String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
