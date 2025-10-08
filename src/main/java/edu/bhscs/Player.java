@@ -551,7 +551,7 @@ public class Player {
     int theotherindex = Integer.parseInt(userinput.next()) - 1;
     if (bakers[theindex] != null && stores[theotherindex] != null) {
       Contractor a = new Contractor();
-      a.performjobinterview(bakers[theindex], stores[theotherindex]);
+      a.performuserinterview(bakers[theindex], stores[theotherindex]);
     } else {
       System.out.println("One or more of the two are invalid!");
     }
