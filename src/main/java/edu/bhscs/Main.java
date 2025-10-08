@@ -1,12 +1,17 @@
-/* Dunhuang Su
- * P2
- * Bake Sale
- * 9/29/2025
+/*
+ * Dunhuang Su P2 Bake Sale 9/29/2025
  *
- * DESCRIPTION: A Cake, a Baker, a Store, and a Customer exist in a bake sale. Earned money is given to PTSA.
- * INPUT: Anything the user wishes, up to the program's limits
- * OUTPUT: The standard operation of the bake sale
- * EDGE CASES: None (in class Main)
+ * DESCRIPTION: A Cake, a Baker, a Store, and a Customer exist in a bake sale. Earned money is given
+ * to PTSA. INPUT: Anything the user wishes, up to the program's limits OUTPUT: The standard
+ * operation of the bake sale EDGE CASES: When playing: Typing something that cannot be converted to
+ * int or double when appropriate will break the code. When another class is being asked for as
+ * input, choosing a slot that does not exist (type null) will also. the requirements are sometimes
+ * VERY SPECIFIC. Please refer to as follows:
+ * 1) A store must get a goods shipment before any baking or examinations can be done. //should be fixed
+ * 2) A baker must be hired and given a recipe before making a cake. // should be fixed
+ * 3) A customer must be given a preferred store before attempting to buy a cake.
+ * 4) A store must be made before making a customer, or the process is impossible to complete without an error.
+ * there are a few more, however they should be basic knowledge.
  */
 
 package edu.bhscs;
