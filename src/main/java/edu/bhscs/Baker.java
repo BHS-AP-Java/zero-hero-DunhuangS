@@ -21,7 +21,7 @@ public class Baker {
   Cake MadeCake = new Cake(false);
   boolean existent = false;
   int exp = 0;
-  int level = 1;
+  int skill = 1;
   int[] levelupchart = {
     20, 30, 50, 50, 75, 125, 150, 200, 300, 1000, 3000, 5000, 15000, Integer.MAX_VALUE
   };
@@ -69,9 +69,13 @@ public class Baker {
     c.takeCake(bakeCake());
   }
 
+  public void learn(int amount) {
+    this.skill += amount;
+  }
+
   Cake bakeCake() {
     String answer = this.p.giveAnswer("what cake do you you want?");
-    return new Cake(answer, this.f);
+    return new Cake(answer, this.f, this.skill);
   }
 
   void takeJob(Store bakery) {
@@ -84,7 +88,7 @@ public class Baker {
 
   //
 
-  void setflour (Flour flour) {
+  void setflour(Flour flour) {
     this.f = flour;
   }
 
@@ -102,17 +106,17 @@ public class Baker {
 
   void printlevel() {
     String levelcomptxt;
-    if (level == 14) {
+    if (skill == 14) {
       levelcomptxt = "infinite";
     } else {
-      levelcomptxt = String.valueOf(levelupchart[level - 1]);
+      levelcomptxt = String.valueOf(levelupchart[skill - 1]);
     }
     System.out.println(
         name
             + " is level "
-            + level
+            + skill
             + " ("
-            + levelnames[level - 1]
+            + levelnames[skill - 1]
             + ") with "
             + exp
             + "/"
@@ -129,8 +133,8 @@ public class Baker {
   }
 
   void gotobakingclass() {
-    if (level < 14) {
-      level += 1;
+    if (skill < 14) {
+      skill += 1;
     }
   }
 
@@ -149,71 +153,90 @@ public class Baker {
   }
 
   public void Bakeacake() {
-    if (this.placeOfWork
-        .accessPantry()
-        .checkresources(
-            MyRecipe.flour(),
-            MyRecipe.eggs(),
-            MyRecipe.butter(),
-            MyRecipe.milk(),
-            MyRecipe.sugar())) {
-      price = 0.;
-      double cakequality = 0.;
-      Pantry Ravage = this.placeOfWork.accessPantry();
-      price += Ravage.getFlour().use(MyRecipe.flour());
-      cakequality += Ravage.getFlour().returnquality();
-      price += Ravage.getEggs().use(MyRecipe.eggs());
-      cakequality += Ravage.getEggs().returnquality();
-      price += Ravage.getButter().use(MyRecipe.butter());
-      cakequality += Ravage.getButter().returnquality();
-      price += Ravage.getMilk().use(MyRecipe.milk());
-      cakequality += Ravage.getMilk().returnquality();
-      price += Ravage.getSugar().use(MyRecipe.sugar());
-      cakequality += Ravage.getSugar().returnquality();
-      cakequality /= 5.;
-      cakequality -= 1.;
-      cakequality += ((double) level / 4);
-      sellprice = price * ((double) 1. + (0.1 * level) + ((double) cakequality / (double) 10.));
-      // Ravage.putflour(Ravage.getFlour().use(MyRecipe.flour()));
-      MadeCake = new Cake(false);
-      int weight =
-          (50 * MyRecipe.eggs())
-              + MyRecipe.butter()
-              + MyRecipe.milk()
-              + MyRecipe.sugar()
-              + MyRecipe.flour();
-      MadeCake.batchsetting(
-          MyRecipe.flavor(),
-          MyRecipe.sweetness(),
-          MyRecipe.toppings(),
-          MyRecipe.shape(),
-          MyRecipe.diameter(),
-          MyRecipe.height(),
-          MyRecipe.name(),
-          MyRecipe.flour(),
-          MyRecipe.eggs(),
-          MyRecipe.butter(),
-          MyRecipe.milk(),
-          MyRecipe.sugar(),
-          cakequality,
-          price,
-          level);
-      this.existent = true;
-      exp += weight / 50;
-      checklevelup();
+    if (placeOfWork != null && MyRecipe != null) {
+      if(placeOfWork.accessPantry().getFlour() == null ||
+      placeOfWork.accessPantry().getEggs() == null ||
+      placeOfWork.accessPantry().getButter() == null ||
+      placeOfWork.accessPantry().getMilk() == null ||
+      placeOfWork.accessPantry().getSugar() == null) {
+        System.out.println("Pantry is not imported yet!");
+      } else {
+        if (this.placeOfWork
+            .accessPantry()
+            .checkresources(
+                MyRecipe.flour(),
+                MyRecipe.eggs(),
+                MyRecipe.butter(),
+                MyRecipe.milk(),
+                MyRecipe.sugar())) {
+          price = 0.;
+          double cakequality = 0.;
+          Pantry Ravage = this.placeOfWork.accessPantry();
+          price += Ravage.getFlour().use(MyRecipe.flour());
+          cakequality += Ravage.getFlour().returnquality();
+          price += Ravage.getEggs().use(MyRecipe.eggs());
+          cakequality += Ravage.getEggs().returnquality();
+          price += Ravage.getButter().use(MyRecipe.butter());
+          cakequality += Ravage.getButter().returnquality();
+          price += Ravage.getMilk().use(MyRecipe.milk());
+          cakequality += Ravage.getMilk().returnquality();
+          price += Ravage.getSugar().use(MyRecipe.sugar());
+          cakequality += Ravage.getSugar().returnquality();
+          cakequality /= 5.;
+          cakequality -= 1.;
+          cakequality += ((double) skill / 4);
+          sellprice = price * ((double) 1. + (0.1 * skill) + ((double) cakequality / (double) 10.));
+          // Ravage.putflour(Ravage.getFlour().use(MyRecipe.flour()));
+          MadeCake = new Cake(false);
+          int weight =
+              (50 * MyRecipe.eggs())
+                  + MyRecipe.butter()
+                  + MyRecipe.milk()
+                  + MyRecipe.sugar()
+                  + MyRecipe.flour();
+          MadeCake.batchsetting(
+              MyRecipe.flavor(),
+              MyRecipe.sweetness(),
+              MyRecipe.toppings(),
+              MyRecipe.shape(),
+              MyRecipe.diameter(),
+              MyRecipe.height(),
+              MyRecipe.name(),
+              MyRecipe.flour(),
+              MyRecipe.eggs(),
+              MyRecipe.butter(),
+              MyRecipe.milk(),
+              MyRecipe.sugar(),
+              cakequality,
+              price,
+              skill);
+          this.existent = true;
+          exp += weight / 50;
+          checklevelup();
+        } else {
+          System.out.println("Insufficient materials to make the cake!");
+        }
+      }
     } else {
-      System.out.println("Insufficient materials to make the cake!");
+      if (MyRecipe == null) {
+        System.out.println("I don't have a recipe!");
+      } else {
+        System.out.println("I have not been hired yet!");
+      }
     }
   }
 
   private void checklevelup() {
-    while (exp >= levelupchart[level - 1]) {
-      exp -= levelupchart[level - 1];
-      level += 1;
+    while (exp >= levelupchart[skill - 1]) {
+      exp -= levelupchart[skill - 1];
+      skill += 1;
+      if (p != null) {
+        p.accomplish(skill);
+      }
     }
   }
 
-  void increaselevel() {
+  void increaselevelforlowdefcakes() {
     exp += f.returnquantity() / 50;
     checklevelup();
   }
@@ -245,4 +268,5 @@ public class Baker {
   public void getinstructions(Recipe therecipe) {
     MyRecipe = therecipe;
   }
+
 }

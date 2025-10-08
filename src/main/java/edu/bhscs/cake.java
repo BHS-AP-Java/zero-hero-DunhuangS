@@ -38,12 +38,14 @@ class Cake {
     }
   }
 
-  public Cake(String kindofcake, Flour flour) {
+  public Cake(String kindofcake, Flour flour, int bakerskill) {
     existent = true;
     alternatedef = true;
     name = kindofcake;
     ingredients[0] = flour.returnquantity();
+    quality = flour.returnquality() - 1 + (((double) bakerskill) / 4);
     weight = ingredients[0];
+    craftquality = bakerskill;
   }
 
   public void viewcake() {
@@ -54,6 +56,8 @@ class Cake {
       System.out.println("INGREDIENTS:");
       System.out.println("Flour: " + ingredients[0] + "g");
       System.out.println("May include: toppings, flavoring, preservatives.");
+      System.out.println("It has a quality rating of " + String.format("%.1f", quality)
+          + ", made by a baker with experience level " + craftquality + ".");
       System.out.println("------------------------------------------------------");
       if (owner == null) {
         System.out.println("This cake has not been owned yet.");
@@ -75,7 +79,8 @@ class Cake {
         System.out.print("The longest part of the cake is " + diameter + " inches wide,");
         System.out.println(" and it is " + height + " inches tall.");
         System.out.println("The cake has a " + flavor + " flavor.");
-        System.out.println("It has a sweetness rating of " + String.format("%.2f", sweetness) + ".");
+        System.out.println(
+            "It has a sweetness rating of " + String.format("%.2f", sweetness) + ".");
         System.out.println("Finally, it is topped off with " + toppings + " toppings.");
         System.out.println("It weighs " + weight + " grams coming out of the store.");
         System.out.println(

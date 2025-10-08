@@ -6,9 +6,9 @@
  * OUTPUT: The standard operation of the bake sale
  * EDGE CASES: Typing something that cannot be converted to int or double when appropriate will break the code.
  * When another class is being asked for as input, choosing a slot that does not exist (type null) will also.
- * the requirements are VERY SPECIFIC. Please refer to as follows:
- * 1) A store must get a goods shipment before any baking or examinations can be done.
- * 2) A baker must be hired and given a recipe before making a cake.
+ * the requirements are sometimes VERY SPECIFIC. Please refer to as follows:
+ * 1) A store must get a goods shipment before any baking or examinations can be done. // should be fixed
+ * 2) A baker must be hired and given a recipe before making a cake. // should be fixed
  * 3) A customer must be given a preferred store before attempting to buy a cake.
  * 4) A store must be made before making a customer, or the process is impossible to complete without an error.
  * there are many more, however they should be basic knowledge.
@@ -29,10 +29,12 @@ public class Player {
   String selection;
   Cake[] personalCakes = new Cake[10];
   PTSA fraudulentServices;
+  int accomplishments = 0;
 
   // CONSTRUCTORS
   public Player() {
-    System.out.println("New player class created! A PTSA with this class' reference must be given to initialize");
+    System.out.println(
+        "New player class created! A PTSA with this class' reference must be given to initialize");
   }
 
   public Player(String name) {
@@ -42,6 +44,11 @@ public class Player {
   }
 
   // METHODS
+
+  public void accomplish(int amount) {
+    this.accomplishments += amount;
+  }
+
   public void runSimulation() {
     if (fraudulentServices != null) {
       while (playing) {
@@ -62,11 +69,15 @@ public class Player {
           PTSA();
         } else if (selection.equals("PersonalCakes")) {
           PersonalCakes();
+        } else if (selection.equals("Accomplishments")) {
+          System.out.println("You have an achievement score of " + accomplishments + ".");
+        } else if (selection.equals("UpdateName")) {
+          setName(giveAnswer("What is your new name?"));
         } else if (selection.equals("end")) {
           userinput.close();
           playing = false;
         } else {
-          System.out.println("Command not recognized! please use 'Help' for help");
+          System.out.println("Command not recognized! please use 'help' for help");
         }
       }
     } else {
@@ -83,7 +94,9 @@ public class Player {
   }
 
   public String giveAnswer(String prompt) {
-    return GetInput(prompt);
+    System.out.println(prompt);
+    userinput.nextLine();
+    return userinput.nextLine();
   }
 
   public String GetInput(String prompt) {
@@ -116,11 +129,15 @@ public class Player {
     System.out.println("Type 'Contractor' to assign work to a Baker");
     System.out.println("Type 'PTSA' to view PTSA");
     System.out.println("Type 'PersonalCakes' to edit cakes you have saved");
+    System.out.println("Type 'Accomplishments' to see your score");
+    System.out.println("Type 'UpdateName' to edit your name");
     System.out.println("Type 'end' to stop program");
   }
 
   private void PersonalCakes() {
-    selection = GetInput("CAKE STORAGE: Type 1 to view a specific cake. Type 2 to remove a cake. Type 3 to eat a cake.");
+    selection =
+        GetInput(
+            "CAKE STORAGE: Type 1 to view a specific cake. Type 2 to remove a cake. Type 3 to eat a cake.");
     if (selection.equals("1")) {
       System.out.println("Which cake to view? (1-10)");
       int a = Integer.parseInt(userinput.next()) - 1;
@@ -202,12 +219,20 @@ public class Player {
     if (selection.equals("1")) {
       store.showcakes();
     } else if (selection.equals("2")) {
-      System.out.println("RESULTS OF PANTRY EXAMINATION");
-      System.out.println("Flour: " + store.accessPantry().getFlour().returnquantity() + "g");
-      System.out.println("Eggs: " + store.accessPantry().getEggs().returnquantity() + " units");
-      System.out.println("Butter: " + store.accessPantry().getButter().returnquantity() + "g");
-      System.out.println("Milk: " + store.accessPantry().getMilk().returnquantity() + "mL");
-      System.out.println("Sugar: " + store.accessPantry().getButter().returnquantity() + "g");
+      if(store.accessPantry().getFlour() == null ||
+      store.accessPantry().getEggs() == null ||
+      store.accessPantry().getButter() == null ||
+      store.accessPantry().getMilk() == null ||
+      store.accessPantry().getSugar() == null) {
+        System.out.println("Pantry is not imported yet!");
+      } else {
+        System.out.println("RESULTS OF PANTRY EXAMINATION");
+        System.out.println("Flour: " + store.accessPantry().getFlour().returnquantity() + "g");
+        System.out.println("Eggs: " + store.accessPantry().getEggs().returnquantity() + " units");
+        System.out.println("Butter: " + store.accessPantry().getButter().returnquantity() + "g");
+        System.out.println("Milk: " + store.accessPantry().getMilk().returnquantity() + "mL");
+        System.out.println("Sugar: " + store.accessPantry().getSugar().returnquantity() + "g");
+      }
     } else if (selection.equals("3")) {
       String[] items = {"Flour", "Eggs", "Butter", "Milk", "Sugar"};
       Flour d = null;
@@ -261,25 +286,25 @@ public class Player {
       System.out.println("Which shelf column? (1 - 5)");
       int secei = Integer.parseInt(userinput.next());
       store.ExamineCake(intermdin, secei);
-    }  else if (selection.equals("9")) {
+    } else if (selection.equals("9")) {
       int ord = 0;
-          for (Cake a : personalCakes) {
-            if(a == null) {
-              break;
-            }
-            ord++;
-          }
-          if (ord == 10) {
-            System.out.println("Personal cake storage is FULL! Please delete a cake first!");
-          } else {
-            System.out.println("Which shelf row? (1 - 3)");
-            int intermdin = Integer.parseInt(userinput.next());
-            System.out.println("Which shelf column? (1 - 5)");
-            int secei = Integer.parseInt(userinput.next());
-            personalCakes[ord] = store.SnagOffShelf(intermdin, secei);
-            personalCakes[ord].SetCakeOwner(name);
-            System.out.println("Cake has been saved to slot " + (ord + 1) + " of personal cakes!");
-          }
+      for (Cake a : personalCakes) {
+        if (a == null) {
+          break;
+        }
+        ord++;
+      }
+      if (ord == 10) {
+        System.out.println("Personal cake storage is FULL! Please delete a cake first!");
+      } else {
+        System.out.println("Which shelf row? (1 - 3)");
+        int intermdin = Integer.parseInt(userinput.next());
+        System.out.println("Which shelf column? (1 - 5)");
+        int secei = Integer.parseInt(userinput.next());
+        personalCakes[ord] = store.SnagOffShelf(intermdin, secei);
+        personalCakes[ord].SetCakeOwner(name);
+        System.out.println("Cake has been saved to slot " + (ord + 1) + " of personal cakes!");
+      }
     } else {
       System.out.println("Not valid!");
     }
@@ -335,8 +360,10 @@ public class Player {
   private void ViewCustomer(Customer customer) {
     System.out.println(
         "CUSTOMER " + customer.name() + ": Type 1 to set store to go to. Type 2 to see money.");
-    System.out.println("Type 3 to go to work. Type 4 to buy a cake. Type 5 to eat cake. Type 6 to discard cake.");
-    System.out.println("Type 7 to examine the cake. Type 8 to instruct a baker to make a specific cake using flour.");
+    System.out.println(
+        "Type 3 to go to work. Type 4 to buy a cake. Type 5 to eat cake. Type 6 to discard cake.");
+    System.out.println(
+        "Type 7 to examine the cake. Type 8 to instruct a baker to make a specific cake using flour.");
     selection = userinput.next();
     if (selection.equals("1")) {
       System.out.println("Which store should they buy from? (index 1 - 5). Type '0' for none.");
@@ -374,7 +401,7 @@ public class Player {
       int d = Integer.parseInt(userinput.next()) - 1;
       Flour a = new Flour(b, 0.00, c);
       bakers[d].setflour(a);
-      bakers[d].takeOrder(e, customer);;
+      bakers[d].takeOrder(e, customer);
     } else {
       System.out.println("Not valid!");
     }
@@ -424,7 +451,7 @@ public class Player {
   private void ViewBaker(Baker baker) {
     System.out.println(
         "BAKER " + baker.getname() + ": Type 1 to set the recipe. Type 2 to see level.");
-    System.out.println("Type 3 to bake a cake. Type 4 to go to clases.");
+    System.out.println("Type 3 to bake a cake. Type 4 to go to clases. Type 5 to see money from personal cake orders.");
     selection = userinput.next();
     if (selection.equals("1")) {
       System.out.println("Which slot to take recipe from? (1 - 5)");
@@ -433,37 +460,42 @@ public class Player {
     } else if (selection.equals("2")) {
       baker.printlevel();
     } else if (selection.equals("3")) {
-      selection = GetInput("Baking Cake: Type 1 to use a recipe. Type 2 to give direct instruction for personal cake.");
-        if (selection.equals("1")) {
-          baker.Bakeacake();
-        } else if (selection.equals("2")) {
-          int ord = 0;
-          for (Cake a : personalCakes) {
-            if(a == null) {
-              break;
-            }
-            ord++;
+      selection =
+          GetInput(
+              "Baking Cake: Type 1 to use a recipe. Type 2 to give direct instruction for personal cake.");
+      if (selection.equals("1")) {
+        baker.Bakeacake();
+      } else if (selection.equals("2")) {
+        int ord = 0;
+        for (Cake a : personalCakes) {
+          if (a == null) {
+            break;
           }
-          if (ord == 10) {
-            System.out.println("Personal cake storage is FULL! Please delete a cake first!");
-          } else {
-            System.out.println("How much flour is in this cake?");
-            int b = Integer.parseInt(userinput.next());
-            System.out.println("What is the quality of the flour?");
-            int c = Integer.parseInt(userinput.next());
-            Flour a = new Flour(b,0.00,c);
-            baker.setflour(a);
-
-            personalCakes[ord] = baker.bakeCake();
-            personalCakes[ord].SetCakeOwner(name);
-            System.out.println("Cake has been saved to slot " + (ord + 1) + " of personal cakes!");
-          }
-
-        } else {
-          System.out.println("Not valid!");
+          ord++;
         }
+        if (ord == 10) {
+          System.out.println("Personal cake storage is FULL! Please delete a cake first!");
+        } else {
+          System.out.println("How much flour is in this cake?");
+          int b = Integer.parseInt(userinput.next());
+          System.out.println("What is the quality of the flour?");
+          int c = Integer.parseInt(userinput.next());
+          Flour a = new Flour(b, 0.00, c);
+          baker.setflour(a);
+
+          personalCakes[ord] = baker.bakeCake();
+          personalCakes[ord].SetCakeOwner(name);
+          baker.increaselevelforlowdefcakes();
+          System.out.println("Cake has been saved to slot " + (ord + 1) + " of personal cakes!");
+        }
+
+      } else {
+        System.out.println("Not valid!");
+      }
     } else if (selection.equals("4")) {
       baker.gotobakingclass();
+    } else if (selection.equals("5")) {
+      baker.printpersonalcash();
     } else {
       System.out.println("Not valid!");
     }
