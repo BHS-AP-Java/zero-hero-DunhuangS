@@ -28,18 +28,14 @@ public class Player {
   Recipe[] recipes = new Recipe[5];
   String selection;
   Cake[] personalCakes = new Cake[10];
-  PTSA fraudulentServices;
+  PTSA fraudulentServices = new PTSA("ptsa");
   int accomplishments = 0;
 
   // CONSTRUCTORS
   public Player() {
-    System.out.println(
-        "New player class created! A PTSA with this class' reference must be given to initialize");
   }
 
   public Player(String name) {
-    System.out.println(
-        "New player class created! A PTSA with this class' reference must be given to initialize");
     this.name = name;
   }
 
@@ -87,10 +83,6 @@ public class Player {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void updatemyPTSA(PTSA ptsa) {
-    fraudulentServices = ptsa;
   }
 
   public String giveAnswer(String prompt) {
@@ -424,7 +416,7 @@ public class Player {
       String thename = userinput.next();
       System.out.println("Which slot to put data for this baker into? (1 - 5)");
       int theindex = Integer.parseInt(userinput.next()) - 1;
-      Baker newbaker = fraudulentServices.playerbakerassignment();
+      Baker newbaker = new Baker(this);
       newbaker.setname(thename);
       bakers[theindex] = newbaker;
 

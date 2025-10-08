@@ -11,6 +11,7 @@
  * 2) A baker must be hired and given a recipe before making a cake. // should be fixed
  * 3) A customer must be given a preferred store before attempting to buy a cake.
  * 4) A store must be made before making a customer, or the process is impossible to complete without an error.
+ * 5) Deleting a baker doesn't fire it from the store, and trying to retrive a cake from that baker will cause an error.
  * there are a few more, however they should be basic knowledge.
  */
 
@@ -211,8 +212,6 @@ class Main {
 
     } else {
       PTSA a = new PTSA("unknown");
-      a.setplayer(ply);
-      ply.updatemyPTSA(a);
       ply.runSimulation();
     }
   }
