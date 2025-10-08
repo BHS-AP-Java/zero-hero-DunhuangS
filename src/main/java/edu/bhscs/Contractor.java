@@ -36,5 +36,4 @@ class Contractor {
     }
     return false;
   }
-
 }

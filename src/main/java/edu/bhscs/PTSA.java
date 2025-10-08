@@ -14,6 +14,7 @@ package edu.bhscs;
 class PTSA {
   String name;
   double money;
+  Player player;
 
   PTSA(String name) {
     this.name = name;
@@ -33,5 +34,13 @@ class PTSA {
 
   void sumofdonation() {
     System.out.println("The PTSA " + name + " has gathered $" + String.format("%.2f", money));
+  }
+
+  void setplayer(Player player) {
+    this.player = player;
+  }
+
+  Baker playerbakerassignment() {
+    return new Baker(player);
   }
 }

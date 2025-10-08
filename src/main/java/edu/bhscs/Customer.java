@@ -78,7 +78,7 @@ class Customer {
     }
   }
 
-  int pay (int price) {
+  int pay(int price) {
     if (MyMoney >= price) {
       MyMoney -= price;
       return price;

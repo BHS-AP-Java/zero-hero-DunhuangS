@@ -81,6 +81,12 @@ class Store {
     }
   }
 
+  Cake SnagOffShelf(int y, int x) {
+    Cake inteindi = shelf[y-1][x-1];
+    shelf[y-1][x-1] = a;
+    return inteindi;
+  }
+
   Pantry accessPantry() {
     return BackPantry;
   }

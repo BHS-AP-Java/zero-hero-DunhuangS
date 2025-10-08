@@ -16,7 +16,7 @@
 package edu.bhscs;
 
 public class Baker {
-  //FIELDS AND PROPERTIES
+  // FIELDS AND PROPERTIES
   Recipe MyRecipe;
   Cake MadeCake = new Cake(false);
   boolean existent = false;
@@ -50,6 +50,7 @@ public class Baker {
   Flour f;
   Store placeOfWork;
   int cash;
+
   //
 
   // CONSTRUCTORS
@@ -75,17 +76,21 @@ public class Baker {
 
   void takeJob(Store bakery) {
     String doYouWantToWorkHere = this.p.giveAnswer("Do you want to work at " + bakery.getName());
-    if(doYouWantToWorkHere.equals("y")){
+    if (doYouWantToWorkHere.equals("y")) {
       this.placeOfWork = bakery;
       System.out.println(this.name + " now works at " + bakery.getName());
     }
   }
+
   //
+
+  void setflour (Flour flour) {
+    this.f = flour;
+  }
 
   Store showworkplace() {
     return placeOfWork;
   }
-
 
   String getname() {
     return name;
@@ -131,11 +136,16 @@ public class Baker {
 
   void examinepantry() {
     System.out.println("RESULTS OF PANTRY EXAMINATION");
-    System.out.println("Flour: " + this.placeOfWork.accessPantry().getFlour().returnquantity() + "g");
-    System.out.println("Eggs: " + this.placeOfWork.accessPantry().getEggs().returnquantity() + " units");
-    System.out.println("Butter: " + this.placeOfWork.accessPantry().getButter().returnquantity() + "g");
-    System.out.println("Milk: " + this.placeOfWork.accessPantry().getMilk().returnquantity() + "mL");
-    System.out.println("Sugar: " + this.placeOfWork.accessPantry().getButter().returnquantity() + "g");
+    System.out.println(
+        "Flour: " + this.placeOfWork.accessPantry().getFlour().returnquantity() + "g");
+    System.out.println(
+        "Eggs: " + this.placeOfWork.accessPantry().getEggs().returnquantity() + " units");
+    System.out.println(
+        "Butter: " + this.placeOfWork.accessPantry().getButter().returnquantity() + "g");
+    System.out.println(
+        "Milk: " + this.placeOfWork.accessPantry().getMilk().returnquantity() + "mL");
+    System.out.println(
+        "Sugar: " + this.placeOfWork.accessPantry().getButter().returnquantity() + "g");
   }
 
   public void Bakeacake() {
