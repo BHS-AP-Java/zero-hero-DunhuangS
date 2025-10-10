@@ -32,8 +32,7 @@ public class Player {
   int accomplishments = 0;
 
   // CONSTRUCTORS
-  public Player() {
-  }
+  public Player() {}
 
   public Player(String name) {
     this.name = name;
@@ -211,11 +210,11 @@ public class Player {
     if (selection.equals("1")) {
       store.showcakes();
     } else if (selection.equals("2")) {
-      if(store.accessPantry().getFlour() == null ||
-      store.accessPantry().getEggs() == null ||
-      store.accessPantry().getButter() == null ||
-      store.accessPantry().getMilk() == null ||
-      store.accessPantry().getSugar() == null) {
+      if (store.accessPantry().getFlour() == null
+          || store.accessPantry().getEggs() == null
+          || store.accessPantry().getButter() == null
+          || store.accessPantry().getMilk() == null
+          || store.accessPantry().getSugar() == null) {
         System.out.println("Pantry is not imported yet!");
       } else {
         System.out.println("RESULTS OF PANTRY EXAMINATION");
@@ -443,7 +442,8 @@ public class Player {
   private void ViewBaker(Baker baker) {
     System.out.println(
         "BAKER " + baker.getname() + ": Type 1 to set the recipe. Type 2 to see level.");
-    System.out.println("Type 3 to bake a cake. Type 4 to go to clases. Type 5 to see money from personal cake orders.");
+    System.out.println(
+        "Type 3 to bake a cake. Type 4 to go to clases. Type 5 to see money from personal cake orders.");
     selection = userinput.next();
     if (selection.equals("1")) {
       System.out.println("Which slot to take recipe from? (1 - 5)");

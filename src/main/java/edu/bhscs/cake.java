@@ -56,8 +56,12 @@ class Cake {
       System.out.println("INGREDIENTS:");
       System.out.println("Flour: " + ingredients[0] + "g");
       System.out.println("May include: toppings, flavoring, preservatives.");
-      System.out.println("It has a quality rating of " + String.format("%.1f", quality)
-          + ", made by a baker with experience level " + craftquality + ".");
+      System.out.println(
+          "It has a quality rating of "
+              + String.format("%.1f", quality)
+              + ", made by a baker with experience level "
+              + craftquality
+              + ".");
       System.out.println("------------------------------------------------------");
       if (owner == null) {
         System.out.println("This cake has not been owned yet.");

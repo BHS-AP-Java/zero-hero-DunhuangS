@@ -79,7 +79,8 @@ public class Baker {
   }
 
   void takeJob(Store bakery) {
-    String doYouWantToWorkHere = this.p.giveAnswer("Do you want to work at " + bakery.getName() + "? (y/n)");
+    String doYouWantToWorkHere =
+        this.p.giveAnswer("Do you want to work at " + bakery.getName() + "? (y/n)");
     if (doYouWantToWorkHere.equals("y")) {
       this.placeOfWork = bakery;
       System.out.println(this.name + " now works at " + bakery.getName());
@@ -154,11 +155,11 @@ public class Baker {
 
   public void Bakeacake() {
     if (placeOfWork != null && MyRecipe != null) {
-      if(placeOfWork.accessPantry().getFlour() == null ||
-      placeOfWork.accessPantry().getEggs() == null ||
-      placeOfWork.accessPantry().getButter() == null ||
-      placeOfWork.accessPantry().getMilk() == null ||
-      placeOfWork.accessPantry().getSugar() == null) {
+      if (placeOfWork.accessPantry().getFlour() == null
+          || placeOfWork.accessPantry().getEggs() == null
+          || placeOfWork.accessPantry().getButter() == null
+          || placeOfWork.accessPantry().getMilk() == null
+          || placeOfWork.accessPantry().getSugar() == null) {
         System.out.println("Pantry is not imported yet!");
       } else {
         if (this.placeOfWork
@@ -268,5 +269,4 @@ public class Baker {
   public void getinstructions(Recipe therecipe) {
     MyRecipe = therecipe;
   }
-
 }
