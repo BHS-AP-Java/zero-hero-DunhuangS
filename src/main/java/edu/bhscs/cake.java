@@ -13,6 +13,7 @@
 package edu.bhscs;
 
 class Cake {
+  //FIELDS and PROPERTIES (a lot of them)
   String flavor;
   double sweetness;
   String toppings;
@@ -31,6 +32,8 @@ class Cake {
   double oprice;
   int craftquality;
   boolean alternatedef = false;
+
+  //CONSTRUCTORS
 
   public Cake(boolean a) {
     if (a) {
@@ -191,4 +194,9 @@ class Cake {
   public void SetCakeOwner(String name) {
     this.owner = name;
   }
+
+  public void DrawTopDown() {
+    math.sqrt()
+  }
+
 }
