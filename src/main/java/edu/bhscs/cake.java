@@ -33,6 +33,8 @@ class Cake {
   int craftquality;
   boolean alternatedef = false;
 
+  int drawlt; int drawht; double drawcut; double drawangle; double drawperspective;
+
   //CONSTRUCTORS
 
   public Cake(boolean a) {
@@ -195,8 +197,26 @@ class Cake {
     this.owner = name;
   }
 
-  public void DrawTopDown() {
-    math.sqrt()
+  public void draw(int lt, int ht, double cut, double angle, double perspective) {
+    drawlt = lt;
+    drawht = ht;
+    drawcut = cut;
+    drawangle = angle;
+    drawperspective = perspective;
+    //find the maximum grid length of the cake needed
+    double ubound = Math.max(Math.abs(drawlt - CartesianEllipseX(drawangle)), Math.abs(CartesianEllipseX(drawangle + drawcut) - CartesianEllipseX(drawangle)));
+    System.out.println(ubound);
   }
 
+  private double topoffset () {
+    return ((drawlt - drawht) * (1 - Math.sin(drawperspective)));
+  }
+
+  private double CartesianEllipseX (double inputradians) {
+    return (drawlt + (drawlt * Math.cos(inputradians + Math.PI)));
+  }
+
+  private double CartesianEllipseY (double inputradians) {
+    return (drawlt - topoffset() + (drawlt * Math.sin(drawperspective) * Math.sin(inputradians + Math.PI)));
+  }
 }
