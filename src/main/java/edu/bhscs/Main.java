@@ -24,8 +24,8 @@ class Main {
     // file name.
     //Burger bur = new Burger(true, true, true, true);
     //bur.Draw();
-    Cake a = new Cake(true);
-    a.draw(6, 3, 0.94, 0.0, 0.62);
+    Cake f = new Cake(true);
+    f.draw(6, 3, 2.6, 1.36, 0.234);
     Player ply = new Player("USER");
     String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
     boolean storybakesale = false;
@@ -215,7 +215,6 @@ class Main {
       Janet.MakeYTVideos(20);
 
     } else {
-      PTSA a = new PTSA("unknown");
       ply.runSimulation();
     }
   }

@@ -203,9 +203,62 @@ class Cake {
     drawcut = cut;
     drawangle = angle;
     drawperspective = perspective;
-    //find the maximum grid length of the cake needed
-    double ubound = Math.max(Math.abs(drawlt - CartesianEllipseX(drawangle)), Math.abs(CartesianEllipseX(drawangle + drawcut) - CartesianEllipseX(drawangle)));
-    System.out.println(ubound);
+    //find the minimum grid length of the cake needed
+    double xbound =
+    Math.max(
+      Math.max(
+        Math.abs(drawlt - CartesianEllipseX(drawangle)),
+        Math.abs(CartesianEllipseX(drawangle + drawcut) - CartesianEllipseX(drawangle))),
+      Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)));
+    // find the offset of the grid from the origin
+    double xoff =
+      Math.min(
+        Math.min(
+          CartesianEllipseX(drawangle),
+          CartesianEllipseX(drawangle + drawcut)),
+        drawlt);
+    System.out.println(xoff); //DBG
+    //Account for if the cut start and end happen to be at the rightmost
+    boolean rightedge = false;
+    if ((drawangle < Math.PI && (drawangle + drawcut) > Math.PI)
+    || (drawangle < 2 * Math.PI && (drawangle + drawcut) > 2 * Math.PI) || drawcut > Math.PI) {
+      rightedge = true;
+      xbound = Math.max(xbound, (2 * drawlt) - xoff);
+    }
+    System.out.println(xbound); //DBG
+    //repeat with height function
+    //find the minimum grid height
+
+    //double ybound =
+
+
+    //find height offset
+
+
+    //create a 2d array of such size calculated above
+
+    //find boundaries of curves
+    //this seems to only be an issue with the vertical curves and the top diagonal lines
+    //in MOST situations (exception: cake slice passes the horizontal parallel or vertical parallel)
+    //this can be marked to save processing speed
+
+    //identify applicable curves
+    //this can be done by comparing the boundary vertical lines to the origin vertical lines
+    //ex: if right vertical is greater than center vertical, right base diagonal would be hidden
+    //repeat with left
+
+    //draw applicable curves onto grid
+    //done by plugging associated integer values with offset fould earlier for y coordinate
+    //please use cartesian equations as much as possible
+    //don't forget to consider +- for sqrt of the ellipse
+    //have a different marker for each curve for the next step
+    //draw from bottom to top or give priority for each marker: top > edge > inside
+
+    //Fill passthrough
+    //loop from top to bottom of array, the markers made above define the boundaries of which to draw from
+
+    //print the cake row by row
+
   }
 
   private double topoffset () {
