@@ -342,7 +342,7 @@ class Cake {
     System.out.println(drawarray[0].length);
     System.out.println();
 
-    printarrayreverse(drawarray, "a", "b", "c", "d", "e"); //DBG
+    //printarrayreverse(drawarray, "a", "b", "c", "d", "e"); //DBG
 
     // find boundaries of curves
     // this seems to only be an issue with the vertical curves and the top diagonal lines
