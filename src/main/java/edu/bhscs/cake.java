@@ -13,7 +13,7 @@
 package edu.bhscs;
 
 class Cake {
-  //FIELDS and PROPERTIES (a lot of them)
+  // FIELDS and PROPERTIES (a lot of them)
   String flavor;
   double sweetness;
   String toppings;
@@ -33,9 +33,13 @@ class Cake {
   int craftquality;
   boolean alternatedef = false;
 
-  int drawlt; int drawht; double drawcut; double drawangle; double drawperspective;
+  double drawlt;
+  double drawht;
+  double drawcut;
+  double drawangle;
+  double drawperspective;
 
-  //CONSTRUCTORS
+  // CONSTRUCTORS
 
   public Cake(boolean a) {
     if (a) {
@@ -197,79 +201,194 @@ class Cake {
     this.owner = name;
   }
 
-  public void draw(int lt, int ht, double cut, double angle, double perspective) {
+  public void draw(double lt, double ht, double cut, double angle, double perspective) {
     drawlt = lt;
     drawht = ht;
     drawcut = cut;
     drawangle = angle;
     drawperspective = perspective;
-    //find the minimum grid length of the cake needed
-    double xbound =
-    Math.max(
-      Math.max(
-        Math.abs(drawlt - CartesianEllipseX(drawangle)),
-        Math.abs(CartesianEllipseX(drawangle + drawcut) - CartesianEllipseX(drawangle))),
-      Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)));
+    // find all points of the cake
+    double[] stct = {
+      CartesianEllipseX(drawangle),
+      CartesianEllipseY(drawangle)
+   } ; //start cut top
+    double[] stcb = {
+      CartesianEllipseX(drawangle),
+      CartesianEllipseY(drawangle) - drawlt + topoffset() + baseoffset()
+        // I don't know how to describe the formula for finding y value in plain english
+        // I have a good visualization of it in Desmos though
+   }; //start cut bottom
+    double[] etct = {CartesianEllipseX(drawangle + drawcut),
+      CartesianEllipseY(drawangle + drawcut)
+    }; //end cut top
+    double[] etcb = {
+      CartesianEllipseX(drawangle + drawcut),
+      CartesianEllipseY(drawangle + drawcut) - drawlt + topoffset() + baseoffset()
+   }; //end cut bottom
+    double[] cent = {
+      drawlt,
+      drawlt - topoffset()
+    }; //center top
+    double[] cenb = {
+      drawlt,
+      baseoffset()
+    }; //center bottom
+
+    //DBG
+    System.out.println(stct[0]);
+    System.out.println(stct[1]);
+    System.out.println(stcb[0]);
+    System.out.println(stcb[1]);
+    System.out.println(etct[0]);
+    System.out.println(etct[1]);
+    System.out.println(etcb[0]);
+    System.out.println(etcb[1]);
+    System.out.println(cent[0]);
+    System.out.println(cent[1]);
+    System.out.println(cenb[0]);
+    System.out.println(cenb[1]);
+    System.out.println();
+
+    // find the minimum grid length of the cake needed
+    double[] xcoordlst = {stct[0], stcb[0], etct[0], etcb[0], cent[0], cenb[0]};
+
+    //Max value finder yada yada
+    double solmin = Integer.MAX_VALUE;
+    double solmax = Integer.MIN_VALUE;
+    for (double value : xcoordlst) {
+      if (value > solmax) {
+        solmax = value;
+      }
+      if (value < solmin) {
+        solmin = value;
+      }
+    }
+    double xbound = solmax - solmin;
     // find the offset of the grid from the origin
-    double xoff =
-      Math.min(
-        Math.min(
-          CartesianEllipseX(drawangle),
-          CartesianEllipseX(drawangle + drawcut)),
-        drawlt);
-    System.out.println(xoff); //DBG
-    //Account for if the cut start and end happen to be at the rightmost
-    boolean rightedge = false;
-    if ((drawangle < Math.PI && (drawangle + drawcut) > Math.PI)
-    || (drawangle < 2 * Math.PI && (drawangle + drawcut) > 2 * Math.PI) || drawcut > Math.PI) {
-      rightedge = true;
+    double xoff = solmin;
+    // Account for if the cut start and end happen to be at the rightmost
+    boolean rxedge = false;
+    boolean lxedge = false;
+    if (((drawangle + Math.PI) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
+      //right edge, accounts for first set
+      rxedge = true;
       xbound = Math.max(xbound, (2 * drawlt) - xoff);
     }
-    System.out.println(xbound); //DBG
-    //repeat with height function
-    //find the minimum grid height
+    if (((drawangle) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
+      // left edge, accounts for other set
+      lxedge = true;
+      xbound = Math.max(xbound, solmax);
+      // xoff additionally must be adjusted as left side impacts both
+      xoff = 0;
+    }
+    System.out.println(xbound); // DBG
+    System.out.println();
+    // repeat with height function
+    // find the minimum grid height
 
-    //double ybound =
+    // Max value finder yada yada
+    // hmm I should REALLLLLLLYYYYY abstract the max value finder
+    // maybe when I get less lazy
+
+    // define all height points
+    double[] ycoordlst ={stct[1], stcb[1], etct[1], etcb[1], cent[1], cenb[1]};
+
+    solmin = Integer.MAX_VALUE;
+    solmax = Integer.MIN_VALUE;
+    for (double value : ycoordlst) {
+      if (value > solmax) {
+        solmax = value;
+      }
+      if (value < solmin) {
+        solmin = value;
+      }
+    }
+
+    double ybound = solmax - solmin;
+    // find height offset
+    double yoff = solmin;
+    boolean byedge = false;
+    boolean tyedge = false;
+
+    // Account for if the cut start and end happen to cross the center:
+    if (((drawangle + ((3 * Math.PI) / 2)) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
+      // bottom edge, accounts for first set
+      byedge = true;
+      ybound = Math.max(ybound, solmax);
+      //adjust base y as necessary
+      yoff = 0;
+    }
+    if (((drawangle + (Math.PI / 2)) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
+      // top edge, accounts for other set
+      lxedge = true;
+      ybound = Math.max(ybound, drawlt - topoffset() + baseoffset());
+    }
+    System.out.println(ybound); // DBG
+    System.out.println();
 
 
-    //find height offset
+    // create a 2d array of such size calculated above
+    int xarraysz = (int) Math.floor(xbound) + 2;
+    int yarraysz = (int) Math.floor(ybound) + 2;
+    /*
+     * Note that 2 additional rows are created!!! This is to account for possible points
+     * just below the old int cutoff and for safety in case something happens with the top cutoff.
+     * For example, boundary (4.9, 6.1) can result in a value ranging from 4 to 6
+     * (size 3 array required) while the xbound is 2.2 (truncated to 2).
+     * This would produce a massive error.
+     * xoff and yoff need to be increased by 1 respectively for this to work.
+     * Otherwise, they can return -1 when values get rounded / truncated.
+     */
+    xoff ++; yoff ++;
 
+    int[][] drawarray = new int[xarraysz][yarraysz];
 
-    //create a 2d array of such size calculated above
+    System.out.println(xarraysz); // DBG
+    System.out.println(yarraysz);
+    System.out.println();
 
-    //find boundaries of curves
-    //this seems to only be an issue with the vertical curves and the top diagonal lines
-    //in MOST situations (exception: cake slice passes the horizontal parallel or vertical parallel)
-    //this can be marked to save processing speed
+    // find boundaries of curves
+    // this seems to only be an issue with the vertical curves and the top diagonal lines
+    // in MOST situations (exception: cake slice passes the horizontal parallel or vertical
+    // parallel)
+    // this can be marked to save processing speed
 
-    //identify applicable curves
-    //this can be done by comparing the boundary vertical lines to the origin vertical lines
-    //ex: if right vertical is greater than center vertical, right base diagonal would be hidden
-    //repeat with left
+    // identify applicable curves
+    // this can be done by comparing the boundary vertical lines to the origin vertical lines
+    // ex: if right vertical is greater than center vertical, right base diagonal would be hidden
+    // repeat with left
 
-    //draw applicable curves onto grid
-    //done by plugging associated integer values with offset fould earlier for y coordinate
-    //please use cartesian equations as much as possible
-    //don't forget to consider +- for sqrt of the ellipse
-    //have a different marker for each curve for the next step
-    //draw from bottom to top or give priority for each marker: top > edge > inside
+    // draw applicable curves onto grid
+    // done by plugging associated integer values with offset fould earlier for y coordinate
+    // please use cartesian equations as much as possible
+    // don't forget to consider +- for sqrt of the ellipse
+    // have a different marker for each curve for the next step
+    // draw from bottom to top or give priority for each marker: top > edge > inside
 
-    //Fill passthrough
-    //loop from top to bottom of array, the markers made above define the boundaries of which to draw from
+    // Fill passthrough
+    // loop from top to bottom of array, the markers made above define the boundaries of which to
+    // draw from
 
-    //print the cake row by row
+    // print the cake row by row
 
   }
 
-  private double topoffset () {
+  private double topoffset() {
     return ((drawlt - drawht) * (1 - Math.sin(drawperspective)));
   }
 
-  private double CartesianEllipseX (double inputradians) {
+  private double baseoffset() {
+    //NOTE: base offset is also used for the verital major axis
+    return (drawlt * Math.sin(drawperspective));
+  }
+
+  private double CartesianEllipseX(double inputradians) {
     return (drawlt + (drawlt * Math.cos(inputradians + Math.PI)));
   }
 
-  private double CartesianEllipseY (double inputradians) {
-    return (drawlt - topoffset() + (drawlt * Math.sin(drawperspective) * Math.sin(inputradians + Math.PI)));
+  private double CartesianEllipseY(double inputradians) {
+    return (drawlt
+        - topoffset()
+        + (drawlt * Math.sin(drawperspective) * Math.sin(inputradians + Math.PI)));
   }
 }
