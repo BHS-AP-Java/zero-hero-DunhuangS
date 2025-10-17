@@ -25,7 +25,7 @@ class Main {
     // Burger bur = new Burger(true, true, true, true);
     // bur.Draw();
     Cake f = new Cake(true);
-    f.draw(4.4, 8.3, 1.04, 0.4, 0.49);
+    f.draw(20, 10, 1, 1, 0.34);
     Player ply = new Player("USER");
     String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
     boolean storybakesale = false;
