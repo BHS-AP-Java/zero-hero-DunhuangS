@@ -208,33 +208,24 @@ class Cake {
     drawangle = angle;
     drawperspective = perspective;
     // find all points of the cake
-    double[] stct = {
-      CartesianEllipseX(drawangle),
-      CartesianEllipseY(drawangle)
-   } ; //start cut top
+    double[] stct = {CartesianEllipseX(drawangle), CartesianEllipseY(drawangle)}; // start cut top
     double[] stcb = {
       CartesianEllipseX(drawangle),
       CartesianEllipseY(drawangle) - drawlt + topoffset() + baseoffset()
-        // I don't know how to describe the formula for finding y value in plain english
-        // I have a good visualization of it in Desmos though
-   }; //start cut bottom
-    double[] etct = {CartesianEllipseX(drawangle + drawcut),
-      CartesianEllipseY(drawangle + drawcut)
-    }; //end cut top
+      // I don't know how to describe the formula for finding y value in plain english
+      // I have a good visualization of it in Desmos though
+    }; // start cut bottom
+    double[] etct = {
+      CartesianEllipseX(drawangle + drawcut), CartesianEllipseY(drawangle + drawcut)
+    }; // end cut top
     double[] etcb = {
       CartesianEllipseX(drawangle + drawcut),
       CartesianEllipseY(drawangle + drawcut) - drawlt + topoffset() + baseoffset()
-   }; //end cut bottom
-    double[] cent = {
-      drawlt,
-      drawlt - topoffset()
-    }; //center top
-    double[] cenb = {
-      drawlt,
-      baseoffset()
-    }; //center bottom
+    }; // end cut bottom
+    double[] cent = {drawlt, drawlt - topoffset()}; // center top
+    double[] cenb = {drawlt, baseoffset()}; // center bottom
 
-    //DBG
+    // DBG
     System.out.println(stct[0]);
     System.out.println(stct[1]);
     System.out.println(stcb[0]);
@@ -252,7 +243,7 @@ class Cake {
     // find the minimum grid length of the cake needed
     double[] xcoordlst = {stct[0], stcb[0], etct[0], etcb[0], cent[0], cenb[0]};
 
-    //Max value finder yada yada
+    // Max value finder yada yada
     double solmin = Integer.MAX_VALUE;
     double solmax = Integer.MIN_VALUE;
     for (double value : xcoordlst) {
@@ -270,7 +261,7 @@ class Cake {
     boolean rxedge = false;
     boolean lxedge = false;
     if (((drawangle + Math.PI) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
-      //right edge, accounts for first set
+      // right edge, accounts for first set
       rxedge = true;
       xbound = Math.max(xbound, (2 * drawlt) - xoff);
     }
@@ -292,7 +283,7 @@ class Cake {
     // maybe when I get less lazy
 
     // define all height points
-    double[] ycoordlst ={stct[1], stcb[1], etct[1], etcb[1], cent[1], cenb[1]};
+    double[] ycoordlst = {stct[1], stcb[1], etct[1], etcb[1], cent[1], cenb[1]};
 
     solmin = Integer.MAX_VALUE;
     solmax = Integer.MIN_VALUE;
@@ -316,7 +307,7 @@ class Cake {
       // bottom edge, accounts for first set
       byedge = true;
       ybound = Math.max(ybound, solmax);
-      //adjust base y as necessary
+      // adjust base y as necessary
       yoff = 0;
     }
     if (((drawangle + (Math.PI / 2)) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
@@ -328,7 +319,6 @@ class Cake {
     System.out.println(yoff);
     System.out.println();
 
-
     // create a 2d array of such size calculated above
     int xarraysz = (int) Math.floor(xbound) + 2;
     int yarraysz = (int) Math.floor(ybound) + 2;
@@ -338,10 +328,11 @@ class Cake {
      * For example, boundary (4.9, 6.1) can result in a value ranging from 4 to 6
      * (size 3 array required) while the xbound is 2.2 (truncated to 2).
      * This would produce a massive error.
-     * xoff and yoff need to be increased by 1 respectively for this to work.
+     * xoff and yoff need to be DECREASED by 1 respectively for this to work.
      * Otherwise, they can return -1 when values get rounded / truncated.
      */
-    xoff ++; yoff ++;
+    xoff--;
+    yoff--;
 
     int[][] drawarray = new int[xarraysz][yarraysz];
 
@@ -380,7 +371,7 @@ class Cake {
   }
 
   private double baseoffset() {
-    //NOTE: base offset is also used for the verital major axis
+    // NOTE: base offset is also used for the verital major axis
     return (drawlt * Math.sin(drawperspective));
   }
 
