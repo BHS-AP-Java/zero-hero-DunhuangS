@@ -282,6 +282,7 @@ class Cake {
       xoff = 0;
     }
     System.out.println(xbound); // DBG
+    System.out.println(xoff);
     System.out.println();
     // repeat with height function
     // find the minimum grid height
@@ -324,6 +325,7 @@ class Cake {
       ybound = Math.max(ybound, drawlt - topoffset() + baseoffset());
     }
     System.out.println(ybound); // DBG
+    System.out.println(yoff);
     System.out.println();
 
 
