@@ -376,11 +376,16 @@ class Cake {
     double tempoffset;
     if (CartesianEllipseX(drawangle) <= drawlt) {
       repeti = (int) Math.floor(drawlt - CartesianEllipseX(drawangle) + 2);
-      tempoffset = CartesianEllipseX(drawangle) - 1;
+      tempoffset = CartesianEllipseX(drawangle) - 1; //this is here to make it loop
+      //only near the wanted values
     } else {
       repeti = (int) Math.floor(CartesianEllipseX(drawangle) - drawlt + 2);
       tempoffset = drawlt - 1;
     }
+
+    System.out.println(repeti); //DBG
+    System.out.println(tempoffset);
+    System.out.println(topliney(drawlt));
 
     for(int i = (int) Math.floor(tempoffset); i <= (int) Math.ceil(tempoffset + repeti); i++) {
       double ptc = i;
@@ -389,9 +394,36 @@ class Cake {
       } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle))) {
         ptc = Math.max(drawlt, CartesianEllipseX(drawangle));
       }
-      double pty = starttopliney(ptc);
-      drawarray[(int) Math.round(ptc)][(int) Math.round(pty)] = 5;
+      double pty = topliney(ptc); //f(x)
+      drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
     }
+    //START LINE DONE
+    //TOP END LINE
+    if (CartesianEllipseX(drawangle + drawcut) <= drawlt) {
+      repeti = (int) Math.floor(drawlt - CartesianEllipseX(drawangle + drawcut) + 2);
+      tempoffset = CartesianEllipseX(drawangle + drawcut) - 1;
+    }  else {
+      repeti = (int) Math.floor(CartesianEllipseX(drawangle + drawcut) - drawlt + 2);
+      tempoffset = drawlt - 1;
+    }
+
+    System.out.println(repeti); //DBG
+    System.out.println(tempoffset);
+    System.out.println(topliney(drawlt));
+
+    for(int i = (int) Math.floor(tempoffset); i <= (int) Math.ceil(tempoffset + repeti); i++) {
+      double ptc = i;
+      if(ptc < Math.min(drawlt, CartesianEllipseX(drawangle + drawcut))) { //check values are within bounds
+        ptc = Math.min(drawlt, CartesianEllipseX(drawangle + drawcut)); //if not make them be in bounds
+      } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
+        ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
+      }
+      double pty = topliney(ptc); //f(x)
+      drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+    }
+
+
+    //TOP END LINE DONE
 
     // done by plugging associated integer values with offset fould earlier for y coordinate
     // please use cartesian equations as much as possible
@@ -410,7 +442,7 @@ class Cake {
 
   }
 
-  private double starttopliney(double inputx) {
+  private double topliney(double inputx) {
     double th = drawlt - topoffset() - CartesianEllipseY(drawangle); //y2 / y1
     double oth = drawlt - CartesianEllipseX(drawangle);//x2 / x1
     return ((th / oth) * (inputx - drawlt)) + drawlt - topoffset();
