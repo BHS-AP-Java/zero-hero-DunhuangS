@@ -320,10 +320,10 @@ class Cake {
     System.out.println();
 
     // create a 2d array of such size calculated above
-    int xarraysz = (int) Math.floor(xbound) + 2;
-    int yarraysz = (int) Math.floor(ybound) + 2;
+    int xarraysz = (int) Math.floor(xbound) + 4;
+    int yarraysz = (int) Math.floor(ybound) + 4;
     /*
-     * Note that 2 additional rows are created!!! This is to account for possible points
+     * Note that 4 additional rows are created!!! This is to account for possible points
      * just below the old int cutoff and for safety in case something happens with the top cutoff.
      * For example, boundary (4.9, 6.1) can result in a value ranging from 4 to 6
      * (size 3 array required) while the xbound is 2.2 (truncated to 2).
@@ -342,7 +342,7 @@ class Cake {
     System.out.println(drawarray[0].length);
     System.out.println();
 
-    //printarrayreverse(drawarray, "a", "b", "c", "d", "e"); //DBG
+    // printarrayreverse(drawarray, "a", "b", "c", "d", "e"); //DBG
 
     // find boundaries of curves
     // this seems to only be an issue with the vertical curves and the top diagonal lines
@@ -357,82 +357,137 @@ class Cake {
 
     // draw applicable curves onto grid
     // the top 3 lines are ALWAYS drawn, let's start with those!
+    double repeti;
 
-    //TOP CIRCLE
-    double detail = 1.25;
-    int repeti = (int) Math.floor(detail * drawlt * drawcut); //creates marfkers along the ellipse
-    //gives approximately 1 marker per
-    for (int i = 1; i <= repeti; i++) {
-      double idtheta = (i / (detail * drawlt)) + drawangle;
-      drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)]
-      [(int) Math.round(CartesianEllipseY(idtheta) - yoff)] = 5;
-      //System.out.println("(" + (int) Math.round(CartesianEllipseX(idtheta)) + ", " + (int) Math.round(CartesianEllipseY(idtheta)) + ")");
-    }
-    // TOP CIRCLE DONE
+    // TOP START LINE
 
-    //TOP START LINE
-
-    //find the correct point
+    // find the correct point
     double tempoffset;
     if (CartesianEllipseX(drawangle) <= drawlt) {
-      repeti = (int) Math.floor(drawlt - CartesianEllipseX(drawangle) + 2);
-      tempoffset = CartesianEllipseX(drawangle) - 1; //this is here to make it loop
-      //only near the wanted values
+      repeti = Math.floor(drawlt - CartesianEllipseX(drawangle) + 2);
+      tempoffset = CartesianEllipseX(drawangle) - 1; // this is here to make it loop
+      // only near the wanted values
     } else {
-      repeti = (int) Math.floor(CartesianEllipseX(drawangle) - drawlt + 2);
+      repeti = Math.floor(CartesianEllipseX(drawangle) - drawlt + 2);
       tempoffset = drawlt - 1;
-    }
+    } //this code is excessively verbose, we can make this better later
 
-    System.out.println(repeti); //DBG
+    System.out.println(repeti); // DBG
     System.out.println(tempoffset);
     System.out.println(topliney(drawlt));
+    System.out.println();
 
-    for(int i = (int) Math.floor(tempoffset); i <= (int) Math.ceil(tempoffset + repeti); i++) {
+
+    //to make sure all points are drawn:
+    //amount of points needed depends on max of y and x, times 3 for safety
+    int points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+    /*
+     * This is here BECAUSE drawing normally (increment x by 1 OR draw using cartesian equations)
+     * Would negate some points if the slope is too large. This is a more general fix for this issue
+     * However to make it better I will also include a vertical line draw for values significantly
+     * close to theta = kpi + pi/2 when I get the chance
+     */
+
+    for (double i = Math.floor(tempoffset);
+     i <= (int) Math.ceil(tempoffset + repeti);
+      i += (repeti / points)) {
       double ptc = i;
-      if(ptc < Math.min(drawlt, CartesianEllipseX(drawangle))) { //check values are within bounds
-        ptc = Math.min(drawlt, CartesianEllipseX(drawangle)); //if not make them be in bounds
+      if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle))) { // check values are within bounds
+        ptc = Math.min(drawlt, CartesianEllipseX(drawangle)); // if not make them be in bounds
       } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle))) {
         ptc = Math.max(drawlt, CartesianEllipseX(drawangle));
       }
-      double pty = topliney(ptc); //f(x)
+      double pty = topliney(ptc); // f(x)
       drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
     }
-    //START LINE DONE
-    //TOP END LINE
+    // START LINE DONE
+
+    // TOP END LINE
     if (CartesianEllipseX(drawangle + drawcut) <= drawlt) {
-      repeti = (int) Math.floor(drawlt - CartesianEllipseX(drawangle + drawcut) + 2);
+      repeti = Math.floor(drawlt - CartesianEllipseX(drawangle + drawcut) + 2);
       tempoffset = CartesianEllipseX(drawangle + drawcut) - 1;
-    }  else {
-      repeti = (int) Math.floor(CartesianEllipseX(drawangle + drawcut) - drawlt + 2);
+    } else {
+      repeti = Math.floor(CartesianEllipseX(drawangle + drawcut) - drawlt + 2);
       tempoffset = drawlt - 1;
     }
 
-    System.out.println(repeti); //DBG
+    System.out.println(repeti); // DBG
     System.out.println(tempoffset);
     System.out.println(topliney(drawlt));
+    System.out.println();
 
-    for(int i = (int) Math.floor(tempoffset); i <= (int) Math.ceil(tempoffset + repeti); i++) {
+    points =
+      (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
+
+    for (double i = Math.floor(tempoffset);
+    i <= (int) Math.ceil(tempoffset + repeti);
+    i += (repeti/points)) {
       double ptc = i;
-      if(ptc < Math.min(drawlt, CartesianEllipseX(drawangle + drawcut))) { //check values are within bounds
-        ptc = Math.min(drawlt, CartesianEllipseX(drawangle + drawcut)); //if not make them be in bounds
+      if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle + drawcut))) { // check values are within bounds
+        ptc = Math.min(drawlt, CartesianEllipseX(drawangle + drawcut)); // if not make them be in bounds
       } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
         ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
       }
-      double pty = topliney(ptc); //f(x)
+      double pty = endtopliney(ptc); // f(x)
+      System.out.println("(" + (ptc - xoff) + ", " + (pty - yoff) + ")");
       drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
     }
 
+    // TOP END LINE DONE
 
-    //TOP END LINE DONE
+    // TOP CIRCLE
+    double detail = 1.25;
+    repeti = Math.floor(detail * drawlt * drawcut); // creates marfkers along the ellipse
+    // gives approximately 1 marker per
+    for (int i = 1; i <= repeti; i++) {
+      double idtheta = (i / (detail * drawlt)) + drawangle;
+      drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)][(int) Math
+          .round(CartesianEllipseY(idtheta) - yoff)] = 5;
+      // System.out.println("(" + (int) Math.round(CartesianEllipseX(idtheta)) + ", " + (int)
+      // Math.round(CartesianEllipseY(idtheta)) + ")");
+    }
+    // TOP CIRCLE DONE
+
+    //Here is where line drawing meets conditions. Starting with the simplist, center line
+    //This is drawn when the slice doesn't pass through the 2kpi + pi/2 mark
+
+    //CENTER VERTICAL
+    if (!(((drawangle + (3 * Math.PI / 2)) % (2 * Math.PI)) + drawcut > 2 * Math.PI)) {
+      for(double i = Math.round(cenb[1]); i <= Math.round(cent[1]); i++) {
+        drawarray[(int) Math.round(drawlt - xoff)][(int) (i - yoff)] = 5;
+      }
+    }
+    //CENTER VERTICAL DONE
+
+
+    // The outer start cut is not drawn between theta = 3pi/2 and theta = 2pi
+
+    //START CUT VERTICAL
+    if (!((drawangle % (2 * Math.PI)) > (3 * Math.PI / 2))) {
+      for (double i = Math.round(stcb[1]); i <= Math.round(stct[1]); i++) {
+        drawarray[(int) Math.round(stcb[0] - xoff)][(int) (i - yoff)] = 5;
+      }
+    }
+    //START CUT VERTICAL DONE
+
+    //the outer end cut is not drawn between theta = pi and theta = 3pi/2
+
+    //END CUT VERTICAL
+
+    if (!(((drawangle + drawcut) % (2 * Math.PI)) < (3 * Math.PI / 2) && ((drawangle + drawcut) % (2 * Math.PI)) > (Math.PI))) {
+      for (double i = Math.round(etcb[1]); i <= Math.round(etct[1]); i++) {
+        drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
+      }
+    }
+
+    //END CUT VERTICAL DONE
 
     // done by plugging associated integer values with offset fould earlier for y coordinate
     // please use cartesian equations as much as possible
-    // don't forget to consider +- for sqrt of the ellipse
     // have a different marker for each curve for the next step
     // draw from bottom to top or give priority for each marker: top > edge > inside
 
-
-    printarrayreverse(drawarray, "a", "b", "c", "d", "e"); //DBG
+    printarrayreverse(drawarray, "aa", "bb", "cc", "dd", "ee"); // DBG
 
     // Fill passthrough
     // loop from top to bottom of array, the markers made above define the boundaries of which to
@@ -442,10 +497,18 @@ class Cake {
 
   }
 
+  private double topslope (double angle) {
+    double th = drawlt - topoffset() - CartesianEllipseY(angle); // y2 / y1
+    double oth = drawlt - CartesianEllipseX(angle); // x2 / x1
+    return (th / oth);
+  }
+
+  private double endtopliney(double inputx) {
+    return (topslope(drawangle + drawcut) * (inputx - drawlt)) + drawlt - topoffset();
+  }
+
   private double topliney(double inputx) {
-    double th = drawlt - topoffset() - CartesianEllipseY(drawangle); //y2 / y1
-    double oth = drawlt - CartesianEllipseX(drawangle);//x2 / x1
-    return ((th / oth) * (inputx - drawlt)) + drawlt - topoffset();
+    return (topslope(drawangle) * (inputx - drawlt)) + drawlt - topoffset();
   }
 
   private double topoffset() {
@@ -467,11 +530,12 @@ class Cake {
         + (drawlt * Math.sin(drawperspective) * Math.sin(inputradians + Math.PI)));
   }
 
-  private void printarrayreverse (int[][] array, String v0, String v1, String v2, String v3, String v4) {
-    //Starts at (0,y) then moves as read
-    //array printing yada yada pretty simple
+  private void printarrayreverse(
+      int[][] array, String v0, String v1, String v2, String v3, String v4) {
+    // Starts at (0,y) then moves as read
+    // array printing yada yada pretty simple
     for (int i = array[0].length - 1; i >= 0; i--) {
-      for (int j = 0; j<= array.length - 1; j++) {
+      for (int j = 0; j <= array.length - 1; j++) {
         if (array[j][i] == 0) {
           System.out.print(v0);
         } else if (array[j][i] == 1) {
@@ -483,9 +547,8 @@ class Cake {
         } else if (array[j][i] == 4) {
           System.out.print(v4);
         } else {
-          System.out.print("M");
+          System.out.print("MM");
         }
-
       }
       System.out.println("");
     }
