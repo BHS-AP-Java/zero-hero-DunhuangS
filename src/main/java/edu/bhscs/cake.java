@@ -272,6 +272,9 @@ class Cake {
       // xoff additionally must be adjusted as left side impacts both
       xoff = 0;
     }
+    if (rxedge && lxedge) {
+      xbound = 2 * drawlt;
+    }
     System.out.println(xbound); // DBG
     System.out.println(xoff);
     System.out.println();
@@ -357,20 +360,17 @@ class Cake {
 
     // draw applicable curves onto grid
     // the top 3 lines are ALWAYS drawn, let's start with those!
+
     double repeti;
+    double tempoffset;
+    int points;
 
     // TOP START LINE
 
     // find the correct point
-    double tempoffset;
-    if (CartesianEllipseX(drawangle) <= drawlt) {
-      repeti = Math.floor(drawlt - CartesianEllipseX(drawangle) + 2);
-      tempoffset = CartesianEllipseX(drawangle) - 1; // this is here to make it loop
-      // only near the wanted values
-    } else {
-      repeti = Math.floor(CartesianEllipseX(drawangle) - drawlt + 2);
-      tempoffset = drawlt - 1;
-    } //this code is excessively verbose, we can make this better later
+
+    repeti = Math.abs(drawlt - CartesianEllipseX(drawangle)) + 2;
+    tempoffset = Math.min(CartesianEllipseX(drawangle), drawlt) - 1;
 
     System.out.println(repeti); // DBG
     System.out.println(tempoffset);
@@ -380,7 +380,7 @@ class Cake {
 
     //to make sure all points are drawn:
     //amount of points needed depends on max of y and x, times 3 for safety
-    int points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+    points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
     /*
      * This is here BECAUSE drawing normally (increment x by 1 OR draw using cartesian equations)
      * Would negate some points if the slope is too large. This is a more general fix for this issue
@@ -403,13 +403,8 @@ class Cake {
     // START LINE DONE
 
     // TOP END LINE
-    if (CartesianEllipseX(drawangle + drawcut) <= drawlt) {
-      repeti = Math.floor(drawlt - CartesianEllipseX(drawangle + drawcut) + 2);
-      tempoffset = CartesianEllipseX(drawangle + drawcut) - 1;
-    } else {
-      repeti = Math.floor(CartesianEllipseX(drawangle + drawcut) - drawlt + 2);
-      tempoffset = drawlt - 1;
-    }
+    repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
+    tempoffset = Math.min(CartesianEllipseX(drawangle + drawcut), drawlt) - 1;
 
     System.out.println(repeti); // DBG
     System.out.println(tempoffset);
@@ -448,7 +443,7 @@ class Cake {
     }
     // TOP CIRCLE DONE
 
-    //Here is where line drawing meets conditions. Starting with the simplist, center line
+    //Here is where line drawing meets conditions. Starting with the simplist, vertical lines
     //This is drawn when the slice doesn't pass through the 2kpi + pi/2 mark
 
     //CENTER VERTICAL
@@ -479,8 +474,74 @@ class Cake {
         drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
       }
     }
-
     //END CUT VERTICAL DONE
+
+    //Conditions now get a little messy with diagonals. They are just the previous ones but shifted
+    //Bottom start line is hidden between 3pi/2 to pi/2
+    //Notice how the other line has exactly the opposite conditions, so I can just use this if condition for both!
+
+
+    //BOTTOM DIAGONALS
+    if (!((drawangle % (2 * Math.PI) > (3 * Math.PI / 2)) || (drawangle % (2 * Math.PI) < (Math.PI / 2)))) {
+      repeti = Math.abs(drawlt - CartesianEllipseX(drawangle)) + 2;
+      tempoffset = Math.min(CartesianEllipseX(drawangle), drawlt) - 1;
+
+      System.out.println(repeti); // DBG
+      System.out.println(tempoffset);
+      System.out.println(topliney(drawlt));
+      System.out.println();
+
+      points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+
+      for (double i = Math.floor(tempoffset);
+      i <= (int) Math.ceil(tempoffset + repeti);
+        i += (repeti / points)) {
+        double ptc = i;
+        if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle))) { // check values are within bounds
+          ptc = Math.min(drawlt, CartesianEllipseX(drawangle)); // if not make them be in bounds
+        } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle))) {
+          ptc = Math.max(drawlt, CartesianEllipseX(drawangle));
+        }
+        double pty = topliney(ptc) - topbottomoffset(); // THIS IS THE ONLY CHANGE!
+        //Y VALUE IS SUBTRACTED BY OFFSET TO ALLIGN WITH BOTTOM ELLIPSE!
+        drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+      }repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
+      tempoffset = Math.min(CartesianEllipseX(drawangle + drawcut), drawlt) - 1;
+    }
+    if ((((drawangle + drawcut) % (2 * Math.PI) > (3 * Math.PI / 2))
+        || (drawangle + drawcut) % (2 * Math.PI) < (Math.PI / 2))) {
+      repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
+      tempoffset = Math.min(CartesianEllipseX(drawangle + drawcut), drawlt) - 1;
+
+      System.out.println(repeti); // DBG
+      System.out.println(tempoffset);
+      System.out.println(topliney(drawlt));
+      System.out.println();
+
+      points =
+          (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
+
+      for (double i = Math.floor(tempoffset);
+        i <= (int) Math.ceil(tempoffset + repeti);
+        i += (repeti / points)) {
+          double ptc = i;
+          if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle + drawcut))) { // check values are within bounds
+            ptc = Math.min(drawlt, CartesianEllipseX(drawangle + drawcut)); // if not make them be in bounds
+          } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
+            ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
+          }
+          double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY CHANGE!!!!!!
+          System.out.println("(" + (ptc - xoff) + ", " + (pty - yoff) + ")");
+          drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+      }
+    }
+    //BOTTOM DIAGONALS DONE
+
+    //Okay, time for the hardest conditional
+    //The bottom ellipse
+    //Must account for clipping on both edges, full cake loops, and more.
+    //I think the best way to do this is to attempt to draw along the entirety of 0 to pi,
+    //and delete sectors that don't fit.
 
     // done by plugging associated integer values with offset fould earlier for y coordinate
     // please use cartesian equations as much as possible
@@ -495,6 +556,10 @@ class Cake {
 
     // print the cake row by row
 
+  }
+
+  private double topbottomoffset () {
+    return drawlt - topoffset() - (drawlt * Math.sin(drawperspective));
   }
 
   private double topslope (double angle) {
