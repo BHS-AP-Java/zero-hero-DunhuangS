@@ -315,9 +315,13 @@ class Cake {
     }
     if (((drawangle + (Math.PI / 2)) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
       // top edge, accounts for other set
-      lxedge = true;
+      tyedge = true;
       ybound = Math.max(ybound, drawlt - topoffset() + baseoffset());
     }
+    if (byedge && tyedge) {
+      ybound = CartesianEllipseY(3 * Math.PI / 2);
+    }
+
     System.out.println(ybound); // DBG
     System.out.println(yoff);
     System.out.println();
@@ -377,6 +381,9 @@ class Cake {
     System.out.println(topliney(drawlt));
     System.out.println();
 
+    double TSStart = tempoffset;
+    double TSEnd = tempoffset + repeti;
+
 
     //to make sure all points are drawn:
     //amount of points needed depends on max of y and x, times 3 for safety
@@ -410,6 +417,9 @@ class Cake {
     System.out.println(tempoffset);
     System.out.println(topliney(drawlt));
     System.out.println();
+
+    double TEStart = tempoffset;
+    double TEEnd = tempoffset + repeti;
 
     points =
       (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
@@ -456,29 +466,67 @@ class Cake {
 
 
     // The outer start cut is not drawn between theta = 3pi/2 and theta = 2pi
+    // Account for the top end diagonal being annoying
 
     //START CUT VERTICAL
     if (!((drawangle % (2 * Math.PI)) > (3 * Math.PI / 2))) {
       for (double i = Math.round(stcb[1]); i <= Math.round(stct[1]); i++) {
-        drawarray[(int) Math.round(stcb[0] - xoff)][(int) (i - yoff)] = 5;
+        if (!(stcb[0] > TEStart &&
+        stcb[0] < TSEnd && //Must be within the bounds of the top line first of all
+        i < endtopliney(stcb[0]) && //Then must be less than top of the line
+        (drawangle % (2 * Math.PI)) > Math.PI)) { // If it's facing you, you can always see it
+          drawarray[(int) Math.round(stcb[0] - xoff)][(int) (i - yoff)] = 5;
+        }
       }
     }
     //START CUT VERTICAL DONE
 
     //the outer end cut is not drawn between theta = pi and theta = 3pi/2
+    //account for the top start diagonal being in the way
 
     //END CUT VERTICAL
 
     if (!(((drawangle + drawcut) % (2 * Math.PI)) < (3 * Math.PI / 2) && ((drawangle + drawcut) % (2 * Math.PI)) > (Math.PI))) {
       for (double i = Math.round(etcb[1]); i <= Math.round(etct[1]); i++) {
-        drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
+        if (!(etcb[0] > TSStart &&
+        etcb[0] < TSEnd &&
+        i < topliney(etcb[0])) &&
+        ((drawangle + drawcut) % (2 * Math.PI)) > Math.PI) {
+          drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
+        }
       }
     }
     //END CUT VERTICAL DONE
 
+    //right and left perspective edges: We use the true/false we found earlier
+
+    //RIGHT VERTICAL CLIP
+
+    if (rxedge) {
+      for (double i = Math.round(CartesianEllipseY(Math.PI) - topbottomoffset());
+      i <= Math.round(CartesianEllipseY(Math.PI)); i++) {
+        drawarray[(int) Math.round((2 * drawlt) - xoff)][(int) (i - yoff)] = 5;
+      }
+    }
+    //RIGHT VERTICAL CLIP DONE
+    //LEFT VERTICAL CLIP
+    if (lxedge) {
+      for (double i = Math.round(CartesianEllipseY(0) - topbottomoffset()); i <= Math
+          .round(CartesianEllipseY(0)); i++) {
+        drawarray[(int) Math.round(0 - xoff)][(int) (i - yoff)] = 5;
+      }
+    }
+
+    //LEFT VERTICAL CLIP DONE
+
     //Conditions now get a little messy with diagonals. They are just the previous ones but shifted
     //Bottom start line is hidden between 3pi/2 to pi/2
     //Notice how the other line has exactly the opposite conditions, so I can just use this if condition for both!
+    //BE CAUTIOUS HERE: if the cake is set to draw a large enough slice that wraps around, the bottom could get
+    //covered up. In this case, we need to account for this by negating anything below the other (top) line
+    //Kind of like a cross parameter
+    //Bottom front aligns with top end, Bottom end aligns with top start
+    //REMEMBER that this is also opposite on the opposing side!
 
 
     //BOTTOM DIAGONALS
@@ -489,6 +537,7 @@ class Cake {
       System.out.println(repeti); // DBG
       System.out.println(tempoffset);
       System.out.println(topliney(drawlt));
+      System.out.println("idahsidhaihasidfh");
       System.out.println();
 
       points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
@@ -502,10 +551,16 @@ class Cake {
         } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle))) {
           ptc = Math.max(drawlt, CartesianEllipseX(drawangle));
         }
-        double pty = topliney(ptc) - topbottomoffset(); // THIS IS THE ONLY CHANGE!
+        double pty = topliney(ptc) - topbottomoffset(); // THIS IS THE ONLY OTHER CHANGE!
         //Y VALUE IS SUBTRACTED BY OFFSET TO ALLIGN WITH BOTTOM ELLIPSE!
-        drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
-      }repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
+        if (!(ptc > TEStart &&
+        ptc < TEEnd &&
+        pty < endtopliney(ptc))) {
+          drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+        }
+      }
+
+      repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
       tempoffset = Math.min(CartesianEllipseX(drawangle + drawcut), drawlt) - 1;
     }
     if ((((drawangle + drawcut) % (2 * Math.PI) > (3 * Math.PI / 2))
@@ -530,9 +585,12 @@ class Cake {
           } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
             ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
           }
-          double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY CHANGE!!!!!!
-          System.out.println("(" + (ptc - xoff) + ", " + (pty - yoff) + ")");
-          drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+          double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY SIGNIFICANT CHANGE!!!!!!
+          if (!(ptc > TSStart &&
+          ptc < TSEnd &&
+          pty < topliney(ptc))) {
+            drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+          }
       }
     }
     //BOTTOM DIAGONALS DONE
@@ -540,8 +598,20 @@ class Cake {
     //Okay, time for the hardest conditional
     //The bottom ellipse
     //Must account for clipping on both edges, full cake loops, and more.
-    //I think the best way to do this is to attempt to draw along the entirety of 0 to pi,
-    //and delete sectors that don't fit.
+    //I think the best way to do this is to attempt to draw along the entirety,
+    //and filter sectors that don't fit.
+
+    //BOTTOM ELLIPSE!!!
+    repeti = Math.floor(detail * drawlt * drawcut); // creates markers along the ellipse
+    // gives approximately 1 marker per grid unit
+    for (int i = 1; i <= repeti; i++) {
+      double idtheta = (i / (detail * drawlt)) + drawangle;
+      if (!(idtheta % (2 * Math.PI) > Math.PI)) {// stops drawing if the portion is hidden
+        drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)]
+        [(int) Math.round(CartesianEllipseY(idtheta) - yoff - topbottomoffset())] = 5;
+      }
+    }
+    //BOTTOM ELLIPSE DONE!!!!
 
     // done by plugging associated integer values with offset fould earlier for y coordinate
     // please use cartesian equations as much as possible
