@@ -25,7 +25,23 @@ class Main {
     // Burger bur = new Burger(true, true, true, true);
     // bur.Draw();
     Cake f = new Cake(true);
-    f.draw(30, 20, 4.74, 3.33, 0.34);
+    f.draw(30, 20, 0.4, 0.3, 0.34, 120.34567);
+    f.draw(30, 20, 0.4, 2.65, 0.34, 120.34567);
+    f.draw(30, 20, 0.4, 4, 0.34, 120.34567);
+    f.draw(30, 20, 0.4, 5.3, 0.34, 120.34567);
+    f.draw(30, 20, 0.4, 4.5, 0.34, 120.34567);
+    f.draw(30, 20, 0.4, 7.67, 0.34, 120.34567);
+    f.draw(30, 20, 1.22, 2.3, 0.34, 120.34567);
+    f.draw(30, 20, 1.22, 5.8, 0.34, 120.34567);
+    f.draw(30, 20, 5.4, 5.8, 0.34, 120.34567);
+    f.draw(30, 20, 4.9, 7.17, 0.34, 120.34567);
+    f.draw(30, 20, 5.9, 3.47, 0.34, 120.34567);
+    f.draw(30, 20, 5.9, 4.24, 0.34, 120.34567);
+    for (double i = 0; i < Math.PI / 2; i += 0.1) {
+      f.draw(30, 20, 5.9, 4.24, i, 120.34567);
+    }
+    //f.draw(30, 20, 4.74, 3.33, 0.34, 120.34567);
+    //f.draw(30, 20, 4.74, 3.33, 0.34, 120.34567);
     Player ply = new Player("USER");
     String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
     boolean storybakesale = false;

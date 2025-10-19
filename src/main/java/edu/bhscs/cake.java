@@ -201,7 +201,7 @@ class Cake {
     this.owner = name;
   }
 
-  public void draw(double lt, double ht, double cut, double angle, double perspective) {
+  public void draw(double lt, double ht, double cut, double angle, double perspective, double diagprecision) {
     drawlt = lt;
     drawht = ht;
     drawcut = cut;
@@ -226,19 +226,19 @@ class Cake {
     double[] cenb = {drawlt, baseoffset()}; // center bottom
 
     // DBG
-    System.out.println(stct[0]);
-    System.out.println(stct[1]);
-    System.out.println(stcb[0]);
-    System.out.println(stcb[1]);
-    System.out.println(etct[0]);
-    System.out.println(etct[1]);
-    System.out.println(etcb[0]);
-    System.out.println(etcb[1]);
-    System.out.println(cent[0]);
-    System.out.println(cent[1]);
-    System.out.println(cenb[0]);
-    System.out.println(cenb[1]);
-    System.out.println();
+    // System.out.println(stct[0]);
+    // System.out.println(stct[1]);
+    // System.out.println(stcb[0]);
+    // System.out.println(stcb[1]);
+    // System.out.println(etct[0]);
+    // System.out.println(etct[1]);
+    // System.out.println(etcb[0]);
+    // System.out.println(etcb[1]);
+    // System.out.println(cent[0]);
+    // System.out.println(cent[1]);
+    // System.out.println(cenb[0]);
+    // System.out.println(cenb[1]);
+    // System.out.println();
 
     // find the minimum grid length of the cake needed
     double[] xcoordlst = {stct[0], stcb[0], etct[0], etcb[0], cent[0], cenb[0]};
@@ -275,9 +275,9 @@ class Cake {
     if (rxedge && lxedge) {
       xbound = 2 * drawlt;
     }
-    System.out.println(xbound); // DBG
-    System.out.println(xoff);
-    System.out.println();
+    // System.out.println(xbound); // DBG
+    // System.out.println(xoff);
+    // System.out.println();
     // repeat with height function
     // find the minimum grid height
 
@@ -316,15 +316,15 @@ class Cake {
     if (((drawangle + (Math.PI / 2)) % (2 * Math.PI)) + drawcut > (2 * Math.PI)) {
       // top edge, accounts for other set
       tyedge = true;
-      ybound = Math.max(ybound, drawlt - topoffset() + baseoffset());
+      ybound = Math.max(ybound, CartesianEllipseY(3 * Math.PI / 2) - baseoffset());
     }
     if (byedge && tyedge) {
       ybound = CartesianEllipseY(3 * Math.PI / 2);
     }
 
-    System.out.println(ybound); // DBG
-    System.out.println(yoff);
-    System.out.println();
+    // System.out.println(ybound); // DBG
+    // System.out.println(yoff);
+    // System.out.println();
 
     // create a 2d array of such size calculated above
     int xarraysz = (int) Math.floor(xbound) + 4;
@@ -343,11 +343,11 @@ class Cake {
 
     int[][] drawarray = new int[xarraysz][yarraysz];
 
-    System.out.println(xarraysz); // DBG
-    System.out.println(yarraysz);
-    System.out.println(drawarray.length);
-    System.out.println(drawarray[0].length);
-    System.out.println();
+    // System.out.println(xarraysz); // DBG
+    // System.out.println(yarraysz);
+    // System.out.println(drawarray.length);
+    // System.out.println(drawarray[0].length);
+    // System.out.println();
 
     // printarrayreverse(drawarray, "a", "b", "c", "d", "e"); //DBG
 
@@ -376,18 +376,18 @@ class Cake {
     repeti = Math.abs(drawlt - CartesianEllipseX(drawangle)) + 2;
     tempoffset = Math.min(CartesianEllipseX(drawangle), drawlt) - 1;
 
-    System.out.println(repeti); // DBG
-    System.out.println(tempoffset);
-    System.out.println(topliney(drawlt));
-    System.out.println();
+    // System.out.println(repeti); // DBG
+    // System.out.println(tempoffset);
+    // System.out.println(topliney(drawlt));
+    // System.out.println();
 
     double TSStart = tempoffset;
-    double TSEnd = tempoffset + repeti - 1;
+    double TSEnd = tempoffset + repeti;
 
     // to make sure all points are drawn:
-    // amount of points needed depends on max of y and x, times 3 for safety
+    // amount of points needed depends on max of y and x times precision given
     points =
-        (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+        (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * diagprecision);
     /*
      * This is here BECAUSE drawing normally (increment x by 1 OR draw using cartesian equations)
      * Would negate some points if the slope is too large. This is a more general fix for this issue
@@ -413,16 +413,16 @@ class Cake {
     repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
     tempoffset = Math.min(CartesianEllipseX(drawangle + drawcut), drawlt) - 1;
 
-    System.out.println(repeti); // DBG
-    System.out.println(tempoffset);
-    System.out.println(topliney(drawlt));
-    System.out.println();
+    // System.out.println(repeti); // DBG
+    // System.out.println(tempoffset);
+    // System.out.println(topliney(drawlt));
+    // System.out.println();
 
     double TEStart = tempoffset;
-    double TEEnd = tempoffset + repeti - 1;
+    double TEEnd = tempoffset + repeti;
 
     points =
-        (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
+        (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * diagprecision);
 
     for (double i = Math.floor(tempoffset);
         i <= (int) Math.ceil(tempoffset + repeti);
@@ -438,7 +438,7 @@ class Cake {
         ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
       }
       double pty = endtopliney(ptc); // f(x)
-      System.out.println("(" + (ptc - xoff) + ", " + (pty - yoff) + ")");
+      //System.out.println("(" + (ptc - xoff) + ", " + (pty - yoff) + ")");
       drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
     }
 
@@ -476,7 +476,7 @@ class Cake {
     if (!((drawangle % (2 * Math.PI)) > (3 * Math.PI / 2))) {
       for (double i = Math.round(stcb[1]); i <= Math.round(stct[1]); i++) {
         if (!(stcb[0] > TEStart
-            && stcb[0] < TSEnd
+            && stcb[0] < TEEnd
             && // Must be within the bounds of the top line first of all
             i < endtopliney(stcb[0])
             && // Then must be less than top of the line
@@ -491,8 +491,8 @@ class Cake {
     // account for the top start diagonal being in the way
 
     // END CUT VERTICAL
-    System.out.println("asdjbsiudhiuvhsdiuzhuaihs");
-    System.out.println(drawangle + drawcut);
+    // System.out.println("asdjbsiudhiuvhsdiuzhuaihs"); //DBG
+    // System.out.println(drawangle + drawcut);
 
     if (!(((drawangle + drawcut) % (2 * Math.PI)) < (3 * Math.PI / 2)
         && ((drawangle + drawcut) % (2 * Math.PI)) > (Math.PI))) {
@@ -501,7 +501,7 @@ class Cake {
             && etcb[0] < TSEnd
             && i < topliney(etcb[0])
             && ((drawangle + drawcut) % (2 * Math.PI)) > Math.PI)) {
-          System.out.println("yes this does run");
+          //System.out.println("yes this does run"); //DBG
           drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
         }
       }
@@ -549,14 +549,14 @@ class Cake {
       repeti = Math.abs(drawlt - CartesianEllipseX(drawangle)) + 2;
       tempoffset = Math.min(CartesianEllipseX(drawangle), drawlt) - 1;
 
-      System.out.println(repeti); // DBG
-      System.out.println(tempoffset);
-      System.out.println(topliney(drawlt));
-      System.out.println("idahsidhaihasidfh");
-      System.out.println();
+      // System.out.println(repeti); // DBG
+      // System.out.println(tempoffset);
+      // System.out.println(topliney(drawlt));
+      // System.out.println("idahsidhaihasidfh");
+      // System.out.println();
 
       points =
-          (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+          (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * diagprecision);
 
       for (double i = Math.floor(tempoffset);
           i <= (int) Math.ceil(tempoffset + repeti);
@@ -578,22 +578,22 @@ class Cake {
             (endtopliney(ptc)) //This needs to be true here
                 <= topliney(ptc))) { // and is above it significantly (in terms of equal plane)
           drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
-          System.out.println("Super success");
-          System.out.println(endtopliney(ptc) + 2);
-          System.out.println(topliney(ptc));
-          System.out.println(ptc > TEStart);
-          System.out.println(ptc < TEEnd);
-          System.out.println(pty < endtopliney(ptc));
-          System.out.println((endtopliney(ptc) - 0.01) <= topliney(ptc));
+          // System.out.println("Super success");
+          // System.out.println(endtopliney(ptc) + 2);
+          // System.out.println(topliney(ptc));
+          // System.out.println(ptc > TEStart);
+          // System.out.println(ptc < TEEnd);
+          // System.out.println(pty < endtopliney(ptc));
+          // System.out.println((endtopliney(ptc) - 0.01) <= topliney(ptc));
         } else {
-          System.out.println("bruh epic fail");
-          System.out.println(ptc);
-          System.out.println(TEEnd);
-          System.out.println(ptc > TEStart);
-          System.out.println(ptc < TEEnd);
-          System.out.println(pty < endtopliney(ptc));
-          System.out.println((endtopliney(ptc) - 0.01) <= topliney(ptc));
-          System.out.println();
+          // System.out.println("bruh epic fail");
+          // System.out.println(ptc);
+          // System.out.println(TEEnd);
+          // System.out.println(ptc > TEStart);
+          // System.out.println(ptc < TEEnd);
+          // System.out.println(pty < endtopliney(ptc));
+          // System.out.println((endtopliney(ptc) - 0.01) <= topliney(ptc));
+          // System.out.println();
         }
       }
 
@@ -605,13 +605,13 @@ class Cake {
       repeti = Math.abs(drawlt - CartesianEllipseX(drawangle + drawcut)) + 2;
       tempoffset = Math.min(CartesianEllipseX(drawangle + drawcut), drawlt) - 1;
 
-      System.out.println(repeti); // DBG
-      System.out.println(tempoffset);
-      System.out.println(topliney(drawlt));
-      System.out.println();
+      // System.out.println(repeti); // DBG
+      // System.out.println(tempoffset);
+      // System.out.println(topliney(drawlt));
+      // System.out.println();
 
       points =
-          (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
+          (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * diagprecision);
 
       for (double i = Math.floor(tempoffset);
           i <= (int) Math.ceil(tempoffset + repeti);
