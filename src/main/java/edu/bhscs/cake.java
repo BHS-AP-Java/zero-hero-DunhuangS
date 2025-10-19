@@ -485,13 +485,16 @@ class Cake {
     //account for the top start diagonal being in the way
 
     //END CUT VERTICAL
+    System.out.println("asdjbsiudhiuvhsdiuzhuaihs");
+    System.out.println(drawangle + drawcut);
 
     if (!(((drawangle + drawcut) % (2 * Math.PI)) < (3 * Math.PI / 2) && ((drawangle + drawcut) % (2 * Math.PI)) > (Math.PI))) {
       for (double i = Math.round(etcb[1]); i <= Math.round(etct[1]); i++) {
         if (!(etcb[0] > TSStart &&
         etcb[0] < TSEnd &&
-        i < topliney(etcb[0])) &&
-        ((drawangle + drawcut) % (2 * Math.PI)) > Math.PI) {
+        i < topliney(etcb[0]) &&
+        ((drawangle + drawcut) % (2 * Math.PI)) > Math.PI)) {
+          System.out.println("yes this does run");
           drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
         }
       }
@@ -554,8 +557,9 @@ class Cake {
         double pty = topliney(ptc) - topbottomoffset(); // THIS IS THE ONLY OTHER CHANGE!
         //Y VALUE IS SUBTRACTED BY OFFSET TO ALLIGN WITH BOTTOM ELLIPSE!
         if (!(ptc > TEStart &&
-        ptc < TEEnd &&
-        pty < endtopliney(ptc))) {
+        ptc < TEEnd && //within range
+        pty < endtopliney(ptc) && // smaller than top line
+        endtopliney(ptc) < topliney(ptc))) {// and is above it (in terms of equal plane)
           drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
         }
       }
@@ -587,8 +591,9 @@ class Cake {
           }
           double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY SIGNIFICANT CHANGE!!!!!!
           if (!(ptc > TSStart &&
-          ptc < TSEnd &&
-          pty < topliney(ptc))) {
+          ptc < TSEnd && //within range
+          pty < topliney(ptc) && //smaller than top line
+          endtopliney(ptc) > topliney(ptc))) { // and is above it (in terms of equal plane)
             drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
           }
       }
