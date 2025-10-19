@@ -381,8 +381,8 @@ class Cake {
     System.out.println(topliney(drawlt));
     System.out.println();
 
-    double TSStart = tempoffset;
-    double TSEnd = tempoffset + repeti;
+    double TSStart = tempoffset + 1;
+    double TSEnd = tempoffset + repeti - 1;
 
 
     //to make sure all points are drawn:
@@ -418,8 +418,8 @@ class Cake {
     System.out.println(topliney(drawlt));
     System.out.println();
 
-    double TEStart = tempoffset;
-    double TEEnd = tempoffset + repeti;
+    double TEStart = tempoffset + 1;
+    double TEEnd = tempoffset + repeti - 1;
 
     points =
       (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
@@ -556,11 +556,19 @@ class Cake {
         }
         double pty = topliney(ptc) - topbottomoffset(); // THIS IS THE ONLY OTHER CHANGE!
         //Y VALUE IS SUBTRACTED BY OFFSET TO ALLIGN WITH BOTTOM ELLIPSE!
-        if (!(ptc >= TEStart &&
-        ptc <= TEEnd && //within range
+        if (!(ptc > TEStart &&
+        ptc < TEEnd && //within range
         pty < endtopliney(ptc) && // smaller than top line
-        endtopliney(ptc) <= topliney(ptc))) {// and is above it (in terms of equal plane)
+        (endtopliney(ptc) - 0.01) <= topliney(ptc))) {// and is above it significantly (in terms of equal plane)
           drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+          System.out.println("Super success");
+          System.out.println(endtopliney(ptc) + 0.01);
+          System.out.println(topliney(ptc));
+        } else {
+          System.out.println("bruh epic fail");
+          System.out.println(ptc);
+          System.out.println(TEEnd);
+          System.out.println();
         }
       }
 
@@ -590,8 +598,8 @@ class Cake {
             ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
           }
           double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY SIGNIFICANT CHANGE!!!!!!
-          if (!(ptc >= TSStart &&
-          ptc <= TSEnd && //within range
+          if (!(ptc > TSStart &&
+          ptc < TSEnd && //within range
           pty < topliney(ptc) && //smaller than top line
           endtopliney(ptc) >= topliney(ptc))) { // and is above it (in terms of equal plane)
             drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
