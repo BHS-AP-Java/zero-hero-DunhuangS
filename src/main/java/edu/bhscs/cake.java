@@ -381,13 +381,13 @@ class Cake {
     System.out.println(topliney(drawlt));
     System.out.println();
 
-    double TSStart = tempoffset + 1;
+    double TSStart = tempoffset;
     double TSEnd = tempoffset + repeti - 1;
 
-
-    //to make sure all points are drawn:
-    //amount of points needed depends on max of y and x, times 3 for safety
-    points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+    // to make sure all points are drawn:
+    // amount of points needed depends on max of y and x, times 3 for safety
+    points =
+        (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
     /*
      * This is here BECAUSE drawing normally (increment x by 1 OR draw using cartesian equations)
      * Would negate some points if the slope is too large. This is a more general fix for this issue
@@ -396,8 +396,8 @@ class Cake {
      */
 
     for (double i = Math.floor(tempoffset);
-     i <= (int) Math.ceil(tempoffset + repeti);
-      i += (repeti / points)) {
+        i <= (int) Math.ceil(tempoffset + repeti);
+        i += (repeti / points)) {
       double ptc = i;
       if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle))) { // check values are within bounds
         ptc = Math.min(drawlt, CartesianEllipseX(drawangle)); // if not make them be in bounds
@@ -418,18 +418,22 @@ class Cake {
     System.out.println(topliney(drawlt));
     System.out.println();
 
-    double TEStart = tempoffset + 1;
+    double TEStart = tempoffset;
     double TEEnd = tempoffset + repeti - 1;
 
     points =
-      (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
+        (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
 
     for (double i = Math.floor(tempoffset);
-    i <= (int) Math.ceil(tempoffset + repeti);
-    i += (repeti/points)) {
+        i <= (int) Math.ceil(tempoffset + repeti);
+        i += (repeti / points)) {
       double ptc = i;
-      if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle + drawcut))) { // check values are within bounds
-        ptc = Math.min(drawlt, CartesianEllipseX(drawangle + drawcut)); // if not make them be in bounds
+      if (ptc
+          < Math.min(
+              drawlt, CartesianEllipseX(drawangle + drawcut))) { // check values are within bounds
+        ptc =
+            Math.min(
+                drawlt, CartesianEllipseX(drawangle + drawcut)); // if not make them be in bounds
       } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
         ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
       }
@@ -446,94 +450,102 @@ class Cake {
     // gives approximately 1 marker per
     for (int i = 1; i <= repeti; i++) {
       double idtheta = (i / (detail * drawlt)) + drawangle;
-      drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)][(int) Math
-          .round(CartesianEllipseY(idtheta) - yoff)] = 5;
+      drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)][
+              (int) Math.round(CartesianEllipseY(idtheta) - yoff)] =
+          5;
       // System.out.println("(" + (int) Math.round(CartesianEllipseX(idtheta)) + ", " + (int)
       // Math.round(CartesianEllipseY(idtheta)) + ")");
     }
     // TOP CIRCLE DONE
 
-    //Here is where line drawing meets conditions. Starting with the simplist, vertical lines
-    //This is drawn when the slice doesn't pass through the 2kpi + pi/2 mark
+    // Here is where line drawing meets conditions. Starting with the simplist, vertical lines
+    // This is drawn when the slice doesn't pass through the 2kpi + pi/2 mark
 
-    //CENTER VERTICAL
+    // CENTER VERTICAL
     if (!(((drawangle + (3 * Math.PI / 2)) % (2 * Math.PI)) + drawcut > 2 * Math.PI)) {
-      for(double i = Math.round(cenb[1]); i <= Math.round(cent[1]); i++) {
+      for (double i = Math.round(cenb[1]); i <= Math.round(cent[1]); i++) {
         drawarray[(int) Math.round(drawlt - xoff)][(int) (i - yoff)] = 5;
       }
     }
-    //CENTER VERTICAL DONE
-
+    // CENTER VERTICAL DONE
 
     // The outer start cut is not drawn between theta = 3pi/2 and theta = 2pi
     // Account for the top end diagonal being annoying
 
-    //START CUT VERTICAL
+    // START CUT VERTICAL
     if (!((drawangle % (2 * Math.PI)) > (3 * Math.PI / 2))) {
       for (double i = Math.round(stcb[1]); i <= Math.round(stct[1]); i++) {
-        if (!(stcb[0] > TEStart &&
-        stcb[0] < TSEnd && //Must be within the bounds of the top line first of all
-        i < endtopliney(stcb[0]) && //Then must be less than top of the line
-        (drawangle % (2 * Math.PI)) > Math.PI)) { // If it's facing you, you can always see it
+        if (!(stcb[0] > TEStart
+            && stcb[0] < TSEnd
+            && // Must be within the bounds of the top line first of all
+            i < endtopliney(stcb[0])
+            && // Then must be less than top of the line
+            (drawangle % (2 * Math.PI)) > Math.PI)) { // If it's facing you, you can always see it
           drawarray[(int) Math.round(stcb[0] - xoff)][(int) (i - yoff)] = 5;
         }
       }
     }
-    //START CUT VERTICAL DONE
+    // START CUT VERTICAL DONE
 
-    //the outer end cut is not drawn between theta = pi and theta = 3pi/2
-    //account for the top start diagonal being in the way
+    // the outer end cut is not drawn between theta = pi and theta = 3pi/2
+    // account for the top start diagonal being in the way
 
-    //END CUT VERTICAL
+    // END CUT VERTICAL
     System.out.println("asdjbsiudhiuvhsdiuzhuaihs");
     System.out.println(drawangle + drawcut);
 
-    if (!(((drawangle + drawcut) % (2 * Math.PI)) < (3 * Math.PI / 2) && ((drawangle + drawcut) % (2 * Math.PI)) > (Math.PI))) {
+    if (!(((drawangle + drawcut) % (2 * Math.PI)) < (3 * Math.PI / 2)
+        && ((drawangle + drawcut) % (2 * Math.PI)) > (Math.PI))) {
       for (double i = Math.round(etcb[1]); i <= Math.round(etct[1]); i++) {
-        if (!(etcb[0] > TSStart &&
-        etcb[0] < TSEnd &&
-        i < topliney(etcb[0]) &&
-        ((drawangle + drawcut) % (2 * Math.PI)) > Math.PI)) {
+        if (!(etcb[0] > TSStart
+            && etcb[0] < TSEnd
+            && i < topliney(etcb[0])
+            && ((drawangle + drawcut) % (2 * Math.PI)) > Math.PI)) {
           System.out.println("yes this does run");
           drawarray[(int) Math.round(etcb[0] - xoff)][(int) (i - yoff)] = 5;
         }
       }
     }
-    //END CUT VERTICAL DONE
+    // END CUT VERTICAL DONE
 
-    //right and left perspective edges: We use the true/false we found earlier
+    // right and left perspective edges: We use the true/false we found earlier
 
-    //RIGHT VERTICAL CLIP
+    // RIGHT VERTICAL CLIP
 
     if (rxedge) {
       for (double i = Math.round(CartesianEllipseY(Math.PI) - topbottomoffset());
-      i <= Math.round(CartesianEllipseY(Math.PI)); i++) {
+          i <= Math.round(CartesianEllipseY(Math.PI));
+          i++) {
         drawarray[(int) Math.round((2 * drawlt) - xoff)][(int) (i - yoff)] = 5;
       }
     }
-    //RIGHT VERTICAL CLIP DONE
-    //LEFT VERTICAL CLIP
+    // RIGHT VERTICAL CLIP DONE
+    // LEFT VERTICAL CLIP
     if (lxedge) {
-      for (double i = Math.round(CartesianEllipseY(0) - topbottomoffset()); i <= Math
-          .round(CartesianEllipseY(0)); i++) {
+      for (double i = Math.round(CartesianEllipseY(0) - topbottomoffset());
+          i <= Math.round(CartesianEllipseY(0));
+          i++) {
         drawarray[(int) Math.round(0 - xoff)][(int) (i - yoff)] = 5;
       }
     }
 
-    //LEFT VERTICAL CLIP DONE
+    // LEFT VERTICAL CLIP DONE
 
-    //Conditions now get a little messy with diagonals. They are just the previous ones but shifted
-    //Bottom start line is hidden between 3pi/2 to pi/2
-    //Notice how the other line has exactly the opposite conditions, so I can just use this if condition for both!
-    //BE CAUTIOUS HERE: if the cake is set to draw a large enough slice that wraps around, the bottom could get
-    //covered up. In this case, we need to account for this by negating anything below the other (top) line
-    //Kind of like a cross parameter
-    //Bottom front aligns with top end, Bottom end aligns with top start
-    //REMEMBER that this is also opposite on the opposing side!
+    // Conditions now get a little messy with diagonals. They are just the previous ones but shifted
+    // Bottom start line is hidden between 3pi/2 to pi/2
+    // Notice how the other line has exactly the opposite conditions, so I can just use this if
+    // condition for both!
+    // BE CAUTIOUS HERE: if the cake is set to draw a large enough slice that wraps around, the
+    // bottom could get
+    // covered up. In this case, we need to account for this by negating anything below the other
+    // (top) line
+    // Kind of like a cross parameter
+    // Bottom front aligns with top end, Bottom end aligns with top start
+    // REMEMBER that this is also opposite on the opposing side!
 
-
-    //BOTTOM DIAGONALS
-    if (!((drawangle % (2 * Math.PI) > (3 * Math.PI / 2)) || (drawangle % (2 * Math.PI) < (Math.PI / 2)))) {
+    // BOTTOM DIAGONALS
+    if (!((drawangle % (2 * Math.PI) > (3 * Math.PI / 2))
+        || (drawangle % (2 * Math.PI) < (Math.PI / 2)))) {
       repeti = Math.abs(drawlt - CartesianEllipseX(drawangle)) + 2;
       tempoffset = Math.min(CartesianEllipseX(drawangle), drawlt) - 1;
 
@@ -543,31 +555,44 @@ class Cake {
       System.out.println("idahsidhaihasidfh");
       System.out.println();
 
-      points = (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
+      points =
+          (int) Math.floor(Math.max(Math.abs(cent[1] - stct[1]), Math.abs(cent[0] - stct[0])) * 3);
 
       for (double i = Math.floor(tempoffset);
-      i <= (int) Math.ceil(tempoffset + repeti);
-        i += (repeti / points)) {
+          i <= (int) Math.ceil(tempoffset + repeti);
+          i += (repeti / points)) {
         double ptc = i;
-        if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle))) { // check values are within bounds
+        if (ptc
+            < Math.min(drawlt, CartesianEllipseX(drawangle))) { // check values are within bounds
           ptc = Math.min(drawlt, CartesianEllipseX(drawangle)); // if not make them be in bounds
         } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle))) {
           ptc = Math.max(drawlt, CartesianEllipseX(drawangle));
         }
         double pty = topliney(ptc) - topbottomoffset(); // THIS IS THE ONLY OTHER CHANGE!
-        //Y VALUE IS SUBTRACTED BY OFFSET TO ALLIGN WITH BOTTOM ELLIPSE!
-        if (!(ptc > TEStart &&
-        ptc < TEEnd && //within range
-        pty < endtopliney(ptc) && // smaller than top line
-        (endtopliney(ptc) - 0.01) <= topliney(ptc))) {// and is above it significantly (in terms of equal plane)
+        // Y VALUE IS SUBTRACTED BY OFFSET TO ALLIGN WITH BOTTOM ELLIPSE!
+        if (!(ptc > TEStart
+            && ptc < TEEnd
+            && // within range
+            pty < endtopliney(ptc)
+            && // smaller than top line
+            (endtopliney(ptc)) //This needs to be true here
+                <= topliney(ptc))) { // and is above it significantly (in terms of equal plane)
           drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
           System.out.println("Super success");
-          System.out.println(endtopliney(ptc) + 0.01);
+          System.out.println(endtopliney(ptc) + 2);
           System.out.println(topliney(ptc));
+          System.out.println(ptc > TEStart);
+          System.out.println(ptc < TEEnd);
+          System.out.println(pty < endtopliney(ptc));
+          System.out.println((endtopliney(ptc) - 0.01) <= topliney(ptc));
         } else {
           System.out.println("bruh epic fail");
           System.out.println(ptc);
           System.out.println(TEEnd);
+          System.out.println(ptc > TEStart);
+          System.out.println(ptc < TEEnd);
+          System.out.println(pty < endtopliney(ptc));
+          System.out.println((endtopliney(ptc) - 0.01) <= topliney(ptc));
           System.out.println();
         }
       }
@@ -589,42 +614,49 @@ class Cake {
           (int) Math.floor(Math.max(Math.abs(cent[1] - etct[1]), Math.abs(cent[0] - etct[0])) * 3);
 
       for (double i = Math.floor(tempoffset);
-        i <= (int) Math.ceil(tempoffset + repeti);
-        i += (repeti / points)) {
-          double ptc = i;
-          if (ptc < Math.min(drawlt, CartesianEllipseX(drawangle + drawcut))) { // check values are within bounds
-            ptc = Math.min(drawlt, CartesianEllipseX(drawangle + drawcut)); // if not make them be in bounds
-          } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
-            ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
-          }
-          double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY SIGNIFICANT CHANGE!!!!!!
-          if (!(ptc > TSStart &&
-          ptc < TSEnd && //within range
-          pty < topliney(ptc) && //smaller than top line
-          endtopliney(ptc) >= topliney(ptc))) { // and is above it (in terms of equal plane)
-            drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
-          }
+          i <= (int) Math.ceil(tempoffset + repeti);
+          i += (repeti / points)) {
+        double ptc = i;
+        if (ptc
+            < Math.min(
+                drawlt, CartesianEllipseX(drawangle + drawcut))) { // check values are within bounds
+          ptc =
+              Math.min(
+                  drawlt, CartesianEllipseX(drawangle + drawcut)); // if not make them be in bounds
+        } else if (ptc > Math.max(drawlt, CartesianEllipseX(drawangle + drawcut))) {
+          ptc = Math.max(drawlt, CartesianEllipseX(drawangle + drawcut));
+        }
+        double pty = endtopliney(ptc) - topbottomoffset(); // again, ONLY SIGNIFICANT CHANGE!!!!!!
+        if (!(ptc > TSStart
+            && ptc < TSEnd
+            && // within range
+            pty < topliney(ptc)
+            && // smaller than top line
+            endtopliney(ptc) >= topliney(ptc))) { // and is above it (in terms of equal plane)
+          drawarray[(int) Math.round(ptc - xoff)][(int) Math.round(pty - yoff)] = 5;
+        }
       }
     }
-    //BOTTOM DIAGONALS DONE
+    // BOTTOM DIAGONALS DONE
 
-    //Okay, time for the hardest conditional
-    //The bottom ellipse
-    //Must account for clipping on both edges, full cake loops, and more.
-    //I think the best way to do this is to attempt to draw along the entirety,
-    //and filter sectors that don't fit.
+    // Okay, time for the hardest conditional
+    // The bottom ellipse
+    // Must account for clipping on both edges, full cake loops, and more.
+    // I think the best way to do this is to attempt to draw along the entirety,
+    // and filter sectors that don't fit.
 
-    //BOTTOM ELLIPSE!!!
+    // BOTTOM ELLIPSE!!!
     repeti = Math.floor(detail * drawlt * drawcut); // creates markers along the ellipse
     // gives approximately 1 marker per grid unit
     for (int i = 1; i <= repeti; i++) {
       double idtheta = (i / (detail * drawlt)) + drawangle;
-      if (!(idtheta % (2 * Math.PI) > Math.PI)) {// stops drawing if the portion is hidden
-        drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)]
-        [(int) Math.round(CartesianEllipseY(idtheta) - yoff - topbottomoffset())] = 5;
+      if (!(idtheta % (2 * Math.PI) > Math.PI)) { // stops drawing if the portion is hidden
+        drawarray[(int) Math.round(CartesianEllipseX(idtheta) - xoff)][
+                (int) Math.round(CartesianEllipseY(idtheta) - yoff - topbottomoffset())] =
+            5;
       }
     }
-    //BOTTOM ELLIPSE DONE!!!!
+    // BOTTOM ELLIPSE DONE!!!!
 
     // done by plugging associated integer values with offset fould earlier for y coordinate
     // please use cartesian equations as much as possible
@@ -641,11 +673,11 @@ class Cake {
 
   }
 
-  private double topbottomoffset () {
+  private double topbottomoffset() {
     return drawlt - topoffset() - (drawlt * Math.sin(drawperspective));
   }
 
-  private double topslope (double angle) {
+  private double topslope(double angle) {
     double th = drawlt - topoffset() - CartesianEllipseY(angle); // y2 / y1
     double oth = drawlt - CartesianEllipseX(angle); // x2 / x1
     return (th / oth);
