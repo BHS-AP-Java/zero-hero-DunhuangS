@@ -22,216 +22,209 @@ class Main {
       String[]
           args) { // this is a constructor. It is not a method because it has the same name as the
     // file name.
-    // Burger bur = new Burger(true, true, true, true);
-    // bur.Draw();
     Cake f = new Cake(true);
-    f.draw(30, 20, 0.4, 0.3, 0.34, 120.34567);
-    f.draw(30, 20, 0.4, 2.65, 0.34, 120.34567);
-    f.draw(30, 20, 0.4, 4, 0.34, 120.34567);
-    f.draw(30, 20, 0.4, 5.3, 0.34, 120.34567);
-    f.draw(30, 20, 0.4, 4.5, 0.34, 120.34567);
-    f.draw(30, 20, 0.4, 7.67, 0.34, 120.34567);
-    f.draw(30, 20, 1.22, 2.3, 0.34, 120.34567);
-    f.draw(30, 20, 1.22, 5.8, 0.34, 120.34567);
-    f.draw(30, 20, 5.4, 5.8, 0.34, 120.34567);
-    f.draw(30, 20, 4.9, 7.17, 0.34, 120.34567);
-    f.draw(30, 20, 5.9, 3.47, 0.34, 120.34567);
-    f.draw(30, 20, 5.9, 4.24, 0.34, 120.34567);
-    for (double i = 0; i < Math.PI / 2; i += 0.1) {
-      f.draw(30, 20, 5.9, 4.24, i, 120.34567);
-    }
-    //f.draw(30, 20, 4.74, 3.33, 0.34, 120.34567);
-    //f.draw(30, 20, 4.74, 3.33, 0.34, 120.34567);
     Player ply = new Player("USER");
-    String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
-    boolean storybakesale = false;
-    if (option.equals("0")) {
-      storybakesale = true;
-    }
-    // Change this to true to get a default story. This is otherwise user-interactive!
-    if (storybakesale) {
-      // Prelude: Defining variables
-      Pantry overstorery = new Pantry();
-      overstorery.putbutter(new Butter(1000, 10.00, 9));
-      overstorery.puteggs(new Eggs(120, 85.00, 3));
-      overstorery.putflour(new Flour(16000, 30.15, 9));
-      overstorery.putmilk(new Milk(4000, 12.15, 4));
-      overstorery.putsugar(new Sugar(8000, 40.00, 5));
-      PTSA GalliumOrganization = new PTSA("Veridian Designs Co.");
 
-      Store overpricery = new Store("Overpricery");
-      overpricery.updatePantry(overstorery);
-      Store goodpricery = new Store("Goodpricery");
-      Flour flourdelivery = new Flour(3000, 19.99, 10);
-      Eggs eggdelivery = new Eggs(800, 1129.99, 10);
-      Butter butterdelivery = new Butter(8200, 250.99, 10);
-      Milk milkdelivery = new Milk(9000, 200.99, 10);
-      Sugar sugardelivery = new Sugar(80000, 1249.99, 10);
-      goodpricery.delivergoods(
-          flourdelivery, eggdelivery, butterdelivery, milkdelivery, sugardelivery);
+    f.drawcustomcake(15, 5.0, 1.2 * Math.PI, 3.6, 0.5,120.345678);
 
-      Contractor hirer = new Contractor();
-      Baker bob = new Baker("bob");
-      Baker billy = new Baker("billy");
+    f.SetHeight(5);
+    f.SetDiameter(10);
+    f.eatcake(40);
 
-      Recipe chocoblast =
-          new Recipe(
-              "Chocolate", "Cherry", "Circle", "Chocolate Blast", 6, 3, 600, 5, 70, 120, 560);
-      Recipe Mikeoriginal =
-          new Recipe(
-              "Vanilla",
-              "Chocolate crisps",
-              "Square",
-              "Mike's original",
-              8,
-              8,
-              2900,
-              12,
-              220,
-              411,
-              600);
-      Recipe Bananablast =
-          new Recipe(
-              "Banana",
-              "Dehydrated banana crisps",
-              "Oval",
-              "Banana Blast",
-              7,
-              3,
-              600,
-              4,
-              40,
-              80,
-              1000);
-      Customer Janet = new Customer("janet", true, overpricery, 999.99);
-      // Act 1: Bob, an inexperienced baker, gets hired at Overpricery. He makes 5 cakes.
-      System.out.println("================ ACT 1 ================");
-      hirer.performjobinterview(bob, overpricery);
-      bob.getinstructions(chocoblast);
-      bob.Bakeacake();
-      overpricery.getCakefrombaker(1, 1, 1);
-      bob.Bakeacake();
-      overpricery.getCakefrombaker(1, 2, 1);
-      bob.Bakeacake();
-      overpricery.getCakefrombaker(1, 3, 1);
-      bob.Bakeacake();
-      overpricery.getCakefrombaker(1, 4, 1);
-      bob.Bakeacake();
-      overpricery.getCakefrombaker(1, 5, 1);
-      overpricery.showcakes();
+    double angle = Double.valueOf(ply.GetInput("What is the angle to view the cake at? (radians)"));
+    double perspective = Double.valueOf(ply.GetInput("What is the perspective to view the cake at? (0 to pi/2, in radians)"));
+    f.drawcake(angle, perspective, 120.34567);
 
-      // Act 2: Janet enters the store, buys a cake, and then eats most of it before discarding.
-      System.out.println("================ ACT 2 ================");
-      overpricery.ExamineCake(1, 1);
-      Janet.BuyAndPayForCake(1, 1);
-      Janet.PickupCake();
-      Janet.EatMyCake(90);
-      Janet.DiscardMyCake();
 
-      overpricery.ShowProfits();
-      bob.printlevel(); // bob levels up because of making cakes
+    // String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
+    // boolean storybakesale = false;
+    // if (option.equals("0")) {
+    //   storybakesale = true;
+    // }
+    // // Change this to true to get a default story. This is otherwise user-interactive!
+    // if (storybakesale) {
+    //   // Prelude: Defining variables
+    //   Pantry overstorery = new Pantry();
+    //   overstorery.putbutter(new Butter(1000, 10.00, 9));
+    //   overstorery.puteggs(new Eggs(120, 85.00, 3));
+    //   overstorery.putflour(new Flour(16000, 30.15, 9));
+    //   overstorery.putmilk(new Milk(4000, 12.15, 4));
+    //   overstorery.putsugar(new Sugar(8000, 40.00, 5));
+    //   PTSA GalliumOrganization = new PTSA("Veridian Designs Co.");
 
-      // Act 3: Bob gets fired from Overpricery, and is hired at Goodpricery.
-      // Bob keeps his experience level between jobs.
-      System.out.println("================ ACT 3 ================");
-      overpricery.firebaker(1);
-      hirer.performjobinterview(bob, goodpricery);
-      bob.getinstructions(Mikeoriginal);
-      bob.Bakeacake();
-      goodpricery.getCakefrombaker(1, 1, 1);
-      goodpricery.showcakes();
-      goodpricery.ExamineCake(1, 1);
+    //   Store overpricery = new Store("Overpricery");
+    //   overpricery.updatePantry(overstorery);
+    //   Store goodpricery = new Store("Goodpricery");
+    //   Flour flourdelivery = new Flour(3000, 19.99, 10);
+    //   Eggs eggdelivery = new Eggs(800, 1129.99, 10);
+    //   Butter butterdelivery = new Butter(8200, 250.99, 10);
+    //   Milk milkdelivery = new Milk(9000, 200.99, 10);
+    //   Sugar sugardelivery = new Sugar(80000, 1249.99, 10);
+    //   goodpricery.delivergoods(
+    //       flourdelivery, eggdelivery, butterdelivery, milkdelivery, sugardelivery);
 
-      // Act 4: Bob tries to make another cake, however there is
-      // not enough resources. A new shipment is then delivered, allowing him to bake the cake.
-      System.out.println("================ ACT 4 ================");
-      bob.Bakeacake(); // prints not enough resources (we know flour is low from examination)
-      System.out.println(goodpricery.accessPantry().getButter().returnquantity());
-      goodpricery.getCakefrombaker(1, 2, 1);
-      goodpricery.showcakes();
+    //   Contractor hirer = new Contractor();
+    //   Baker bob = new Baker("bob");
+    //   Baker billy = new Baker("billy");
 
-      bob.examinepantry(); // Bob examines the pantry and orders more flour
-      Flour newflourshipment = new Flour(800000, 1509.99, 5);
-      goodpricery.delivergoods(newflourshipment, null, null, null, null);
+    //   Recipe chocoblast =
+    //       new Recipe(
+    //           "Chocolate", "Cherry", "Circle", "Chocolate Blast", 6, 3, 600, 5, 70, 120, 560);
+    //   Recipe Mikeoriginal =
+    //       new Recipe(
+    //           "Vanilla",
+    //           "Chocolate crisps",
+    //           "Square",
+    //           "Mike's original",
+    //           8,
+    //           8,
+    //           2900,
+    //           12,
+    //           220,
+    //           411,
+    //           600);
+    //   Recipe Bananablast =
+    //       new Recipe(
+    //           "Banana",
+    //           "Dehydrated banana crisps",
+    //           "Oval",
+    //           "Banana Blast",
+    //           7,
+    //           3,
+    //           600,
+    //           4,
+    //           40,
+    //           80,
+    //           1000);
+    //   Customer Janet = new Customer("janet", true, overpricery, 999.99);
+    //   // Act 1: Bob, an inexperienced baker, gets hired at Overpricery. He makes 5 cakes.
+    //   System.out.println("================ ACT 1 ================");
+    //   hirer.performjobinterview(bob, overpricery);
+    //   bob.getinstructions(chocoblast);
+    //   bob.Bakeacake();
+    //   overpricery.getCakefrombaker(1, 1, 1);
+    //   bob.Bakeacake();
+    //   overpricery.getCakefrombaker(1, 2, 1);
+    //   bob.Bakeacake();
+    //   overpricery.getCakefrombaker(1, 3, 1);
+    //   bob.Bakeacake();
+    //   overpricery.getCakefrombaker(1, 4, 1);
+    //   bob.Bakeacake();
+    //   overpricery.getCakefrombaker(1, 5, 1);
+    //   overpricery.showcakes();
 
-      bob.Bakeacake(); // cake is now baked.
-      // The new cake is worth less because the cost per gram of flour and quality is low.
-      goodpricery.getCakefrombaker(1, 2, 1);
-      goodpricery.showcakes();
-      goodpricery.ExamineCake(1, 2);
+    //   // Act 2: Janet enters the store, buys a cake, and then eats most of it before discarding.
+    //   System.out.println("================ ACT 2 ================");
+    //   overpricery.ExamineCake(1, 1);
+    //   Janet.BuyAndPayForCake(1, 1);
+    //   Janet.PickupCake();
+    //   Janet.EatMyCake(90);
+    //   Janet.DiscardMyCake();
 
-      // Act 5: Bob goes to classes. Since he is higher level than before, his cakes are worth more.
-      System.out.println("================ ACT 5 ================");
-      for (int i = 0; i < 10; i++) {
-        bob.gotobakingclass();
-      }
-      bob.printlevel();
-      bob.Bakeacake();
-      goodpricery.getCakefrombaker(2, 2, 1);
-      goodpricery.showcakes();
-      goodpricery.ExamineCake(2, 2);
-      // The cake is worth even more than the one made with high quality ingredients.
-      // This is due to Bob's expertise.
-      Janet.ChangePreferredStore(goodpricery);
-      Janet.BuyAndPayForCake(2, 2);
-      Janet.PickupCake();
+    //   overpricery.ShowProfits();
+    //   bob.printlevel(); // bob levels up because of making cakes
 
-      // Act 6: Billy gets hired at the same bakery. They make the same cake, but the price is
-      // different.
-      System.out.println("================ ACT 6 ================");
-      hirer.performjobinterview(billy, goodpricery);
-      billy.getinstructions(Bananablast);
-      bob.getinstructions(Bananablast);
-      billy.Bakeacake();
-      bob.Bakeacake();
-      goodpricery.getCakefrombaker(2, 1, 2);
-      goodpricery.getCakefrombaker(3, 1, 1);
-      goodpricery
-          .showcakes(); // Cake at (3,1) is worth much more because of difference in experience!
+    //   // Act 3: Bob gets fired from Overpricery, and is hired at Goodpricery.
+    //   // Bob keeps his experience level between jobs.
+    //   System.out.println("================ ACT 3 ================");
+    //   overpricery.firebaker(1);
+    //   hirer.performjobinterview(bob, goodpricery);
+    //   bob.getinstructions(Mikeoriginal);
+    //   bob.Bakeacake();
+    //   goodpricery.getCakefrombaker(1, 1, 1);
+    //   goodpricery.showcakes();
+    //   goodpricery.ExamineCake(1, 1);
 
-      // Act 7: Janet buys more cakes. Profits are donated to the PTSA.
-      System.out.println("================ ACT 7 ================");
-      Janet.EatMyCake(100);
-      Janet.CakeInfo(); // Cake shows owner and eating progress
-      Janet.DiscardMyCake();
-      // Notice how discarding a cake yields a
-      // different message depending on how much of the cake was eaten.
-      Janet.BuyAndPayForCake(1, 1);
-      Janet.PickupCake();
-      Janet.EatMyCake(80);
-      Janet.DiscardMyCake();
+    //   // Act 4: Bob tries to make another cake, however there is
+    //   // not enough resources. A new shipment is then delivered, allowing him to bake the cake.
+    //   System.out.println("================ ACT 4 ================");
+    //   bob.Bakeacake(); // prints not enough resources (we know flour is low from examination)
+    //   System.out.println(goodpricery.accessPantry().getButter().returnquantity());
+    //   goodpricery.getCakefrombaker(1, 2, 1);
+    //   goodpricery.showcakes();
 
-      Janet.BuyAndPayForCake(1, 2);
-      Janet.PickupCake();
-      Janet.EatMyCake(95);
-      Janet.DiscardMyCake();
+    //   bob.examinepantry(); // Bob examines the pantry and orders more flour
+    //   Flour newflourshipment = new Flour(800000, 1509.99, 5);
+    //   goodpricery.delivergoods(newflourshipment, null, null, null, null);
 
-      Janet.BuyAndPayForCake(3, 1);
-      Janet.PickupCake();
-      Janet.EatMyCake(30);
-      Janet.DiscardMyCake();
+    //   bob.Bakeacake(); // cake is now baked.
+    //   // The new cake is worth less because the cost per gram of flour and quality is low.
+    //   goodpricery.getCakefrombaker(1, 2, 1);
+    //   goodpricery.showcakes();
+    //   goodpricery.ExamineCake(1, 2);
 
-      goodpricery
-          .ShowProfits(); // goodpricery profits from cakes sold, but only a fraction of the price
-      goodpricery.DonateAllMoneyToPTSA(GalliumOrganization);
-      goodpricery.ShowProfits(); // profits are gone because...
-      GalliumOrganization.sumofdonation(); // ...they are all in the PTSA!
+    //   // Act 5: Bob goes to classes. Since he is higher level than before, his cakes are worth more.
+    //   System.out.println("================ ACT 5 ================");
+    //   for (int i = 0; i < 10; i++) {
+    //     bob.gotobakingclass();
+    //   }
+    //   bob.printlevel();
+    //   bob.Bakeacake();
+    //   goodpricery.getCakefrombaker(2, 2, 1);
+    //   goodpricery.showcakes();
+    //   goodpricery.ExamineCake(2, 2);
+    //   // The cake is worth even more than the one made with high quality ingredients.
+    //   // This is due to Bob's expertise.
+    //   Janet.ChangePreferredStore(goodpricery);
+    //   Janet.BuyAndPayForCake(2, 2);
+    //   Janet.PickupCake();
 
-      // Act 8: Janet goes to work to earn money. She gets tired after a while, and buying a cake
-      // heeps her satisfication up.
-      System.out.println("================ ACT 8 ================");
-      Janet.getmysatisfication();
-      Janet.MakeYTVideos(600);
-      Janet.printmoney();
-      Janet.MakeYTVideos(20); // she isn't motivated enough to do this
-      Janet.BuyAndPayForCake(2, 1);
-      Janet.PickupCake();
-      Janet.EatMyCake(50); // she is more motivated after eating cake
-      Janet.getmysatisfication();
-      Janet.MakeYTVideos(20);
+    //   // Act 6: Billy gets hired at the same bakery. They make the same cake, but the price is
+    //   // different.
+    //   System.out.println("================ ACT 6 ================");
+    //   hirer.performjobinterview(billy, goodpricery);
+    //   billy.getinstructions(Bananablast);
+    //   bob.getinstructions(Bananablast);
+    //   billy.Bakeacake();
+    //   bob.Bakeacake();
+    //   goodpricery.getCakefrombaker(2, 1, 2);
+    //   goodpricery.getCakefrombaker(3, 1, 1);
+    //   goodpricery
+    //       .showcakes(); // Cake at (3,1) is worth much more because of difference in experience!
 
-    } else {
-      ply.runSimulation();
-    }
+    //   // Act 7: Janet buys more cakes. Profits are donated to the PTSA.
+    //   System.out.println("================ ACT 7 ================");
+    //   Janet.EatMyCake(100);
+    //   Janet.CakeInfo(); // Cake shows owner and eating progress
+    //   Janet.DiscardMyCake();
+    //   // Notice how discarding a cake yields a
+    //   // different message depending on how much of the cake was eaten.
+    //   Janet.BuyAndPayForCake(1, 1);
+    //   Janet.PickupCake();
+    //   Janet.EatMyCake(80);
+    //   Janet.DiscardMyCake();
+
+    //   Janet.BuyAndPayForCake(1, 2);
+    //   Janet.PickupCake();
+    //   Janet.EatMyCake(95);
+    //   Janet.DiscardMyCake();
+
+    //   Janet.BuyAndPayForCake(3, 1);
+    //   Janet.PickupCake();
+    //   Janet.EatMyCake(30);
+    //   Janet.DiscardMyCake();
+
+    //   goodpricery
+    //       .ShowProfits(); // goodpricery profits from cakes sold, but only a fraction of the price
+    //   goodpricery.DonateAllMoneyToPTSA(GalliumOrganization);
+    //   goodpricery.ShowProfits(); // profits are gone because...
+    //   GalliumOrganization.sumofdonation(); // ...they are all in the PTSA!
+
+    //   // Act 8: Janet goes to work to earn money. She gets tired after a while, and buying a cake
+    //   // heeps her satisfication up.
+    //   System.out.println("================ ACT 8 ================");
+    //   Janet.getmysatisfication();
+    //   Janet.MakeYTVideos(600);
+    //   Janet.printmoney();
+    //   Janet.MakeYTVideos(20); // she isn't motivated enough to do this
+    //   Janet.BuyAndPayForCake(2, 1);
+    //   Janet.PickupCake();
+    //   Janet.EatMyCake(50); // she is more motivated after eating cake
+    //   Janet.getmysatisfication();
+    //   Janet.MakeYTVideos(20);
+
+    // } else {
+    //   ply.runSimulation();
+    // }
   }
 }
