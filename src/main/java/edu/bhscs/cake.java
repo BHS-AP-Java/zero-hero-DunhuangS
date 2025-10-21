@@ -217,10 +217,10 @@ class Cake {
     drawangle = angle;
     drawperspective = perspective;
     drawprecision = diagprecision;
-    System.out.println(drawlt);
-    System.out.println(drawht);
-    System.out.println(drawcut);
-    System.out.println(drawangle);
+    // System.out.println(drawlt);
+    // System.out.println(drawht);
+    // System.out.println(drawcut);
+    // System.out.println(drawangle);
     draw();
   }
 

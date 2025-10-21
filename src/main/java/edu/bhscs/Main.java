@@ -24,12 +24,34 @@ class Main {
     // file name.
     Cake f = new Cake(true);
     Player ply = new Player("USER");
+    Store n = new Store("a");
+    Flour flourdelivery = new Flour(3000, 19.99, 10);
+    Eggs eggdelivery = new Eggs(800, 1129.99, 10);
+    Butter butterdelivery = new Butter(8200, 250.99, 10);
+    Milk milkdelivery = new Milk(9000, 200.99, 10);
+    Sugar sugardelivery = new Sugar(80000, 1249.99, 10);
+    n.delivergoods(
+    flourdelivery, eggdelivery, butterdelivery, milkdelivery, sugardelivery);
+    Contractor e = new Contractor();
+    Baker aah = new Baker("a");
+    Recipe aahcake = new Recipe(null,
+    null,
+    null,
+    null,
+    10,
+     5,
+     0,
+     0, 0, 0, 0);
+    aah.getinstructions(aahcake);
+    e.performjobinterview(aah, n);
+    aah.Bakeacake();
+    f = aah.Givemethecake();
+
+    f.eatcake(25);
+
+
 
     f.drawcustomcake(15, 5.0, 1.2 * Math.PI, 5.8, 0.5, 120.345678);
-
-    f.SetHeight(5);
-    f.SetDiameter(10);
-    f.eatcake(40);
 
     double angle = Double.valueOf(ply.GetInput("What is the angle to view the cake at? (radians)"));
     double perspective =
