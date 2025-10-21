@@ -25,16 +25,17 @@ class Main {
     Cake f = new Cake(true);
     Player ply = new Player("USER");
 
-    f.drawcustomcake(15, 5.0, 1.2 * Math.PI, 3.6, 0.5,120.345678);
+    f.drawcustomcake(15, 5.0, 1.2 * Math.PI, 5.8, 0.5, 120.345678);
 
     f.SetHeight(5);
     f.SetDiameter(10);
     f.eatcake(40);
 
     double angle = Double.valueOf(ply.GetInput("What is the angle to view the cake at? (radians)"));
-    double perspective = Double.valueOf(ply.GetInput("What is the perspective to view the cake at? (0 to pi/2, in radians)"));
+    double perspective =
+        Double.valueOf(
+            ply.GetInput("What is the perspective to view the cake at? (0 to pi/2, in radians)"));
     f.drawcake(angle, perspective, 120.34567);
-
 
     // String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");
     // boolean storybakesale = false;
@@ -153,7 +154,8 @@ class Main {
     //   goodpricery.showcakes();
     //   goodpricery.ExamineCake(1, 2);
 
-    //   // Act 5: Bob goes to classes. Since he is higher level than before, his cakes are worth more.
+    //   // Act 5: Bob goes to classes. Since he is higher level than before, his cakes are worth
+    // more.
     //   System.out.println("================ ACT 5 ================");
     //   for (int i = 0; i < 10; i++) {
     //     bob.gotobakingclass();
@@ -205,7 +207,8 @@ class Main {
     //   Janet.DiscardMyCake();
 
     //   goodpricery
-    //       .ShowProfits(); // goodpricery profits from cakes sold, but only a fraction of the price
+    //       .ShowProfits(); // goodpricery profits from cakes sold, but only a fraction of the
+    // price
     //   goodpricery.DonateAllMoneyToPTSA(GalliumOrganization);
     //   goodpricery.ShowProfits(); // profits are gone because...
     //   GalliumOrganization.sumofdonation(); // ...they are all in the PTSA!

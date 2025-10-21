@@ -224,7 +224,8 @@ class Cake {
     draw();
   }
 
-  public void drawcustomcake (double lt, double ht, double cut, double angle, double perspective, double diagprecision) {
+  public void drawcustomcake(
+      double lt, double ht, double cut, double angle, double perspective, double diagprecision) {
     drawlt = lt;
     drawht = ht;
     drawcut = cut;
@@ -345,7 +346,7 @@ class Cake {
       // top edge, accounts for other set
       tyedge = true;
       ybound = Math.max(ybound, CartesianEllipseY(3 * Math.PI / 2) - solmin);
-      //System.out.println("top");
+      // System.out.println("top");
     }
     if (byedge && tyedge) {
       ybound = CartesianEllipseY(3 * Math.PI / 2);
