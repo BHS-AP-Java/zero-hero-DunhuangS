@@ -703,7 +703,7 @@ class Cake {
     // have a different marker for each curve for the next step
     // draw from bottom to top or give priority for each marker: top > edge > inside
 
-    printarrayreverse(drawarray, "aa", "bb", "cc", "dd", "ee"); // DBG
+    printarrayreverse(drawarray, "  ", "bb", "cc", "dd", "ee"); // DBG
 
     // Fill passthrough
     // loop from top to bottom of array, the markers made above define the boundaries of which to
@@ -767,7 +767,7 @@ class Cake {
         } else if (array[j][i] == 4) {
           System.out.print(v4);
         } else {
-          System.out.print("MM");
+          System.out.print("██");
         }
       }
       System.out.println("");
