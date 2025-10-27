@@ -30,7 +30,7 @@ class Cake {
   // so I will just use array instead :/
   double quality;
   double oprice;
-  int craftquality;
+  int craftquality = -1;
   boolean alternatedef = false;
 
   double drawlt;
@@ -58,6 +58,12 @@ class Cake {
     craftquality = bakerskill;
   }
 
+  public Cake(String cakeownername, int size) {
+    this.name = "Made for " + cakeownername + ". Size: " + size;
+    this.ingredients[0] = 10 * size * size;
+    this.height = size * 5;
+  }
+
   public void viewcake() {
     if (alternatedef) {
       System.out.println("------------------------------------------------------");
@@ -66,12 +72,14 @@ class Cake {
       System.out.println("INGREDIENTS:");
       System.out.println("Flour: " + ingredients[0] + "g");
       System.out.println("May include: toppings, flavoring, preservatives.");
-      System.out.println(
+      if (craftquality != -1) {
+        System.out.println(
           "It has a quality rating of "
               + String.format("%.1f", quality)
               + ", made by a baker with experience level "
               + craftquality
               + ".");
+      }
       System.out.println("------------------------------------------------------");
       if (owner == null) {
         System.out.println("This cake has not been owned yet.");
@@ -233,6 +241,16 @@ class Cake {
     drawperspective = perspective;
     drawprecision = diagprecision;
     draw();
+  }
+
+  public void draw(Table t) {
+    drawlt = drawht = height;
+    drawcut = 1;
+    drawangle = 0.4;
+    drawperspective = 0.6;
+    drawprecision = 120.3457;
+    this.draw();
+    t.draw(height);
   }
 
   public void draw() {

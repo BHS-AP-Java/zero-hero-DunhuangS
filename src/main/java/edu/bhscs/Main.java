@@ -33,17 +33,7 @@ class Main {
     n.delivergoods(flourdelivery, eggdelivery, butterdelivery, milkdelivery, sugardelivery);
     Contractor e = new Contractor();
     Baker aah = new Baker("a");
-    Recipe aahcake = new Recipe(null,
-    null,
-    null,
-    null,
-    10,
-    10,
-    0,
-    0,
-    0,
-    0,
-    0);
+    Recipe aahcake = new Recipe(null, null, null, null, 10, 10, 0, 0, 0, 0, 0);
     aah.getinstructions(aahcake);
     e.performjobinterview(aah, n);
     aah.Bakeacake();
@@ -54,11 +44,10 @@ class Main {
     f.drawcustomcake(15, 5.0, 1.2 * Math.PI, 5.8, 0.5, 120.345678);
 
     double angle =
-        Double.parseDouble(
-        ply.GetInput("What is the angle to view the cake at? (radians)"));
+        Double.parseDouble(ply.GetInput("What is the angle to view the cake at? (radians)"));
     double perspective =
         Double.parseDouble(
-        ply.GetInput("What is the perspective to view the cake at? (0 to pi/2, in radians)"));
+            ply.GetInput("What is the perspective to view the cake at? (0 to pi/2, in radians)"));
     f.drawcake(angle, perspective, 120.34567);
 
     // String option = ply.GetInput("Type 0 for default story, or type 1 for interactive mode.");

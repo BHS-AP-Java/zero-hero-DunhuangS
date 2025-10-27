@@ -87,6 +87,10 @@ public class Baker {
     }
   }
 
+  public Cake bakes(int size, String name) {
+    return new Cake(name, size);
+  }
+
   //
 
   void setflour(Flour flour) {
