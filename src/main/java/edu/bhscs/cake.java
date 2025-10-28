@@ -61,7 +61,7 @@ class Cake {
   public Cake(String cakeownername, int size) {
     this.name = "Made for " + cakeownername + ". Size: " + size;
     this.ingredients[0] = 10 * size * size;
-    this.height = size * 5;
+    this.height = 1 + (size * 4);
   }
 
   public void viewcake() {
@@ -74,11 +74,11 @@ class Cake {
       System.out.println("May include: toppings, flavoring, preservatives.");
       if (craftquality != -1) {
         System.out.println(
-          "It has a quality rating of "
-              + String.format("%.1f", quality)
-              + ", made by a baker with experience level "
-              + craftquality
-              + ".");
+            "It has a quality rating of "
+                + String.format("%.1f", quality)
+                + ", made by a baker with experience level "
+                + craftquality
+                + ".");
       }
       System.out.println("------------------------------------------------------");
       if (owner == null) {

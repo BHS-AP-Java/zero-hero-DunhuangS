@@ -1,25 +1,75 @@
 package edu.bhscs;
 
 class Table {
-  //FIELDS AND PROPERTIES
+  // FIELDS AND PROPERTIES
   int size;
   int legs;
+  int height = 6;
 
-  //CONSTRUCTORs
+  // CONSTRUCTORs
   Table(int legs, int size) {
     this.size = size;
     this.legs = legs;
   }
 
-  //METHODS
+  // METHODS
+  private void drawspacing(int cakestart) {
+    for (int i = 0; i < cakestart; i++) {
+      System.out.print("  ");
+    }
+  }
+
   public void draw(int cakesize) {
+
     int cakecen = (cakesize + 1) / 2;
     /*
      * center of cake: example = = = = =
      * 5 items                     ^
-     * size + 1 / 2 is item 3, the center
+     * size + 1 / 2 is item 3, the center (6/2=3)
      */
-    int cakestart = cakecen - ((int) Math.floor((size) / 2)); //locates start position of cake
-    //half rounded down
+    int cakestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
+    // half rounded down
+    // checks if start is below 0
+    if (cakestart < 0) { //make it in bounds
+      cakestart = 0;
+    }
+    //top of the cake
+    drawspacing(cakestart);
+    for (int i = 0; i < size; i++) {
+      System.out.print("==");
+    }
+    System.out.println();
+    //legs of the cake
+    if (legs == 1) {
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < cakecen; j++) {
+          System.out.print("  ");
+        }
+      System.out.println("||");
+      }
+      // put in center if legs = 1
+    } else {
+      double spacing = ((double) (size - 1) / (double) (legs - 1)) - 0.0000001;
+      //this is to account for repeating decimals - storage limit prevents actual value reflected
+      //and defaults to rounding up! Storage is 16 "bytes" but I dont really care about
+      //flooring the last digit exactly, so I will do a generous subtraction
+      //who makes a table with 10^8 legs anyways
+      //welp I guess that is an edge case now
+      // System.out.println(spacing);
+      // System.out.println(size);
+      for (int i = 0; i < height; i++) {
+        drawspacing(cakestart);
+        for (int j = 0; j < size; j++) {
+          if (0 == Math.floor(((double) j) % spacing)) {
+            System.out.print("||");
+            //System.out.println(j);
+          } else {
+            System.out.print("  ");
+          }
+        }
+        System.out.println();
+      }
+    }
+
   }
 }
