@@ -14,6 +14,14 @@ class Table {
     this.legs = legs;
   }
 
+  public void setLegs (String legs) {
+    this.LegTxt = legs;
+  }
+
+  public void setTop (String top) {
+    this.TableTxt = top;
+  }
+
   // METHODS
   private void drawspacing(int cakestart) {
     for (int i = 0; i < cakestart; i++) {
@@ -31,6 +39,10 @@ class Table {
      */
     int cakestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
     // half rounded down
+
+    int legTxtOrder = 0; //used to order leg text, as the table legs aren't continuous
+    //unlike the tabletop
+
     // checks if start is below 0
     if (cakestart < 0) { // make it in bounds
       cakestart = 0;
@@ -49,11 +61,17 @@ class Table {
     System.out.println();
     // legs of the table
     if (legs == 1) {
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < cakecen; j++) {
-          System.out.print("  ");
+      for (int i = 0; i < height; i++) { //repeat for height
+
+        //legTxtOrder = 0;
+
+        drawspacing(cakecen); //space to center
+        for (int j = 0; j < 2; j++) { //then draw the leg
+          System.out.print(LegTxt.substring(legTxtOrder % LegTxt.length(),
+          (legTxtOrder % LegTxt.length()) + 1));
+          legTxtOrder ++;
         }
-        System.out.println("||");
+        System.out.println(); //new ln
       }
       // put in center if legs = 1
     } else {
@@ -66,12 +84,22 @@ class Table {
       // System.out.println(spacing);
       // System.out.println(size);
       for (int i = 0; i < height; i++) {
-        drawspacing(cakestart);
-        for (int j = 0; j < size; j++) {
-          if (0 == Math.floor(((double) j) % spacing)) {
-            System.out.print("||");
+        //I am not sure if I should reset the order of the leg text per loop
+        //I am not going to do it for now because I think its better without
+
+        //legTxtOrder = 0;
+
+        drawspacing(cakestart); //spacing for the table
+        for (int j = 0; j < size; j++) { //repeats for size of table
+          if (0 == Math.floor(((double) j) % spacing)) { //if we calculated spacing
+            //from before, and it matches we draw
+            for (int k = 0; k < 2; k++) { //draw loop (my table is char / length)
+              System.out.print(LegTxt.substring(legTxtOrder % LegTxt.length(),
+              (legTxtOrder % LegTxt.length()) + 1));
+              legTxtOrder++;
+            }
             // System.out.println(j);
-          } else {
+          } else { //if not spacing, skip
             System.out.print("  ");
           }
         }
