@@ -39,6 +39,7 @@ class Cake {
   double drawangle;
   double drawperspective;
   double drawprecision;
+  int drawoffset;
 
   // CONSTRUCTORS
 
@@ -249,6 +250,7 @@ class Cake {
     drawangle = 0.4;
     drawperspective = 0.6;
     drawprecision = 120.3457;
+    this.drawoffset = (t.getSize() / 2) - (((int) drawlt - 1) / 2);
     this.draw();
     t.draw(height);
   }
@@ -768,11 +770,18 @@ class Cake {
         + (drawlt * Math.sin(drawperspective) * Math.sin(inputradians + Math.PI)));
   }
 
+  private void printoffset() {
+    for (int i = 0; i < drawoffset; i++) {
+      System.out.print("  ");
+    }
+  }
+
   private void printarrayreverse(
       int[][] array, String v0, String v1, String v2, String v3, String v4) {
     // Starts at (0,y) then moves as read
     // array printing yada yada pretty simple
     for (int i = array[0].length - 1; i >= 0; i--) {
+      printoffset();
       for (int j = 0; j <= array.length - 1; j++) {
         if (array[j][i] == 0) {
           System.out.print(v0);

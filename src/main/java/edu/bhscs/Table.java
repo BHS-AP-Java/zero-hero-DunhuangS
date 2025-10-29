@@ -10,8 +10,12 @@ class Table {
 
   // CONSTRUCTORs
   Table(int legs, int size) {
-    this.size = size;
+    this.size = (size * 3);
     this.legs = legs;
+  }
+
+  public int getSize () {
+    return size;
   }
 
   public void setLegs (String legs) {
