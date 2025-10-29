@@ -5,6 +5,8 @@ class Table {
   int size;
   int legs;
   int height = 6;
+  String TableTxt = "HelloWrld";
+  String LegTxt = "INI";
 
   // CONSTRUCTORs
   Table(int legs, int size) {
@@ -30,31 +32,37 @@ class Table {
     int cakestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
     // half rounded down
     // checks if start is below 0
-    if (cakestart < 0) { //make it in bounds
+    if (cakestart < 0) { // make it in bounds
       cakestart = 0;
     }
-    //top of the cake
+    // top of the table
     drawspacing(cakestart);
     for (int i = 0; i < size; i++) {
-      System.out.print("==");
+      for (int j = 0; j < 2; j++) {
+        System.out.print(
+            (String)
+                TableTxt.substring(
+                    ((2 * i + j) % TableTxt.length()), ((2 * i + j) % TableTxt.length()) + 1));
+      }
+      // System.out.print("==");
     }
     System.out.println();
-    //legs of the cake
+    // legs of the table
     if (legs == 1) {
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < cakecen; j++) {
           System.out.print("  ");
         }
-      System.out.println("||");
+        System.out.println("||");
       }
       // put in center if legs = 1
     } else {
       double spacing = ((double) (size - 1) / (double) (legs - 1)) - 0.0000001;
-      //this is to account for repeating decimals - storage limit prevents actual value reflected
-      //and defaults to rounding up! Storage is 16 "bytes" but I dont really care about
-      //flooring the last digit exactly, so I will do a generous subtraction
-      //who makes a table with 10^8 legs anyways
-      //welp I guess that is an edge case now
+      // this is to account for repeating decimals - storage limit prevents actual value reflected
+      // and defaults to rounding up! Storage is 16 "bytes" but I dont really care about
+      // flooring the last digit exactly, so I will do a generous subtraction
+      // who makes a table with 10^8 legs anyways
+      // welp I guess that is an edge case now
       // System.out.println(spacing);
       // System.out.println(size);
       for (int i = 0; i < height; i++) {
@@ -62,7 +70,7 @@ class Table {
         for (int j = 0; j < size; j++) {
           if (0 == Math.floor(((double) j) % spacing)) {
             System.out.print("||");
-            //System.out.println(j);
+            // System.out.println(j);
           } else {
             System.out.print("  ");
           }
@@ -70,6 +78,5 @@ class Table {
         System.out.println();
       }
     }
-
   }
 }
