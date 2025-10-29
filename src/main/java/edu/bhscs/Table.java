@@ -4,7 +4,7 @@ class Table {
   // FIELDS AND PROPERTIES
   int size;
   int legs;
-  int height = 6;
+  int height = 10;
   String TableTxt = "HelloWrld";
   String LegTxt = "INI";
 
