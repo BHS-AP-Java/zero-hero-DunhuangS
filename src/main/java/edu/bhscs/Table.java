@@ -1,5 +1,8 @@
 package edu.bhscs;
 
+import edu.bhscs.MyInterfaces.MyOffset;
+import edu.bhscs.MyInterfaces.offsetable;
+
 class Table {
   // FIELDS AND PROPERTIES
   int size;
@@ -14,15 +17,15 @@ class Table {
     this.legs = legs;
   }
 
-  public int getSize () {
+  public int getSize() {
     return size;
   }
 
-  public void setLegs (String legs) {
+  public void setLegs(String legs) {
     this.LegTxt = legs;
   }
 
-  public void setTop (String top) {
+  public void setTop(String top) {
     this.TableTxt = top;
   }
 
@@ -44,15 +47,19 @@ class Table {
     int cakestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
     // half rounded down
 
-    int legTxtOrder = 0; //used to order leg text, as the table legs aren't continuous
-    //unlike the tabletop
+    int legTxtOrder = 0; // used to order leg text, as the table legs aren't continuous
+    // unlike the tabletop
 
     // checks if start is below 0
     if (cakestart < 0) { // make it in bounds
       cakestart = 0;
     }
+
+    // implements..?
+    offsetable a = new MyOffset();
+
     // top of the table
-    drawspacing(cakestart);
+    a.printoffset(cakestart);
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < 2; j++) {
         System.out.print(
@@ -65,17 +72,17 @@ class Table {
     System.out.println();
     // legs of the table
     if (legs == 1) {
-      for (int i = 0; i < height; i++) { //repeat for height
+      for (int i = 0; i < height; i++) { // repeat for height
 
-        //legTxtOrder = 0;
+        // legTxtOrder = 0;
 
-        drawspacing(cakecen); //space to center
-        for (int j = 0; j < 2; j++) { //then draw the leg
-          System.out.print(LegTxt.substring(legTxtOrder % LegTxt.length(),
-          (legTxtOrder % LegTxt.length()) + 1));
-          legTxtOrder ++;
+        a.printoffset(cakecen); // space to center
+        for (int j = 0; j < 2; j++) { // then draw the leg
+          System.out.print(
+              LegTxt.substring(legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
+          legTxtOrder++;
         }
-        System.out.println(); //new ln
+        System.out.println(); // new ln
       }
       // put in center if legs = 1
     } else {
@@ -88,22 +95,23 @@ class Table {
       // System.out.println(spacing);
       // System.out.println(size);
       for (int i = 0; i < height; i++) {
-        //I am not sure if I should reset the order of the leg text per loop
-        //I am not going to do it for now because I think its better without
+        // I am not sure if I should reset the order of the leg text per loop
+        // I am not going to do it for now because I think its better without
 
-        //legTxtOrder = 0;
+        // legTxtOrder = 0;
 
-        drawspacing(cakestart); //spacing for the table
-        for (int j = 0; j < size; j++) { //repeats for size of table
-          if (0 == Math.floor(((double) j) % spacing)) { //if we calculated spacing
-            //from before, and it matches we draw
-            for (int k = 0; k < 2; k++) { //draw loop (my table is char / length)
-              System.out.print(LegTxt.substring(legTxtOrder % LegTxt.length(),
-              (legTxtOrder % LegTxt.length()) + 1));
+        drawspacing(cakestart); // spacing for the table
+        for (int j = 0; j < size; j++) { // repeats for size of table
+          if (0 == Math.floor(((double) j) % spacing)) { // if we calculated spacing
+            // from before, and it matches we draw
+            for (int k = 0; k < 2; k++) { // draw loop (my table is char / length)
+              System.out.print(
+                  LegTxt.substring(
+                      legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
               legTxtOrder++;
             }
             // System.out.println(j);
-          } else { //if not spacing, skip
+          } else { // if not spacing, skip
             System.out.print("  ");
           }
         }

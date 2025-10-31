@@ -12,7 +12,7 @@
 
 package edu.bhscs;
 
-class Cake {
+class Cake implements MyInterfaces {
   // FIELDS and PROPERTIES (a lot of them)
   String flavor;
   double sweetness;
@@ -780,8 +780,10 @@ class Cake {
       int[][] array, String v0, String v1, String v2, String v3, String v4) {
     // Starts at (0,y) then moves as read
     // array printing yada yada pretty simple
+    Table.offsetable a = e.new MyOffset();
     for (int i = array[0].length - 1; i >= 0; i--) {
-      printoffset();
+      // printoffset();
+      a.printoffset(drawoffset);
       for (int j = 0; j <= array.length - 1; j++) {
         if (array[j][i] == 0) {
           System.out.print(v0);
