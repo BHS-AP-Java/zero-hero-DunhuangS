@@ -12,8 +12,11 @@
 
 package edu.bhscs;
 
-class Cake implements MyInterfaces {
+class Cake {
+
   // FIELDS and PROPERTIES (a lot of them)
+  offsetable a = new offsetable();
+
   String flavor;
   double sweetness;
   String toppings;
@@ -65,6 +68,7 @@ class Cake implements MyInterfaces {
     this.height = 1 + (size * 4);
   }
 
+  // METHODS
   public void viewcake() {
     if (alternatedef) {
       System.out.println("------------------------------------------------------");
@@ -780,10 +784,9 @@ class Cake implements MyInterfaces {
       int[][] array, String v0, String v1, String v2, String v3, String v4) {
     // Starts at (0,y) then moves as read
     // array printing yada yada pretty simple
-    Table.offsetable a = e.new MyOffset();
     for (int i = array[0].length - 1; i >= 0; i--) {
       // printoffset();
-      a.printoffset(drawoffset);
+      a.printwidth(drawoffset);
       for (int j = 0; j <= array.length - 1; j++) {
         if (array[j][i] == 0) {
           System.out.print(v0);

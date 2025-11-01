@@ -1,8 +1,5 @@
 package edu.bhscs;
 
-import edu.bhscs.MyInterfaces.MyOffset;
-import edu.bhscs.MyInterfaces.offsetable;
-
 class Table {
   // FIELDS AND PROPERTIES
   int size;
@@ -10,6 +7,7 @@ class Table {
   int height = 10;
   String TableTxt = "HelloWrld";
   String LegTxt = "INI";
+  offsetable a = new offsetable();
 
   // CONSTRUCTORs
   Table(int legs, int size) {
@@ -56,10 +54,9 @@ class Table {
     }
 
     // implements..?
-    offsetable a = new MyOffset();
 
     // top of the table
-    a.printoffset(cakestart);
+    a.printwidth(cakestart);
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < 2; j++) {
         System.out.print(
@@ -76,7 +73,7 @@ class Table {
 
         // legTxtOrder = 0;
 
-        a.printoffset(cakecen); // space to center
+        a.printwidth(cakecen); // space to center
         for (int j = 0; j < 2; j++) { // then draw the leg
           System.out.print(
               LegTxt.substring(legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
