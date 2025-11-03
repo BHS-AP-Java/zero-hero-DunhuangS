@@ -65,8 +65,7 @@ class Table {
     if (cakestart < 0) { // make it in bounds
       cakestart = 0;
     }
-
-    // implements..?
+    //TECHNICALLY not necessary as the for loop condition would always be false anyways
 
     // top of the table
     a.printwidth(cakestart);
