@@ -52,7 +52,7 @@ class Table {
     /*
      * center of cake: example = = = = =
      * 5 items                     ^
-     * I have programmed it in a way where cakesize should always be even
+     * I have programmed it in a way where cakesize should always be odd
      * size + 1 / 2 is item 3, the center (6/2=3)
      */
     int cakestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
