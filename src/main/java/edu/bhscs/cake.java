@@ -6,8 +6,9 @@
  *
  * DESCRIPTION: A cake with various assigned properties
  * INPUT: The wanted properties of a given cake
- * OUTPUT: Various information about the cake
+ * OUTPUT: Various information about the cake, draws the cake
  * EDGE CASES: Often the string-based properties will have gramatically incorrect phrases in viewcake
+ * When printing the cake, angle and perspective cannot be negative (very likely causes an error!)
  */
 
 package edu.bhscs;

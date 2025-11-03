@@ -1,3 +1,14 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 11/3/2025
+ *
+ * DESCRIPTION: A different executable class to run the bakesale with
+ * INPUT: nothing
+ * OUTPUT: The operation of the bake sale under this new operation
+ * EDGE CASES: Table size and legs in the millions
+ */
 package edu.bhscs;
 
 public class App {

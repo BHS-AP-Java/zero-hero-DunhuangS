@@ -1,3 +1,15 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 11/3/2025
+ *
+ * DESCRIPTION: Draws a 2D table which the cake sits ontop of
+ * INPUT: tabke length, number of legs, offset of the cake, length of the cake
+ * OUTPUT: a table printed in the terminal
+ * EDGE CASES: Table can be too long and wraps around the edge of the screen,
+ * miscounts the legs at absurdly high numbers of legs
+ */
 package edu.bhscs;
 
 class Table {

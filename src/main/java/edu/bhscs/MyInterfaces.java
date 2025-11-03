@@ -1,3 +1,16 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 11/3/2025
+ *
+ * DESCRIPTION: Interfaces to implement into other classes
+ * INPUT: nothing
+ * OUTPUT: I'm not really sure what it exactly "outputs"
+ * EDGE CASES: I'm not familiar enough with implements and interfaces to know
+ * Probably only inputting wrong types
+ */
+
 package edu.bhscs;
 
 interface MyInterfaces {
