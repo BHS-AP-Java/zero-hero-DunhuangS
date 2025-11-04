@@ -43,7 +43,7 @@ class Cake {
   double drawangle;
   double drawperspective;
   double drawprecision;
-  int drawoffset;
+  int drawoffset = 0;
 
   // CONSTRUCTORS
 
@@ -255,7 +255,7 @@ class Cake {
     drawangle = 0.4;
     drawperspective = 0.6;
     drawprecision = 120.3457;
-    this.drawoffset = (t.getSize() / 2) - (((int) drawlt - 1) / 2);
+    this.drawoffset = (int) (t.getSize() - drawlt - 1) / 2;
     this.draw();
     t.draw(height);
   }

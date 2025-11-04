@@ -49,26 +49,20 @@ class Table {
   public void draw(int cakesize) {
 
     int cakecen = (cakesize + 1) / 2;
-    /*
-     * center of cake: example = = = = =
-     * 5 items                     ^
-     * I have programmed it in a way where cakesize should always be odd
-     * size + 1 / 2 is item 3, the center (6/2=3)
-     */
-    int cakestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
+    int tablestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
     // half rounded down
 
     int legTxtOrder = 0; // used to order leg text, as the table legs aren't continuous
     // unlike the tabletop
 
     // checks if start is below 0
-    if (cakestart < 0) { // make it in bounds
-      cakestart = 0;
+    if (tablestart < 0) { // make it in bounds
+      tablestart = 0;
     }
-    //TECHNICALLY not necessary as the for loop condition would always be false anyways
+    // TECHNICALLY not necessary as the for loop condition would always be false anyways
 
     // top of the table
-    a.printwidth(cakestart);
+    a.printwidth(tablestart);
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < 2; j++) {
         System.out.print(
@@ -109,7 +103,7 @@ class Table {
 
         // legTxtOrder = 0;
 
-        drawspacing(cakestart); // spacing for the table
+        drawspacing(tablestart); // spacing for the table
         for (int j = 0; j < size; j++) { // repeats for size of table
           if (0 == Math.floor(((double) j) % spacing)) { // if we calculated spacing
             // from before, and it matches we draw
