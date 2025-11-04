@@ -24,3 +24,18 @@ class offsetable implements MyInterfaces {
     }
   }
 }
+
+interface MathStufz {
+  public int centeringmath(int cakesize, int tablesize, boolean ifcake);
+}
+
+class MyMathing implements MathStufz {
+  public int centeringmath(int cakesize, int tablesize, boolean ifcake) {
+    double trueoffset = (tablesize - cakesize) / 2;
+    if (ifcake) {
+      return (int) trueoffset;
+    } else {
+      return (int) -trueoffset;
+    }
+  }
+}

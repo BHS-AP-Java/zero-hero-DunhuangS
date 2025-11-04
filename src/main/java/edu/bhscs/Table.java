@@ -12,7 +12,7 @@
  */
 package edu.bhscs;
 
-class Table {
+class Table extends MyMathing {
   // FIELDS AND PROPERTIES
   int size;
   int legs;
@@ -26,6 +26,8 @@ class Table {
     this.size = (size * 3);
     this.legs = legs;
   }
+
+  // MMETHODS
 
   public int getSize() {
     return size;
@@ -49,7 +51,7 @@ class Table {
   public void draw(int cakesize) {
 
     int cakecen = (cakesize + 1) / 2;
-    int tablestart = cakecen - ((int) Math.floor((size) / 2)); // locates start position of cake
+    int tablestart = centeringmath(cakesize, this.size, false); // locates start position of cake
     // half rounded down
 
     int legTxtOrder = 0; // used to order leg text, as the table legs aren't continuous

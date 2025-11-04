@@ -249,13 +249,22 @@ class Cake {
     draw();
   }
 
+  public int centeringmath(Table t, boolean ifcake) {
+    double trueoffset = (t.getSize() - drawlt) / 2;
+    if (ifcake) {
+      return (int) trueoffset;
+    } else {
+      return (int) -trueoffset;
+    }
+  }
+
   public void draw(Table t) {
     drawlt = drawht = height;
     drawcut = 1;
     drawangle = 0.4;
     drawperspective = 0.6;
     drawprecision = 120.3457;
-    this.drawoffset = (int) (t.getSize() - drawlt - 1) / 2;
+    this.drawoffset = centeringmath(t, true);
     this.draw();
     t.draw(height);
   }
