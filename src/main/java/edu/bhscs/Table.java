@@ -50,7 +50,7 @@ class Table extends MyMathing {
 
   public void draw(int cakesize) {
 
-    int cakecen = (cakesize + 1) / 2;
+    int cakecen = ((cakesize + 1) / 2) + centeringmath(cakesize, this.size, true);
     int tablestart = centeringmath(cakesize, this.size, false); // locates start position of cake
     // half rounded down
 
@@ -79,10 +79,12 @@ class Table extends MyMathing {
     if (legs == 1) {
       for (int i = 0; i < height; i++) { // repeat for height
 
+        drawspacing(tablestart);
+
         // legTxtOrder = 0;
 
-        a.printwidth(cakecen); // space to center
-        for (int j = 0; j < 2; j++) { // then draw the leg
+        a.printwidth((int) cakecen - (LegTxt.length() / 4)); // space to center
+        for (int j = 0; j < LegTxt.length(); j++) { // then draw the leg
           System.out.print(
               LegTxt.substring(legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
           legTxtOrder++;
@@ -91,7 +93,7 @@ class Table extends MyMathing {
       }
       // put in center if legs = 1
     } else {
-      double spacing = ((double) (size - 1) / (double) (legs - 1)) - 0.0000001;
+      double spacing = (double) ((double) ((size * 2) - (legs * LegTxt.length())) / (double) (legs - 1)) + LegTxt.length() - 0.0000001;
       // this is to account for repeating decimals - storage limit prevents actual value reflected
       // and defaults to rounding up! Storage is 16 "bytes" but I dont really care about
       // flooring the last digit exactly, so I will do a generous subtraction
@@ -99,25 +101,24 @@ class Table extends MyMathing {
       // welp I guess that is an edge case now
       // System.out.println(spacing);
       // System.out.println(size);
-      for (int i = 0; i < height; i++) {
-        // I am not sure if I should reset the order of the leg text per loop
-        // I am not going to do it for now because I think its better without
 
-        // legTxtOrder = 0;
+      for (int i = 0; i < height; i++) {
+        // With the new update, this is now needed~~
+
+        legTxtOrder = 0;
 
         drawspacing(tablestart); // spacing for the table
-        for (int j = 0; j < size; j++) { // repeats for size of table
-          if (0 == Math.floor(((double) j) % spacing)) { // if we calculated spacing
+        for (int j = 0; j < size * 2; j++) { // repeats for size of table
+          if (Math.floor(((double) j) % spacing) < (LegTxt.length())) { // if we calculated spacing
             // from before, and it matches we draw
-            for (int k = 0; k < 2; k++) { // draw loop (my table is char / length)
+            // we print at the start few char
               System.out.print(
-                  LegTxt.substring(
-                      legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
+                LegTxt.substring(
+                legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
               legTxtOrder++;
-            }
             // System.out.println(j);
-          } else { // if not spacing, skip
-            System.out.print("  ");
+        } else { // if not spacing, skip
+            System.out.print(" ");
           }
         }
         System.out.println();
