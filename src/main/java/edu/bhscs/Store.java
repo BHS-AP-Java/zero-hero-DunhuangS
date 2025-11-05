@@ -81,9 +81,12 @@ class Store {
     }
   }
 
-  Cake SnagOffShelf(int y, int x) {
+  Cake SnagOffShelf(int y, int x, boolean authorization) {
     Cake inteindi = shelf[y - 1][x - 1];
     shelf[y - 1][x - 1] = a;
+    if (!authorization) {
+      System.out.println("YOU THEIF! CURSE YOU AND YOUR FAMILY!");
+    }
     return inteindi;
   }
 

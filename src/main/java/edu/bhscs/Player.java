@@ -292,7 +292,7 @@ public class Player {
         int intermdin = Integer.parseInt(userinput.next());
         System.out.println("Which shelf column? (1 - 5)");
         int secei = Integer.parseInt(userinput.next());
-        personalCakes[ord] = store.SnagOffShelf(intermdin, secei);
+        personalCakes[ord] = store.SnagOffShelf(intermdin, secei, true);
         personalCakes[ord].SetCakeOwner(name);
         System.out.println("Cake has been saved to slot " + (ord + 1) + " of personal cakes!");
       }
