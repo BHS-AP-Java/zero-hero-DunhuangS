@@ -13,10 +13,9 @@
 
 package edu.bhscs;
 
-class Cake {
+class Cake implements Offsetable {
 
   // FIELDS and PROPERTIES (a lot of them)
-  offsetable a = new offsetable();
 
   String flavor;
   double sweetness;
@@ -70,6 +69,18 @@ class Cake {
   }
 
   // METHODS
+
+  @Override
+  public int getWidth() {
+    return (int) drawlt;
+  }
+
+  @Override
+  public void draw(Offsetable below) {
+    drawoffset = getOffset(below);
+    draw();
+  }
+
   public void viewcake() {
     if (alternatedef) {
       System.out.println("------------------------------------------------------");
@@ -795,8 +806,7 @@ class Cake {
     // Starts at (0,y) then moves as read
     // array printing yada yada pretty simple
     for (int i = array[0].length - 1; i >= 0; i--) {
-      // printoffset();
-      a.printwidth(drawoffset);
+      printoffset();
       for (int j = 0; j <= array.length - 1; j++) {
         if (array[j][i] == 0) {
           System.out.print(v0);

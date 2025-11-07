@@ -12,14 +12,15 @@
  */
 package edu.bhscs;
 
-class Table extends MyMathing {
+class Table implements Offsetable {
   // FIELDS AND PROPERTIES
   int size;
   int legs;
   int height = 10;
   String TableTxt = "HelloWrld";
   String LegTxt = "INI";
-  offsetable a = new offsetable();
+  int tablestart;
+  int cakecen;
 
   // CONSTRUCTORs
   Table(int legs, int size) {
@@ -28,6 +29,18 @@ class Table extends MyMathing {
   }
 
   // MMETHODS
+
+  @Override
+  public int getWidth() {
+    return size;
+  }
+
+  @Override
+  public void draw(Offsetable below) {
+    tablestart = getOffset(below);
+    cakecen = ((below.getWidth() + 1) / 2) + tablestart;
+    //draw();
+  }
 
   public int getSize() {
     return size;
@@ -50,8 +63,8 @@ class Table extends MyMathing {
 
   public void draw(int cakesize) {
 
-    int cakecen = ((cakesize + 1) / 2) + centeringmath(cakesize, this.size, true);
-    int tablestart = centeringmath(cakesize, this.size, false); // locates start position of cake
+    cakecen = ((cakesize + 1) / 2) + getOffset(this);
+    tablestart = getOffset(this); // locates start position of cake
     // half rounded down
 
     int legTxtOrder = 0; // used to order leg text, as the table legs aren't continuous
@@ -64,7 +77,7 @@ class Table extends MyMathing {
     // TECHNICALLY not necessary as the for loop condition would always be false anyways
 
     // top of the table
-    a.printwidth(tablestart);
+    drawspacing(tablestart);
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < 2; j++) {
         System.out.print(
@@ -83,7 +96,7 @@ class Table extends MyMathing {
 
         // legTxtOrder = 0;
 
-        a.printwidth((int) cakecen - (LegTxt.length() / 4)); // space to center
+        drawspacing((int) cakecen - (LegTxt.length() / 4)); // space to center
         for (int j = 0; j < LegTxt.length(); j++) { // then draw the leg
           System.out.print(
               LegTxt.substring(legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
@@ -93,7 +106,10 @@ class Table extends MyMathing {
       }
       // put in center if legs = 1
     } else {
-      double spacing = (double) ((double) ((size * 2) - (legs * LegTxt.length())) / (double) (legs - 1)) + LegTxt.length() - 0.0000001;
+      double spacing =
+          (double) ((double) ((size * 2) - (legs * LegTxt.length())) / (double) (legs - 1))
+              + LegTxt.length()
+              - 0.0000001;
       // this is to account for repeating decimals - storage limit prevents actual value reflected
       // and defaults to rounding up! Storage is 16 "bytes" but I dont really care about
       // flooring the last digit exactly, so I will do a generous subtraction
@@ -112,12 +128,12 @@ class Table extends MyMathing {
           if (Math.floor(((double) j) % spacing) < (LegTxt.length())) { // if we calculated spacing
             // from before, and it matches we draw
             // we print at the start few char
-              System.out.print(
+            System.out.print(
                 LegTxt.substring(
-                legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
-              legTxtOrder++;
+                    legTxtOrder % LegTxt.length(), (legTxtOrder % LegTxt.length()) + 1));
+            legTxtOrder++;
             // System.out.println(j);
-        } else { // if not spacing, skip
+          } else { // if not spacing, skip
             System.out.print(" ");
           }
         }

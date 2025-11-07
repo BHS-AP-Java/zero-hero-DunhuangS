@@ -1,12 +1,10 @@
 package edu.bhscs;
 
 class SimplifiedRenderer extends SimpRendFormula {
-  //FIELDS AND PROPERTIES
+  // FIELDS AND PROPERTIES
 
-  //CONSTRUCTORS
-  public SimplifiedRenderer() {
-    
-  }
+  // CONSTRUCTORS
+  public SimplifiedRenderer() {}
 
-  //METHODS
+  // METHODS
 }
