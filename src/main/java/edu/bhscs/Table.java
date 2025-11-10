@@ -21,6 +21,7 @@ class Table implements Offsetable {
   String LegTxt = "INI";
   int tablestart;
   int cakecen;
+  int legTxtOrder = 0;
 
   // CONSTRUCTORs
   Table(int legs, int size) {
@@ -39,7 +40,7 @@ class Table implements Offsetable {
   public void draw(Offsetable below) {
     tablestart = getOffset(below);
     cakecen = ((below.getWidth() + 1) / 2) + tablestart;
-    //draw();
+    draw();
   }
 
   public int getSize() {
@@ -67,9 +68,11 @@ class Table implements Offsetable {
     tablestart = getOffset(this); // locates start position of cake
     // half rounded down
 
-    int legTxtOrder = 0; // used to order leg text, as the table legs aren't continuous
+    legTxtOrder = 0; // used to order leg text, as the table legs aren't continuous
     // unlike the tabletop
-
+    draw();
+  }
+  public void draw() {
     // checks if start is below 0
     if (tablestart < 0) { // make it in bounds
       tablestart = 0;

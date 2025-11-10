@@ -33,5 +33,7 @@ class Equation {
   }
 
   // METHODS
-  public int findyvalue() {}
+  public int findyvalue() {
+    return 0;
+  }
 }

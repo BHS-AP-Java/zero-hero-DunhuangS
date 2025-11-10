@@ -77,8 +77,19 @@ class Cake implements Offsetable {
 
   @Override
   public void draw(Offsetable below) {
+    drawlt = drawht = height;
     drawoffset = getOffset(below);
+    drawcut = 1;
+    drawangle = 0.4;
+    drawperspective = 0.6;
+    drawprecision = 120.3457;
     draw();
+  }
+
+  public void drawbetter(Table t) {
+    t.getWidth();
+    draw(t);
+    t.draw(this);
   }
 
   public void viewcake() {
@@ -269,16 +280,16 @@ class Cake implements Offsetable {
     }
   }
 
-  public void draw(Table t) {
-    drawlt = drawht = height;
-    drawcut = 1;
-    drawangle = 0.4;
-    drawperspective = 0.6;
-    drawprecision = 120.3457;
-    this.drawoffset = centeringmath(t, true);
-    this.draw();
-    t.draw(height);
-  }
+  // public void draw(Table t) {
+  //   drawlt = drawht = height;
+  //   drawcut = 1;
+  //   drawangle = 0.4;
+  //   drawperspective = 0.6;
+  //   drawprecision = 120.3457;
+  //   this.drawoffset = centeringmath(t, true);
+  //   this.draw();
+  //   t.draw(height);
+  // }
 
   public void draw() {
     // find all points of the cake

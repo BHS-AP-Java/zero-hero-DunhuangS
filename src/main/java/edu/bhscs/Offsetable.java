@@ -30,26 +30,3 @@ public interface Offsetable {
   // relative to whatever is beneath it.
   void draw(Offsetable below);
 }
-
-class offsetable implements MyInterfaces {
-  public void printwidth(int a) {
-    for (int i = 0; i < a; i++) {
-      System.out.print("  ");
-    }
-  }
-}
-
-interface MathStufz {
-  public int centeringmath(int cakesize, int tablesize, boolean ifcake);
-}
-
-class MyMathing implements MathStufz {
-  public int centeringmath(int cakesize, int tablesize, boolean ifcake) {
-    double trueoffset = (tablesize - cakesize) / 2;
-    if (ifcake) {
-      return (int) trueoffset;
-    } else {
-      return (int) -trueoffset;
-    }
-  }
-}

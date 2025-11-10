@@ -22,6 +22,7 @@ public class App {
     Baker bob = new Baker("Bob");
     Table t = new Table(3, 15);
     Cake bDay = bob.bakes(5, "Suzzie");
-    bDay.draw(t);
+    bDay.drawbetter(t);
+    
   }
 }
