@@ -24,7 +24,7 @@ class Table implements Offsetable {
   int legTxtOrder = 0;
 
   // CONSTRUCTORs
-  Table(int legs, int size) {
+  public Table(int legs, int size) {
     this.size = (size * 3);
     this.legs = legs;
   }
@@ -72,6 +72,7 @@ class Table implements Offsetable {
     // unlike the tabletop
     draw();
   }
+
   public void draw() {
     // checks if start is below 0
     if (tablestart < 0) { // make it in bounds
