@@ -4,16 +4,16 @@ public class MoreApplication {
 
   public static void main(String[] args) throws InterruptedException {
     Roboclass r = new Roboclass();
-    //for(int i = 0; i < 1000; i++) {
-      Thread.sleep(3000);
-      System.out.println(r.getMouseLocation()[0]);
-      System.out.println(r.getMouseLocation()[1]);
-    //}
+    // for(int i = 0; i < 1000; i++) {
+    Thread.sleep(3000);
+    System.out.println(r.getMouseLocation()[0]);
+    System.out.println(r.getMouseLocation()[1]);
+    // }
     FileWriter f = new FileWriter();
     String relapath = "src\\main\\java\\edu\\bhscs\\scrinshaws\\";
 
     Grid snaekGryd = new Grid(739, 257, 30, 30);
-    //r.moveMouse(627,258);
+    // r.moveMouse(627,258);
     // 627, 258
     // 657, 258
 
@@ -23,7 +23,7 @@ public class MoreApplication {
       for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 14; j++) {
           String newPath = relapath + i + "_" + j + ".png";
-          //System.out.println(newPath);
+          // System.out.println(newPath);
           f.cloneSavePixels(
               r,
               snaekGryd.getCoordinate(i, j)[0],

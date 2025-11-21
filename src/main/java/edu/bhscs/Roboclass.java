@@ -47,7 +47,7 @@ class Roboclass {
     return outlist;
   }
 
-  public void moveMouse (int cx, int cy) {
+  public void moveMouse(int cx, int cy) {
     try {
 
       Robot r = new Robot();
