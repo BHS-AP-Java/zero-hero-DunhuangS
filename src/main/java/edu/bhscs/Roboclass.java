@@ -2,9 +2,11 @@ package edu.bhscs;
 
 import java.awt.AWTException;
 import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 class Roboclass {
   // fieldspropertiesand
@@ -14,15 +16,48 @@ class Roboclass {
 
   // methods
   private void runFailSafe() {
-    if(MouseInfo.getPointerInfo().getLocation().getY() < 10) {
+    if (MouseInfo.getPointerInfo().getLocation().getY() < 10) {
+      System.out.println("Mouse is near top of the screen, stopping");
       System.exit(0);
     }
   }
 
+  public BufferedImage cloneDisplayPixels(int startx, int starty, int lenx, int leny) {
+    try {
+
+      Robot r = new Robot();
+
+      Rectangle o = new Rectangle(startx, starty, lenx, leny);
+
+      runFailSafe();
+
+      return r.createScreenCapture(o);
+
+    } catch (AWTException a) {
+      System.out.println("no robots!!!");
+      return null;
+    }
+  }
+
   public int[] getMouseLocation() {
-    int[] outlist = {(int) MouseInfo.getPointerInfo().getLocation().getX(),
-      (int) MouseInfo.getPointerInfo().getLocation().getY()};
+    int[] outlist = {
+      (int) MouseInfo.getPointerInfo().getLocation().getX(),
+      (int) MouseInfo.getPointerInfo().getLocation().getY()
+    };
     return outlist;
+  }
+
+  public void moveMouse (int cx, int cy) {
+    try {
+
+      Robot r = new Robot();
+
+      r.mouseMove(cx, cy);
+      r.delay(50);
+
+    } catch (AWTException e) {
+      System.out.println("no");
+    }
   }
 
   public void click(int cx, int cy) {
