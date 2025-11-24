@@ -11,13 +11,35 @@ public class MoreApplication {
     // }
     FileWriter f = new FileWriter();
     String relapath = "src\\main\\java\\edu\\bhscs\\scrinshaws\\";
+    String referencepath = "src\\main\\java\\edu\\bhscs\\defaultimages\\unklight.png";
+    String[] referencelist = {
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\unklight.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\unkdark.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\klight.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\kdark.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\1.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\2.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\3.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\4.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\5.png",
+    };
 
     Grid snaekGryd = new Grid(739, 257, 30, 30);
+    for (String ref : referencelist) {
+      if (f.compareKeyPixel(relapath + "0_1.png", ref)) {
+        System.out.println("yahoo");
+      } else {
+        System.out.println("boohoo");
+      }
+    }
+
     // r.moveMouse(627,258);
     // 627, 258
     // 657, 258
 
-    int active = 11;
+    //f.capturegrid(snaekGryd, 18, 14, relapath, r);
+
+    int active = 0;
 
     if (active == 11) {
       for (int i = 0; i < 18; i++) {

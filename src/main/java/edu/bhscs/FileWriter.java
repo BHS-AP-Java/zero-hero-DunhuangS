@@ -1,5 +1,6 @@
 package edu.bhscs;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -14,6 +15,48 @@ class FileWriter {
     } catch (IOException i) {
       System.out.println("ur file is bad :(");
       i.printStackTrace();
+    }
+  }
+
+  public boolean compareKeyPixel(String filepatha, String filepathb) {
+    try {
+      BufferedImage fim = ImageIO.read(new File(filepatha));
+
+      BufferedImage cim = ImageIO.read(new File(filepathb));
+
+      int activeia = fim.getWidth() / 2;
+      int activeib = 3 * fim.getHeight() / 4;
+      int sourceia = cim.getWidth() / 2;
+      int sourceib = 3 * cim.getHeight() / 4;
+
+      System.out.println(cim.getRGB(sourceia, sourceib));
+      System.out.println(fim.getRGB(activeia, activeib));
+
+      if (cim.getRGB(sourceia, sourceib) == fim.getRGB(activeia, activeib)) {
+        return true;
+      }
+      return false;
+    } catch (IOException a) {
+      System.out.println("one or both of ur files are bad");
+      a.printStackTrace();
+      return false;
+    }
+  }
+
+  public void capturegrid(Grid g, int xlen, int ylen, String relapath, Roboclass r) {
+
+    for (int i = 0; i < xlen; i++) {
+      for (int j = 0; j < ylen; j++) {
+        String newPath = relapath + i + "_" + j + ".png";
+        // System.out.println(newPath);
+        cloneSavePixels(
+            r,
+            g.getCoordinate(i, j)[0],
+            g.getCoordinate(i, j)[1],
+            g.getXSpacing(),
+            g.getYSpacing(),
+            newPath);
+      }
     }
   }
 }
