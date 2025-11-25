@@ -37,7 +37,7 @@ public class MoreApplication {
     // 627, 258
     // 657, 258
 
-    //f.capturegrid(snaekGryd, 18, 14, relapath, r);
+    // f.capturegrid(snaekGryd, 18, 14, relapath, r);
 
     int active = 0;
 

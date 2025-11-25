@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Mystery1",
+      "request": "launch",
+      "mainClass": "edu.bhscs.Mystery1",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
+      "name": "Mystery1",
+      "request": "launch",
+      "mainClass": "edu.bhscs.defaultimages.Mystery1",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
       "name": "MoreApplication",
       "request": "launch",
       "mainClass": "edu.bhscs.MoreApplication",
