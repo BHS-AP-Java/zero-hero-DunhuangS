@@ -3,6 +3,7 @@ package edu.bhscs;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 class FileWriter {
@@ -29,8 +30,13 @@ class FileWriter {
       int sourceia = cim.getWidth() / 2;
       int sourceib = 3 * cim.getHeight() / 4;
 
+      int aargb = cim.getRGB(sourceia, sourceib);
+      int bargb = fim.getRGB(activeia, activeib);
+
       System.out.println(cim.getRGB(sourceia, sourceib));
       System.out.println(fim.getRGB(activeia, activeib));
+
+      int ra = (aargb >> 16) & 0xff;
 
       if (cim.getRGB(sourceia, sourceib) == fim.getRGB(activeia, activeib)) {
         return true;
