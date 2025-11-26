@@ -33,8 +33,8 @@ class FileWriter {
       int aargb = cim.getRGB(sourceia, sourceib);
       int bargb = fim.getRGB(activeia, activeib);
 
-      //System.out.println(cim.getRGB(sourceia, sourceib));
-      //System.out.println(fim.getRGB(activeia, activeib));
+      // System.out.println(cim.getRGB(sourceia, sourceib));
+      // System.out.println(fim.getRGB(activeia, activeib));
 
       int ra = (aargb >> 16) & 0xff;
       int ga = (aargb >> 8) & 0xff;
@@ -48,7 +48,6 @@ class FileWriter {
       System.out.println(rb + " " + gb + " " + bb);
 
       int erar = Math.abs(ra - rb) + Math.abs(ga - gb) + Math.abs(ba - bb);
-
 
       if (erar <= 10) {
         return true;
@@ -76,5 +75,12 @@ class FileWriter {
             newPath);
       }
     }
+
+    String newPath = relapath + "FullGrid.png";
+    cloneSavePixels(r,
+      g.getCoordinate(0, 0)[0],
+      g.getCoordinate(0, 0)[1], xlen * g.getXSpacing(), ylen * g.getYSpacing(), newPath);
+
+
   }
 }
