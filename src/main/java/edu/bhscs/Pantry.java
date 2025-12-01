@@ -1,0 +1,74 @@
+/*
+ * Dunhuang Su
+ * P2
+ * Bake Sale
+ * 10/1/2025
+ *
+ * DESCRIPTION: A customer that purchases cake from stores and consumes them. INPUT: Preferred
+ * store, money, name, consumption of cake OUTPUT: Properties of the customer and the cake EDGE
+ * CASES: The customer can eat negative cake.
+ */
+package edu.bhscs;
+
+class Pantry {
+  Sugar sugarstore;
+  Eggs eggstore;
+  Butter butterstore;
+  Flour flourstore;
+  Milk milkstore;
+
+  Pantry() {}
+
+  void putsugar(Sugar source) {
+    sugarstore = source;
+  }
+
+  void puteggs(Eggs source) {
+    eggstore = source;
+  }
+
+  void putmilk(Milk source) {
+    milkstore = source;
+  }
+
+  void putflour(Flour source) {
+    flourstore = source;
+  }
+
+  void putbutter(Butter source) {
+    butterstore = source;
+  }
+
+  Sugar getSugar() {
+    return sugarstore;
+  }
+
+  Eggs getEggs() {
+    return eggstore;
+  }
+
+  Milk getMilk() {
+    return milkstore;
+  }
+
+  Flour getFlour() {
+    return flourstore;
+  }
+
+  Butter getButter() {
+    return butterstore;
+  }
+
+  boolean checkresources(
+      int neededFlour, int neededEggs, int neededButter, int neededMilk, int neededSugar) {
+    if (neededSugar <= sugarstore.returnquantity()
+        && neededEggs <= eggstore.returnquantity()
+        && neededMilk <= milkstore.returnquantity()
+        && neededFlour <= flourstore.returnquantity()
+        && neededButter <= butterstore.returnquantity()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}

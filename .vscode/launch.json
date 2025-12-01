@@ -3,6 +3,34 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Mystery1",
+      "request": "launch",
+      "mainClass": "edu.bhscs.Mystery1",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
+      "name": "Mystery1",
+      "request": "launch",
+      "mainClass": "edu.bhscs.defaultimages.Mystery1",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
+      "name": "MoreApplication",
+      "request": "launch",
+      "mainClass": "edu.bhscs.MoreApplication",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "edu.bhscs.App",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
       "name": "Run Main (console)",
       "request": "launch",
       "mainClass": "edu.bhscs.Main",
@@ -23,7 +51,10 @@
       "mainClass": "edu.bhscs.Main",
       "console": "integratedTerminal",
       "preLaunchTask": "xpra-up",
-      "env": { "DISPLAY": ":99", "LIBGL_ALWAYS_SOFTWARE": "1" }
+      "env": {
+        "DISPLAY": ":99",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      }
     }
   ]
 }
