@@ -3,7 +3,6 @@ package edu.bhscs;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 class FileWriter {
@@ -56,8 +55,8 @@ class FileWriter {
       int gb = (bargb >> 8) & 0xff;
       int bb = (bargb >> 0) & 0xff;
 
-      System.out.println(ra + " " + ga + " " + ba);
-      System.out.println(rb + " " + gb + " " + bb);
+      // System.out.println(ra + " " + ga + " " + ba);
+      // System.out.println(rb + " " + gb + " " + bb);
 
       int erar = Math.abs(ra - rb) + Math.abs(ga - gb) + Math.abs(ba - bb);
 

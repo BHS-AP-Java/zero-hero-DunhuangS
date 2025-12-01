@@ -57,7 +57,8 @@ class MineSweeperSolver {
   public void printGrid() {
     for (int i = 0; i < 14; i++) {
       for (int j = 0; j < 18; j++) {
-        if (board[i][j] != 9) System.out.print(board[i][j] + " ");
+        if (board[i][j] == -1) System.out.print("U ");
+        else if (board[i][j] != 9) System.out.print(board[i][j] + " ");
         else System.out.print("-" + " ");
       }
       System.out.println();

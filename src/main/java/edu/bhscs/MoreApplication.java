@@ -5,7 +5,7 @@ public class MoreApplication {
   public static void main(String[] args) throws InterruptedException {
     Roboclass r = new Roboclass();
     // for(int i = 0; i < 1000; i++) {
-    // Thread.sleep(3000);
+    Thread.sleep(3000);
     System.out.println(r.getMouseLocation()[0]);
     System.out.println(r.getMouseLocation()[1]);
     // }
@@ -26,10 +26,13 @@ public class MoreApplication {
     };
 
     // f.compareKeyPixel(relapath + "0_2.png", referencelist[4]);
-    f.saveSubImage(relapath + "0_2.png", relapath + "testing01.png");
-    f.saveSubImage(referencelist[4], relapath + "testing02.png");
+    f.saveSubImage(relapath + "5_1.png", relapath + "testing01.png");
+    f.saveSubImage(referencelist[8], relapath + "testing02.png");
 
     MineSweeperSolver asdij = new MineSweeperSolver();
+
+    Grid MyGryd = new Grid(739, 257, 30, 30);
+    f.capturegrid(MyGryd, 18, 14, relapath, r);
 
     asdij.updateBoardFromImages(f, relapath);
     asdij.printGrid();
