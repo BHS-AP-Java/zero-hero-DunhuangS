@@ -19,15 +19,27 @@ class FileWriter {
     }
   }
 
+  public void saveSubImage(String filepath, String savepath) {
+    try {
+      BufferedImage file = ImageIO.read(new File(filepath));
+      File f = new File(savepath);
+      file = file.getSubimage((file.getWidth() / 2), (3 * file.getHeight() / 4) - 2, 5, 5);
+      ImageIO.write(file, "PNG", f);
+
+    } catch (IOException ex) {
+      System.out.println("this file is bad ://////");
+    }
+  }
+
   public boolean compareKeyPixel(String filepatha, String filepathb) {
     try {
       BufferedImage fim = ImageIO.read(new File(filepatha));
 
       BufferedImage cim = ImageIO.read(new File(filepathb));
 
-      int activeia = fim.getWidth() / 2;
+      int activeia = (fim.getWidth() / 2) + 2;
       int activeib = 3 * fim.getHeight() / 4;
-      int sourceia = cim.getWidth() / 2;
+      int sourceia = (cim.getWidth() / 2) + 2;
       int sourceib = 3 * cim.getHeight() / 4;
 
       int aargb = cim.getRGB(sourceia, sourceib);
@@ -49,7 +61,7 @@ class FileWriter {
 
       int erar = Math.abs(ra - rb) + Math.abs(ga - gb) + Math.abs(ba - bb);
 
-      if (erar <= 10) {
+      if (erar <= 15) {
         return true;
       }
       return false;
@@ -77,10 +89,12 @@ class FileWriter {
     }
 
     String newPath = relapath + "FullGrid.png";
-    cloneSavePixels(r,
-      g.getCoordinate(0, 0)[0],
-      g.getCoordinate(0, 0)[1], xlen * g.getXSpacing(), ylen * g.getYSpacing(), newPath);
-
-
+    cloneSavePixels(
+        r,
+        g.getCoordinate(0, 0)[0],
+        g.getCoordinate(0, 0)[1],
+        xlen * g.getXSpacing(),
+        ylen * g.getYSpacing(),
+        newPath);
   }
 }

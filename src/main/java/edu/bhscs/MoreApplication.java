@@ -5,7 +5,7 @@ public class MoreApplication {
   public static void main(String[] args) throws InterruptedException {
     Roboclass r = new Roboclass();
     // for(int i = 0; i < 1000; i++) {
-    Thread.sleep(3000);
+    // Thread.sleep(3000);
     System.out.println(r.getMouseLocation()[0]);
     System.out.println(r.getMouseLocation()[1]);
     // }
@@ -17,12 +17,17 @@ public class MoreApplication {
       "src\\main\\java\\edu\\bhscs\\defaultimages\\unkdark.png",
       "src\\main\\java\\edu\\bhscs\\defaultimages\\klight.png",
       "src\\main\\java\\edu\\bhscs\\defaultimages\\kdark.png",
-      "src\\main\\java\\edu\\bhscs\\defaultimages\\1.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\1dark.png",
+      "src\\main\\java\\edu\\bhscs\\defaultimages\\1light.png",
       "src\\main\\java\\edu\\bhscs\\defaultimages\\2.png",
       "src\\main\\java\\edu\\bhscs\\defaultimages\\3.png",
       "src\\main\\java\\edu\\bhscs\\defaultimages\\4.png",
       "src\\main\\java\\edu\\bhscs\\defaultimages\\5.png",
     };
+
+    // f.compareKeyPixel(relapath + "0_2.png", referencelist[4]);
+    f.saveSubImage(relapath + "0_2.png", relapath + "testing01.png");
+    f.saveSubImage(referencelist[4], relapath + "testing02.png");
 
     MineSweeperSolver asdij = new MineSweeperSolver();
 
@@ -42,7 +47,7 @@ public class MoreApplication {
     // 627, 258
     // 657, 258
 
-    //f.capturegrid(snaekGryd, 18, 14, relapath, r);
+    // f.capturegrid(snaekGryd, 18, 14, relapath, r);
 
     // for (int i = 0; i < 10; i++) {
     //   r.type("right");
